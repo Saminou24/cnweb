@@ -1,0 +1,68 @@
+<!doctype html>
+<html>
+    <head>
+        <title> CabVN </title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+        <link rel="stylesheet" href="/css/jquery.mobile-1.2.0.min.css" />
+        <link rel="stylesheet" href="/css/style.css" />
+
+    </head>
+    <body>
+    <head>
+    <div class="nav">
+        <div class="nav-center">
+            <!-- search form -->
+            <form class="command-bar-form" action="/search" method="posst">
+                <p>
+                    <input type="text" placeholder="Tim gi cac Cab ? " name='q' autocomplete="false"  id='search-box'/>
+                    <input type="submit" value="Tim" id="btnsearch"/>
+                </p>
+                <div id="search-suggest" class="search-suggest"></div>
+            </form>
+            <div class='menu-container'>
+                <ul class="menu">
+                    <li  onclick="showLoginForm();" class='button'>Dang nhap</li>
+                    <div class="separate" ></div>
+                    <li><a class='button' href="moi/">Dang ky</a></li>
+
+                </ul>
+                <form id='login-form' action='login' action="/login" method="post">
+                    <input type='button' name='username' />
+                    <input tpe='password' name='password' />
+                    <input type='submit' value='login' />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="container">
+        <div id="mainContainer">
+            <div id="content"> 
+                <div class="header-content" >
+                    <div class='menu-item active'> <a href='/hot'>Hot</a></div>
+                    <div class='menu-item'><a href='/new' >Moi</a></div>
+                </div>
+                <?php echo $this->layout()->content ?>
+            </div>
+            <div id="sidebar">
+                <!-- Top hot -->
+                <div id="top-cab" class='sidebar-item' >
+                    <div class='sidebar-item-header'>Top danh hai</div>
+                </div>
+                <!-- Top hot -->
+                <div id="top-cab" class='sidebar-item' >
+                    <div class='sidebar-item-header'>Ket ban</div>
+                </div>
+            </div>>
+        </div>
+    </div>
+    <!-- script -->
+    <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="/js/effect.js"></script>
+    <script type="text/javascript" >
+                        function showLoginForm() {
+                            $('#login-form').show();
+
+                        }
+    </script>
+</body>
+</html>

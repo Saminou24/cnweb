@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<!-- saved from url=(0021)http://www.haivl.com/ -->
+<html><script src="./Ảnh vui   Hài vl_files/cb=gapi.loaded_0" async=""></script><script id="facebook-jssdk" src="./Ảnh vui   Hài vl_files/all.js"></script><script type="text/javascript" async="" src="./Ảnh vui   Hài vl_files/plusone.js" gapi_processed="true"></script><script id="twitter-wjs" src="./Ảnh vui   Hài vl_files/widgets.js"></script><script type="text/javascript" async="" src="./Ảnh vui   Hài vl_files/ga.js"></script><script async="" type="text/javascript" src="http://www.googletagservices.com/tag/js/gpt.js"></script><script type="text/javascript">window["_gaUserPrefs"] = { ioo : function() { return true; } }</script><script>(function main() {
+    // Create enabled event
+    function fireEnabledEvent() {
+        // If gli exists, then we are already present and shouldn't do anything
+        if (!window.gli) {
+            setTimeout(function () {
+                var enabledEvent = document.createEvent("Event");
+                enabledEvent.initEvent("WebGLEnabledEvent", true, true);
+                document.dispatchEvent(enabledEvent);
+            }, 0);
+        } else {
+            //console.log("WebGL Inspector already embedded on the page - disabling extension");
+        }
+    };
+
+    // Grab the path root from the extension
+    document.addEventListener("WebGLInspectorReadyEvent", function (e) {
+        var pathElement = document.getElementById("__webglpathroot");
+        if (window["gliloader"]) {
+            gliloader.pathRoot = pathElement.innerText;
+        } else {
+            // TODO: more?
+            window.gliCssUrl = pathElement.innerText + "gli.all.css";
+        }
+    }, false);
+
+    // Rewrite getContext to snoop for webgl
+    var originalGetContext = HTMLCanvasElement.prototype.getContext;
+    if (!HTMLCanvasElement.prototype.getContextRaw) {
+        HTMLCanvasElement.prototype.getContextRaw = originalGetContext;
+    }
+    HTMLCanvasElement.prototype.getContext = function () {
+        var ignoreCanvas = this.internalInspectorSurface;
+        if (ignoreCanvas) {
+            return originalGetContext.apply(this, arguments);
+        }
+
+        var result = originalGetContext.apply(this, arguments);
+        if (result == null) {
+            return null;
+        }
+
+        var contextNames = ["moz-webgl", "webkit-3d", "experimental-webgl", "webgl", "3d"];
+        var requestingWebGL = contextNames.indexOf(arguments[0]) != -1;
+        if (requestingWebGL) {
+            // Page is requesting a WebGL context!
+            fireEnabledEvent(this);
+
+            // If we are injected, inspect this context
+            if (window.gli) {
+                if (gli.host.inspectContext) {
+                    // TODO: pull options from extension
+                    result = gli.host.inspectContext(this, result);
+                    // NOTE: execute in a timeout so that if the dom is not yet
+                    // loaded this won't error out.
+                    window.setTimeout(function() {
+                        var hostUI = new gli.host.HostUI(result);
+                        result.hostUI = hostUI; // just so we can access it later for debugging
+                    }, 0);
+                }
+            }
+        }
+
+        return result;
+    };
+})();</script><head prefix="og: http://ogp.me/ns# fb: http://ogp.me/ns/fb# haivlcom: http://ogp.me/ns/fb/haivlcom#"><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta charset="utf-8">
+    <meta vary="User-Agent">
+    <meta http-equiv="content-language" content="vi">
+    <title>Ảnh vui | Hài vl</title>
+        <meta name="description" content="Xả stress tại haivl.com">
+            <link rel="image_src" href="http://s.haivl.com/content/images/logo_smiley.jpg">
+    <link rel="shortcut icon" href="http://www.haivl.com/content/images/favicon.ico">
+    <script src="./Ảnh vui   Hài vl_files/jquery-1.6.2.min.js" type="text/javascript"></script>
+    <link rel="stylesheet" href="./Ảnh vui   Hài vl_files/haivl.10.7.0.css" type="text/css">
+<script src="./Ảnh vui   Hài vl_files/haivl.10.7.0.min.js" type="text/javascript"></script>
+    <meta property="og:site_name" content="haivl.com">
+    <meta property="fb:app_id" content="378808135489760">
+    <link href="http://www.haivl.com/rss" rel="alternate" type="application/rss+xml" title="RSS Trang chủ haivl.com">
+    <link href="http://www.haivl.com/rss?where=hot" rel="alternate" type="application/rss+xml" title="RSS Trang Hot haivl.com">
+    
+    
+    <script type="text/javascript">
+        var googletag = googletag || {};
+        googletag.cmd = googletag.cmd || [];
+        (function () {
+            var gads = document.createElement('script');
+            gads.async = true;
+            gads.type = 'text/javascript';
+            var useSSL = 'https:' == document.location.protocol;
+            gads.src = (useSSL ? 'https:' : 'http:') + '//www.googletagservices.com/tag/js/gpt.js';
+            var node = document.getElementsByTagName('script')[0];
+            node.parentNode.insertBefore(gads, node);
+        })();
+    </script>
+    <script type="text/javascript">
+        googletag.cmd.push(function () {
+            googletag.defineSlot('/1050670/haivl-trang-chu', [300, 250], 'div-gpt-ad-1340107187238-0').addService(googletag.pubads());
+            googletag.defineSlot('/1050670/haivl-trang-chu-bottom', [300, 250], 'div-gpt-ad-1348211982138-0').addService(googletag.pubads());
+            googletag.pubads().enableSingleRequest();
+            googletag.pubads().collapseEmptyDivs();
+            googletag.enableServices();
+        });
+    </script>
+
+
+    <script type="text/javascript">
+        Haivl.GA.init('UA-29994824-4');
+    </script>
+<style type="text/css"></style><style type="text/css">.fb_hidden{position:absolute;top:-10000px;z-index:10001}
+.fb_invisible{display:none}
+.fb_reset{background:none;border-spacing:0;border:0;color:#000;cursor:auto;direction:ltr;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;font-size:11px;font-style:normal;font-variant:normal;font-weight:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal}
+.fb_link img{border:none}
+.fb_dialog{background:rgba(82, 82, 82, .7);position:absolute;top:-10000px;z-index:10001}
+.fb_dialog_advanced{padding:10px;-moz-border-radius:8px;-webkit-border-radius:8px;border-radius:8px}
+.fb_dialog_content{background:#fff;color:#333}
+.fb_dialog_close_icon{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 0 transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif);cursor:pointer;display:block;height:15px;position:absolute;right:18px;top:17px;width:15px;top:8px\9;right:7px\9}
+.fb_dialog_mobile .fb_dialog_close_icon{top:5px;left:5px;right:auto}
+.fb_dialog_padding{background-color:transparent;position:absolute;width:1px;z-index:-1}
+.fb_dialog_close_icon:hover{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -15px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_close_icon:active{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yq/r/IE9JII6Z1Ys.png) no-repeat scroll 0 -30px transparent;_background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/s816eWC-2sl.gif)}
+.fb_dialog_loader{background-color:#f2f2f2;border:1px solid #606060;font-size:24px;padding:20px}
+.fb_dialog_top_left,
+.fb_dialog_top_right,
+.fb_dialog_bottom_left,
+.fb_dialog_bottom_right{height:10px;width:10px;overflow:hidden;position:absolute}
+/* @noflip */
+.fb_dialog_top_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 0;left:-10px;top:-10px}
+/* @noflip */
+.fb_dialog_top_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -10px;right:-10px;top:-10px}
+/* @noflip */
+.fb_dialog_bottom_left{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -20px;bottom:-10px;left:-10px}
+/* @noflip */
+.fb_dialog_bottom_right{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ye/r/8YeTNIlTZjm.png) no-repeat 0 -30px;right:-10px;bottom:-10px}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right,
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{position:absolute;background:#525252;filter:alpha(opacity=70);opacity:.7}
+.fb_dialog_vert_left,
+.fb_dialog_vert_right{width:10px;height:100%}
+.fb_dialog_vert_left{margin-left:-10px}
+.fb_dialog_vert_right{right:0;margin-right:-10px}
+.fb_dialog_horiz_top,
+.fb_dialog_horiz_bottom{width:100%;height:10px}
+.fb_dialog_horiz_top{margin-top:-10px}
+.fb_dialog_horiz_bottom{bottom:0;margin-bottom:-10px}
+.fb_dialog_iframe{line-height:0}
+.fb_dialog_content .dialog_title{background:#6d84b4;border:1px solid #3b5998;color:#fff;font-size:14px;font-weight:bold;margin:0}
+.fb_dialog_content .dialog_title > span{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/yd/r/Cou7n-nqK52.gif)
+no-repeat 5px 50%;float:left;padding:5px 0 7px 26px}
+body.fb_hidden{-webkit-transform:none;height:100%;margin:0;left:-10000px;overflow:visible;position:absolute;top:-10000px;width:100%
+}
+.fb_dialog.fb_dialog_mobile.loading{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/ya/r/3rhSv5V8j3o.gif)
+white no-repeat 50% 50%;min-height:100%;min-width:100%;overflow:hidden;position:absolute;top:0;z-index:10001}
+.fb_dialog.fb_dialog_mobile.loading.centered{max-height:590px;min-height:590px;max-width:500px;min-width:500px}
+#fb-root #fb_dialog_ipad_overlay{background:rgba(0, 0, 0, .45);position:absolute;left:0;top:0;width:100%;min-height:100%;z-index:10000}
+#fb-root #fb_dialog_ipad_overlay.hidden{display:none}
+.fb_dialog.fb_dialog_mobile.loading iframe{visibility:hidden}
+.fb_dialog_content .dialog_header{-webkit-box-shadow:white 0 1px 1px -1px inset;background:-webkit-gradient(linear, 0 0, 0 100%, from(#738ABA), to(#2C4987));border-bottom:1px solid;border-color:#1d4088;color:#fff;font:14px Helvetica, sans-serif;font-weight:bold;text-overflow:ellipsis;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0;vertical-align:middle;white-space:nowrap}
+.fb_dialog_content .dialog_header table{-webkit-font-smoothing:subpixel-antialiased;height:43px;width:100%
+}
+.fb_dialog_content .dialog_header td.header_left{font-size:12px;padding-left:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .dialog_header td.header_right{font-size:12px;padding-right:5px;vertical-align:middle;width:60px
+}
+.fb_dialog_content .touchable_button{background:-webkit-gradient(linear, 0 0, 0 100%, from(#4966A6),
+color-stop(0.5, #355492), to(#2A4887));border:1px solid #29447e;-webkit-background-clip:padding-box;-webkit-border-radius:3px;-webkit-box-shadow:rgba(0, 0, 0, .117188) 0 1px 1px inset,
+rgba(255, 255, 255, .167969) 0 1px 0;display:inline-block;margin-top:3px;max-width:85px;line-height:18px;padding:4px 12px;position:relative}
+.fb_dialog_content .dialog_header .touchable_button input{border:none;background:none;color:#fff;font:12px Helvetica, sans-serif;font-weight:bold;margin:2px -12px;padding:2px 6px 3px 6px;text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog_content .dialog_header .header_center{color:#fff;font-size:16px;font-weight:bold;line-height:18px;text-align:center;vertical-align:middle}
+.fb_dialog_content .dialog_content{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat 50% 50%;border:1px solid #555;border-bottom:0;border-top:0;height:150px}
+.fb_dialog_content .dialog_footer{background:#f2f2f2;border:1px solid #555;border-top-color:#ccc;height:40px}
+#fb_dialog_loader_close{float:left}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_button{text-shadow:rgba(0, 30, 84, .296875) 0 -1px 0}
+.fb_dialog.fb_dialog_mobile .fb_dialog_close_icon{visibility:hidden}
+.fb_iframe_widget{position:relative;display:-moz-inline-block;display:inline-block}
+.fb_iframe_widget iframe{position:absolute}
+.fb_iframe_widget_lift{z-index:1}
+.fb_iframe_widget span{display:inline-block;position:relative;text-align:justify;vertical-align:text-bottom}
+.fb_hide_iframes iframe{position:relative;left:-10000px}
+.fb_iframe_widget_loader{position:relative;display:inline-block}
+.fb_iframe_widget_fluid{display:inline}
+.fb_iframe_widget_fluid span{width:100%}
+.fb_iframe_widget_loader iframe{min-height:32px;z-index:2;zoom:1}
+.fb_iframe_widget_loader .FB_Loader{background:url(http://static.ak.fbcdn.net/rsrc.php/v2/y9/r/jKEcVPZFk-2.gif) no-repeat;height:32px;width:32px;margin-left:-16px;position:absolute;left:50%;z-index:4}
+.fb_button_simple,
+.fb_button_simple_rtl{background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yH/r/eIpbnVKI9lR.png);background-repeat:no-repeat;cursor:pointer;outline:none;text-decoration:none}
+.fb_button_simple_rtl{background-position:right 0}
+.fb_button_simple .fb_button_text{margin:0 0 0 20px;padding-bottom:1px}
+.fb_button_simple_rtl .fb_button_text{margin:0 10px 0 0}
+a.fb_button_simple:hover .fb_button_text,
+a.fb_button_simple_rtl:hover .fb_button_text,
+.fb_button_simple:hover .fb_button_text,
+.fb_button_simple_rtl:hover .fb_button_text{text-decoration:underline}
+.fb_button,
+.fb_button_rtl{background:#29447e url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/FGFbc80dUKj.png);background-repeat:no-repeat;cursor:pointer;display:inline-block;padding:0 0 0 1px;text-decoration:none;outline:none}
+.fb_button .fb_button_text,
+.fb_button_rtl .fb_button_text{background:#5f78ab url(http://static.ak.fbcdn.net/rsrc.php/v2/yL/r/FGFbc80dUKj.png);border-top:solid 1px #879ac0;border-bottom:solid 1px #1a356e;color:#fff;display:block;font-family:"lucida grande",tahoma,verdana,arial,sans-serif;font-weight:bold;padding:2px 6px 3px 6px;margin:1px 1px 0 21px;text-shadow:none}
+a.fb_button,
+a.fb_button_rtl,
+.fb_button,
+.fb_button_rtl{text-decoration:none}
+a.fb_button:active .fb_button_text,
+a.fb_button_rtl:active .fb_button_text,
+.fb_button:active .fb_button_text,
+.fb_button_rtl:active .fb_button_text{border-bottom:solid 1px #29447e;border-top:solid 1px #45619d;background:#4f6aa3;text-shadow:none}
+.fb_button_xlarge,
+.fb_button_xlarge_rtl{background-position:left -60px;font-size:24px;line-height:30px}
+.fb_button_xlarge .fb_button_text{padding:3px 8px 3px 12px;margin-left:38px}
+a.fb_button_xlarge:active{background-position:left -99px}
+.fb_button_xlarge_rtl{background-position:right -268px}
+.fb_button_xlarge_rtl .fb_button_text{padding:3px 8px 3px 12px;margin-right:39px}
+a.fb_button_xlarge_rtl:active{background-position:right -307px}
+.fb_button_large,
+.fb_button_large_rtl{background-position:left -138px;font-size:13px;line-height:16px}
+.fb_button_large .fb_button_text{margin-left:24px;padding:2px 6px 4px 6px}
+a.fb_button_large:active{background-position:left -163px}
+.fb_button_large_rtl{background-position:right -346px}
+.fb_button_large_rtl .fb_button_text{margin-right:25px}
+a.fb_button_large_rtl:active{background-position:right -371px}
+.fb_button_medium,
+.fb_button_medium_rtl{background-position:left -188px;font-size:11px;line-height:14px}
+a.fb_button_medium:active{background-position:left -210px}
+.fb_button_medium_rtl{background-position:right -396px}
+.fb_button_text_rtl,
+.fb_button_medium_rtl .fb_button_text{padding:2px 6px 3px 6px;margin-right:22px}
+a.fb_button_medium_rtl:active{background-position:right -418px}
+.fb_button_small,
+.fb_button_small_rtl{background-position:left -232px;font-size:10px;line-height:10px}
+.fb_button_small .fb_button_text{padding:2px 6px 3px;margin-left:17px}
+a.fb_button_small:active,
+.fb_button_small:active{background-position:left -250px}
+.fb_button_small_rtl{background-position:right -440px}
+.fb_button_small_rtl .fb_button_text{padding:2px 6px;margin-right:18px}
+a.fb_button_small_rtl:active{background-position:right -458px}
+.fb_share_count_wrapper{position:relative;float:left}
+.fb_share_count{background:#b0b9ec none repeat scroll 0 0;color:#333;font-family:"lucida grande", tahoma, verdana, arial, sans-serif;text-align:center}
+.fb_share_count_inner{background:#e8ebf2;display:block}
+.fb_share_count_right{margin-left:-1px;display:inline-block}
+.fb_share_count_right .fb_share_count_inner{border-top:solid 1px #e8ebf2;border-bottom:solid 1px #b0b9ec;margin:1px 1px 0 1px;font-size:10px;line-height:10px;padding:2px 6px 3px;font-weight:bold}
+.fb_share_count_top{display:block;letter-spacing:-1px;line-height:34px;margin-bottom:7px;font-size:22px;border:solid 1px #b0b9ec}
+.fb_share_count_nub_top{border:none;display:block;position:absolute;left:7px;top:35px;margin:0;padding:0;width:6px;height:7px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yU/r/bSOHtKbCGYI.png)}
+.fb_share_count_nub_right{border:none;display:inline-block;padding:0;width:5px;height:10px;background-repeat:no-repeat;background-image:url(http://static.ak.fbcdn.net/rsrc.php/v2/yX/r/i_oIVTKMYsL.png);vertical-align:top;background-position:right 5px;z-index:10;left:2px;margin:0 2px 0 0;position:relative}
+.fb_share_no_count{display:none}
+.fb_share_size_Small .fb_share_count_right .fb_share_count_inner{font-size:10px}
+.fb_share_size_Medium .fb_share_count_right .fb_share_count_inner{font-size:11px;padding:2px 6px 3px;letter-spacing:-1px;line-height:14px}
+.fb_share_size_Large .fb_share_count_right .fb_share_count_inner{font-size:13px;line-height:16px;padding:2px 6px 4px;font-weight:normal;letter-spacing:-1px}
+.fb_share_count_hidden .fb_share_count_nub_top,
+.fb_share_count_hidden .fb_share_count_top,
+.fb_share_count_hidden .fb_share_count_nub_right,
+.fb_share_count_hidden .fb_share_count_right{visibility:hidden}
+.fb_connect_bar_container div,
+.fb_connect_bar_container span,
+.fb_connect_bar_container a,
+.fb_connect_bar_container img,
+.fb_connect_bar_container strong{background:none;border-spacing:0;border:0;direction:ltr;font-style:normal;font-variant:normal;letter-spacing:normal;line-height:1;margin:0;overflow:visible;padding:0;text-align:left;text-decoration:none;text-indent:0;text-shadow:none;text-transform:none;visibility:visible;white-space:normal;word-spacing:normal;vertical-align:baseline}
+.fb_connect_bar_container{position:fixed;left:0 !important;right:0 !important;height:42px !important;padding:0 25px !important;margin:0 !important;vertical-align:middle !important;border-bottom:1px solid #333 !important;background:#3b5998 !important;z-index:99999999 !important;overflow:hidden !important}
+.fb_connect_bar_container_ie6{position:absolute;top:expression(document.compatMode=="CSS1Compat"? document.documentElement.scrollTop+"px":body.scrollTop+"px")}
+.fb_connect_bar{position:relative;margin:auto;height:100%;width:100%;padding:6px 0 0 0 !important;background:none;color:#fff !important;font-family:"lucida grande", tahoma, verdana, arial, sans-serif !important;font-size:13px !important;font-style:normal !important;font-variant:normal !important;font-weight:normal !important;letter-spacing:normal !important;line-height:1 !important;text-decoration:none !important;text-indent:0 !important;text-shadow:none !important;text-transform:none !important;white-space:normal !important;word-spacing:normal !important}
+.fb_connect_bar a:hover{color:#fff}
+.fb_connect_bar .fb_profile img{height:30px;width:30px;vertical-align:middle;margin:0 6px 5px 0}
+.fb_connect_bar div a,
+.fb_connect_bar span,
+.fb_connect_bar span a{color:#bac6da;font-size:11px;text-decoration:none}
+.fb_connect_bar .fb_buttons{float:right;margin-top:7px}
+.fb_edge_widget_with_comment{position:relative;*z-index:1000}
+.fb_edge_widget_with_comment span.fb_edge_comment_widget{position:absolute}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget{z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget .FB_Loader{left:0;top:1px;margin-top:6px;margin-left:0;background-position:50% 50%;background-color:#fff;height:150px;width:394px;border:1px #666 solid;border-bottom:2px solid #283e6c;z-index:1}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.dark .FB_Loader{background-color:#000;border-bottom:2px solid #ccc}
+.fb_edge_widget_with_comment span.fb_send_button_form_widget.siderender
+.FB_Loader{margin-top:0}
+.fbpluginrecommendationsbarleft,
+.fbpluginrecommendationsbarright{position:fixed !important;bottom:0;z-index:999}
+/* @noflip */
+.fbpluginrecommendationsbarleft{left:10px}
+/* @noflip */
+.fbpluginrecommendationsbarright{right:10px}</style></head>
+<body data-twttr-rendered="true" cz-shortcut-listen="true">
+    
+<div id="header">
+    <div id="headerContent">
+        <a href="./Ảnh vui   Hài vl_files/Ảnh vui   Hài vl.html" id="logo">haivl</a>
+        <ul id="menuBar">
+            <li class="selected"><a href="./Ảnh vui   Hài vl_files/Ảnh vui   Hài vl.html">Mới</a></li>
+            <li><a href="http://www.haivl.com/hot">Hot</a></li>
+            <li><a href="http://www.haivl.com/old">Cũ</a></li>
+			<li><a href="http://www.haivl.com/vote">Bình chọn</a></li>
+            <li><a class="upload" href="http://www.haivl.com/upload">Đăng ảnh</a></li>
+            <li><a href="http://www.haivl.com/search">Tìm kiếm</a></li>
+			<li><a href="http://forum.haivl.com/" target="_blank">Diễn đàn</a></li>
+        </ul>
+        <div id="loginPanel">
+                <a class="profileButton" href="http://www.haivl.com/uploader/110042">
+                    Tuan Zendf 
+                        <span class="notiCount">1</span>
+                </a>
+                <ul>
+                    <li><a href="http://www.haivl.com/uploader/110042">Ảnh của bạn</a></li>
+                    <li><a href="http://www.haivl.com/account/notification">Thông báo (1)</a></li>
+                    <li><a href="http://www.haivl.com/account/edit">Thông tin cá nhân</a></li>
+                    <li><a href="http://www.haivl.com/account/password">Đổi mật khẩu</a></li>
+                    <li><a href="http://www.haivl.com/account/logout">Thoát</a></li>
+                </ul>
+        </div>
+        
+        <div class="clear">
+        </div>
+    </div>
+</div>
+
+    <div id="content">
+        <div id="mainContainer">
+            
+
+            
+<div id="leftColumn">
+
+    <div class="box">
+        <h3>Ảnh mới</h3>
+        
+<div class="tips">
+    <b>Mẹo: </b><b>Ấn hotkey</b> ← và → hoặc Z và X để duyệt ảnh nhanh hơn
+</div>
+
+        <div class="photoList">
+
+<div class="photoListItem" data-id="240656">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/240656" target="_blank">
+					<img src="./Ảnh vui   Hài vl_files/medium-038a43442c154b55b6146ea4565541bc-400.jpg" alt="Nếu Mẹ và Vợ cùng rơi xuống nc và k biết bơi, bạn sẽ cứu ai trc?" class="thumbImg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/240656">Nếu Mẹ và Vợ cùng rơi xuống nc và k biết bơi, bạn sẽ cứu ai trc?</a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/37584">Too Late Apologize</a>
+            vừa mới đây</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">369</span>
+            <span class="comments" title="lượt bình luận">9</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/240656" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 76px;"><iframe id="f3e479df84" name="f306e6feec" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 76px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(1).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+                <div class="featuredFanPage">
+                    <h4>
+                        Like <a href="http://www.facebook.com/haivl.com" target="_blank">haivl trên Facebook</a> để được cười nhiều hơn nhé ^^</h4>
+                    <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.facebook.com/haivl.com" data-send="false" data-width="400" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 28px; width: 400px;"><iframe id="f13aa3f2ac" name="fb4714d7" scrolling="no" style="border: none; overflow: hidden; height: 28px; width: 400px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(16).html"></iframe></span></div>
+                </div>
+
+<div class="photoListItem" data-id="240720">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/240720" target="_blank">
+					<img src="./Ảnh vui   Hài vl_files/medium-8f14a841a9d04a68b5689e804b6cf7a0-400.jpg" alt="Chỉ có thể là Super Mario!" class="thumbImg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/240720">Chỉ có thể là Super Mario!</a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/75899">Cường So Love</a>
+            4 phút trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">944</span>
+            <span class="comments" title="lượt bình luận">4</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/240720" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 76px;"><iframe id="f244dbb28" name="f1376ddf8c" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 76px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like.html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="240544">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/240544" target="_blank">
+					<img src="./Ảnh vui   Hài vl_files/medium-504fb7f680dd434c9130196cbb5fb008-400.jpg" alt="Ai ăn cùng với mình không ?? sức khoẻ dồi dào luôn =))" class="thumbImg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/240544">Ai ăn cùng với mình không ?? sức khoẻ dồi dào luôn <img class="emo" src="./Ảnh vui   Hài vl_files/roflmao.png"></a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/72038">TheZelLord</a>
+            9 phút trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">2.064</span>
+            <span class="comments" title="lượt bình luận">11</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/240544" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 76px;"><iframe id="f141350ec" name="f32ad99d78" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 76px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(11).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="240591">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/240591" target="_blank">
+					<img src="./Ảnh vui   Hài vl_files/medium-828cf791e1344eb9aeb11b2ff35beb25-400.jpg" alt="Có thể bạn chưa biết ? :D" class="thumbImg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/240591">Có thể bạn chưa biết ? <img class="emo" src="./Ảnh vui   Hài vl_files/biggrin.png"></a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/95801">Tây Cuồng</a>
+            15 phút trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">2.884</span>
+            <span class="comments" title="lượt bình luận">8</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/240591" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 76px;"><iframe id="f9c28e38" name="f22125dbd8" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 76px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(10).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="241275">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/241275" target="_blank">
+					<img src="./Ảnh vui   Hài vl_files/medium-61a54db090b640e98b56d920bf0a3751-400.jpg" alt="Làm gì khác?" class="thumbImg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/241275">Làm gì khác?</a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/46031">Khoa Dang</a>
+            23 phút trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">4.265</span>
+            <span class="comments" title="lượt bình luận">21</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/241275" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f2243035f" name="f3f6c4ed0" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(5).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="241224">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/241224" target="_blank">
+					<img src="./Ảnh vui   Hài vl_files/medium-53a8a8ae964040879717292c80a5ff35-400.jpg" alt="Em của bạn có hút thuốc không ? :D" class="thumbImg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/241224">Em của bạn có hút thuốc không ? <img class="emo" src="./Ảnh vui   Hài vl_files/biggrin.png"></a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/1533">Ngoc Son</a>
+            43 phút trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">8.329</span>
+            <span class="comments" title="lượt bình luận">14</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/241224" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f3213a7e4c" name="f1c9bffe44" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(4).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+        
+<div class="photoListItem" data-id="239529">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/239529" target="_blank">
+					<img data-src="http://s2.haivl.com/data/photos2/20@30327/#@3@8b3@ba!a44@#8c!!d!78255f4fbb/medium-35ae!7fed2b74c!0ba8373d30af!bfe0-400.jpg" alt="Giống nhau thôi khác chi đâu" class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-35ae97fed2b74c90ba8373d30af9bfe0-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/239529">Giống nhau thôi khác chi đâu</a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/97848">Triều Tống</a>
+            50 phút trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">5.778</span>
+            <span class="comments" title="lượt bình luận">13</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/239529" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f7b3d66c" name="ffa0dfc04" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(13).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="241150">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/241150" target="_blank">
+					<img data-src="http://s4.haivl.com/data/photos2/20@30327/5384243@!4!@45bc!baf70!#870a@e22/medium-d3f737ed50ed4dc88ce7e0ea!!748cf3-400.jpg" alt="Nếu một ngày bạn biết yêu" class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-d3f737ed50ed4dc88ce7e0ea99748cf3-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/241150">Nếu một ngày bạn biết yêu</a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/29971">Xe Hết Sạch Xăng</a>
+            53 phút trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">4.085</span>
+            <span class="comments" title="lượt bình luận">20</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/241150" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f3b79eb9b4" name="f1040cfff4" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(7).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="240187">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/240187" target="_blank">
+					<img data-src="http://s2.haivl.com/data/photos2/20@30327/!db7ad@3@f@74d8ea@@0eba07d!4a3e4/medium-d#7e4b225a#c438abab#@b0abb23402b-400.jpg" alt="Ức chế đừng hỏi. =))" class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-d67e4b225a6c438abab61b0abb23402b-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/240187">Ức chế đừng hỏi. <img class="emo" src="./Ảnh vui   Hài vl_files/roflmao.png"></a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/59282">Uron Nè</a>
+            1 tiếng trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">6.299</span>
+            <span class="comments" title="lượt bình luận">29</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/240187" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f280868b6c" name="f39dda936" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(18).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="241089">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/241089" target="_blank">
+					<img data-src="http://s2.haivl.com/data/photos2/20@30327/22adef0ffe2!445!8#!@b8f2c7@3a30b/medium-ceb7a288e2e74e28!dbcba5dbb784#e3-400.jpg" alt="Món này có khả năng gây nghiện =))" class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-ceb7a288e2e74e289dbcba5dbb7846e3-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/241089">Món này có khả năng gây nghiện <img class="emo" src="./Ảnh vui   Hài vl_files/roflmao.png"></a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/82267">Ađu Ucha Đau</a>
+            1 tiếng trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">5.312</span>
+            <span class="comments" title="lượt bình luận">26</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/241089" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f821dcf08" name="f31a37c2d" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(9).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="241118">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/241118" target="_blank">
+					<img data-src="http://s4.haivl.com/data/photos2/20@30327/@007cebbef8542b285b3f8@#fc434838/medium-a4a533c733524#b3bf@b0dff4fdba02d-400.jpg" alt="Quay tay =))" class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-a4a533c7335246b3bf1b0dff4fdba02d-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/241118">Quay tay <img class="emo" src="./Ảnh vui   Hài vl_files/roflmao.png"></a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/57856">Kute Dana</a>
+            1 tiếng trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">6.248</span>
+            <span class="comments" title="lượt bình luận">27</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/241118" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f1c65200dc" name="f3ac85e14" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(8).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="241058">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/241058" target="_blank">
+					<img data-src="http://s4.haivl.com/data/photos2/20@30327/d0#eaacb2f3a40!4!e@7@b0e8!@fb0b4/medium-!5#!fb8!54@@4f!c8c3bda0daf7#!cfb-400.jpg" alt="Tự sướng bá đạo :))" class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-9569fb8954114f9c8c3bda0daf769cfb-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/241058">Tự sướng bá đạo <img class="emo" src="./Ảnh vui   Hài vl_files/laugh.png"></a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/107536">Hiếu Còi</a>
+            1 tiếng trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">6.382</span>
+            <span class="comments" title="lượt bình luận">32</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/241058" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f2cec50f98" name="f7033de8" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(2).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="240712">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/240712" target="_blank">
+					<img data-src="http://s4.haivl.com/data/photos2/20@30327/d@!c##da0!d24a588@#bb#748@ac33c#/medium-!eacf05b0!@#42!8ae@8a70c#dd@d3e3-400.jpg" alt="Thử đi có khi lại giàu đấy các Thím ơi =))" class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-9eacf05b09164298ae18a70c6dd1d3e3-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/240712">Thử đi có khi lại giàu đấy các Thím ơi <img class="emo" src="./Ảnh vui   Hài vl_files/roflmao.png"></a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/34951">CHIPKA - 칩카</a>
+            1 tiếng trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">5.728</span>
+            <span class="comments" title="lượt bình luận">10</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/240712" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f20e8650c" name="f396bb984" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(6).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="240012">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/240012" target="_blank">
+					<img data-src="http://s4.haivl.com/data/photos2/20@30327/5#3458a44#2b4@@8a5b8e#!0a#f2af28/medium-f53d@@3b!c324b00aebea!8c!!502cae-400.jpg" alt="Như 1 thói quen." class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-f53d113b9c324b00aebea98c99502cae-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/240012">Như 1 thói quen.</a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/114351">Bìm Bịp</a>
+            1 tiếng trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">12.539</span>
+            <span class="comments" title="lượt bình luận">38</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/240012" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f367e658c8" name="f3e05274a" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(15).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="240647">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/240647" target="_blank">
+					<img data-src="http://s2.haivl.com/data/photos2/20@30327/07e4ffec@aed4888ad8b00e@3522@##0/medium-d7ea#b8ea!5845eb8cff!e!@ea@eca!d-400.jpg" alt="Phụ nữ tuyệt thật" class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-d7ea6b8ea95845eb8cff9e91ea1eca9d-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/240647">Phụ nữ tuyệt thật</a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/64676">Da Đen</a>
+            1 tiếng trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">5.519</span>
+            <span class="comments" title="lượt bình luận">5</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/240647" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="fa4cde888" name="f37571e7c4" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(19).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="241005">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/241005" target="_blank">
+					<img data-src="http://img.youtube.com/vi/GEqpV#Z0wVE/0.jpg" alt="Nick Vujicic chào Việt Nam" class="thumbImg" src="./Ảnh vui   Hài vl_files/0.jpg">
+                            <img src="./Ảnh vui   Hài vl_files/play_icon1.png" class="videoIndicator">
+        </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/241005">Nick Vujicic chào Việt Nam</a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/25357">Mr Miru</a>
+            1 tiếng trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">9.488</span>
+            <span class="comments" title="lượt bình luận">20</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/241005" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f2d9cf9e58" name="f334b7b98c" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(3).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="241021">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/241021" target="_blank">
+					<img data-src="http://s2.haivl.com/data/photos2/20@30327/3c!#f4ee!bdf42e#!83#e0c@5c852!@b/medium-5ee5#!20723045!abb5!aca7b!a2c@d3-400.jpg" alt="Vãi thím nô =))" class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-5ee569207230459abb59aca7b9a2c1d3-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: relative;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/241021">Vãi thím nô <img class="emo" src="./Ảnh vui   Hài vl_files/roflmao.png"></a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/23549">Chuối</a>
+            1 tiếng trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">5.138</span>
+            <span class="comments" title="lượt bình luận">10</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/241021" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="f4c70eff4" name="f2df23b7d8" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(14).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+
+<div class="photoListItem" data-id="240233">
+    <div class="listItemSeparator">
+    </div>
+    <div class="thumbnail">
+        <a href="http://www.haivl.com/photo/240233" target="_blank">
+					<img data-src="http://s2.haivl.com/data/photos2/20@30327/5bbb#c07ded048c8b5@bf!a2e573!377/medium-5df@df@32a384f!eaf77!@a#a40@a4a8-400.jpg" alt="Mềnh là mềnh hiểu! các cá hiểu ko :))" class="thumbImg" src="./Ảnh vui   Hài vl_files/medium-5df1df132a384f9eaf7791a6a401a4a8-400.jpg">
+                    </a>
+    </div>
+    <div class="info" style="position: fixed; top: 60px;">
+        <h2>
+            <a target="_blank" href="http://www.haivl.com/photo/240233">Mềnh là mềnh hiểu! các cá hiểu ko <img class="emo" src="./Ảnh vui   Hài vl_files/laugh.png"></a>
+        </h2>
+        <div class="uploader">
+            Đăng bởi <a href="http://www.haivl.com/uploader/57348">OnePiece StrawHat</a>
+            1 tiếng trước</div>
+        <div class="stats">
+            <span class="views" title="lượt xem">9.895</span>
+            <span class="comments" title="lượt bình luận">39</span>
+            <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.haivl.com/photo/240233" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 20px; width: 82px;"><iframe id="fdf7f0ca8" name="f1f7cf1278" scrolling="no" style="border: none; overflow: hidden; height: 20px; width: 82px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(12).html"></iframe></span></div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+<div id="listEnd">
+        </div>
+        <div class="listItemSeparator">
+        </div>
+        <p class="loading" style="display: none;">
+            <img src="./Ảnh vui   Hài vl_files/loading.gif">
+            <br>
+            Đang tải thêm ảnh...
+        </p>
+</div>
+
+        <a class="buttons nextListPage" href="http://www.haivl.com/new/4" style="display: inline;">xem thêm, còn nhiều lắm</a>
+        <div class="clear">
+        </div>
+    </div>
+    <div id="footer">
+    <ul class="left">
+        <li>Copyright © 2013 <a href="http://www.appvl.com/" target="_blank">
+            Appvl</a></li>
+    </ul>
+    <ul class="right">
+        <li><a href="http://www.haivl.com/contact">Liên hệ</a>
+        </li>
+        <li>·<a href="http://www.haivl.com/about">Giới thiệu</a>
+        </li>
+        <li>·<a href="http://www.haivl.com/faq">FAQ</a>
+        </li>
+        <li>·<a href="http://www.haivl.com/tos">Điều khoản</a>
+        </li>
+        <li>·<a href="http://www.haivl.com/rss" target="_blank">RSS</a>
+        </li>
+        <li>·<a href="http://www.facebook.com/haivl.com" target="_blank">Facebook</a>
+        </li>
+        <li>·<a href="http://itunes.apple.com/us/app/haivl.com/id558704602" target="_blank">iOS</a>
+        </li>
+        <li>·<a href="https://play.google.com/store/apps/details?id=com.appvl.haivl" target="_blank">Android</a>
+        </li>
+    </ul>
+    <div class="clear">
+    </div>
+</div>
+</div>
+<div id="rightColumn">
+
+    
+    
+         <div class="box infoBox highlightBox">
+            <b><a href="https://play.google.com/store/apps/details?id=com.appvl.haivl" target="_blank">Haivl</a> đã có trên Google Play cho <span style="color: red">Android</span>. <a href="https://play.google.com/store/apps/details?id=com.appvl.haivl" target="_blank">Click để tải</a>
+                hoặc vào <a href="https://play.google.com/store/apps/details?id=com.appvl.haivl" target="_blank">haivl.com/android</a> từ smartphone của bạn.</b>
+        </div>
+	
+    <div class="box infoBox highlightBox">
+        <b>Vào Facebook để duyệt haivl sướng hơn! Bạn không vào được? Xem <a href="http://www.haivl.com/cach-vao-facebook-bi-chan-mang-vnpt-viettel-fpt">hướng dẫn cách vào Facebook</a>.</b>
+    </div>
+    <div>
+        <a class="buttons spaceBottom" href="http://www.haivl.com/upload" style="float: left; width: 278px;color: white">Click để bắt đầu chia sẻ những bức ảnh vui!</a>
+        <div class="clear">
+        </div>
+    </div>
+        <div class="box darkBox">
+            <h3 class="topUsers">
+                Top danh hài</h3>
+            <ul class="topUsersSort topUsersSortHome">
+                <li><a href="http://www.haivl.com/#" data-sort="week" class="selected">tuần</a> / </li>
+                <li><a href="http://www.haivl.com/#" data-sort="month">tháng</a> / </li>
+                <li><a href="http://www.haivl.com/#" data-sort="all">tất cả</a> </li>
+            </ul>
+            <div class="clear">
+            </div>
+            <div id="topUserContent">
+                    <div class="topUsers">
+            <div class="item">
+                <a href="http://www.haivl.com/uploader/10926">
+                    <img src="./Ảnh vui   Hài vl_files/thumbnail.jpg">
+                    <div class="info">
+                        <span class="name">nhathotinht...</span> <span class="likes">26.079</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="http://www.haivl.com/uploader/72568">
+                    <img src="./Ảnh vui   Hài vl_files/thumbnail(1).jpg">
+                    <div class="info">
+                        <span class="name">fe fe fe</span> <span class="likes">23.710</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="http://www.haivl.com/uploader/34951">
+                    <img src="./Ảnh vui   Hài vl_files/thumbnail(2).jpg">
+                    <div class="info">
+                        <span class="name">CHIPKA - 칩카</span> <span class="likes">21.527</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="http://www.haivl.com/uploader/3842">
+                    <img src="./Ảnh vui   Hài vl_files/picture">
+                    <div class="info">
+                        <span class="name">Huỳnh Minh Bee</span> <span class="likes">16.551</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="http://www.haivl.com/uploader/29971">
+                    <img src="./Ảnh vui   Hài vl_files/thumbnail(3).jpg">
+                    <div class="info">
+                        <span class="name">Xe Hết Sạch...</span> <span class="likes">15.278</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="http://www.haivl.com/uploader/38494">
+                    <img src="./Ảnh vui   Hài vl_files/thumbnail(4).jpg">
+                    <div class="info">
+                        <span class="name">Shinichi Kudo</span> <span class="likes">14.673</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="http://www.haivl.com/uploader/39262">
+                    <img src="./Ảnh vui   Hài vl_files/thumbnail(5).jpg">
+                    <div class="info">
+                        <span class="name">Ceddy Blueup</span> <span class="likes">14.286</span>
+                    </div>
+                </a>
+            </div>
+            <div class="item">
+                <a href="http://www.haivl.com/uploader/13977">
+                    <img src="./Ảnh vui   Hài vl_files/thumbnail(6).jpg">
+                    <div class="info">
+                        <span class="name">Mèo Mun</span> <span class="likes">12.836</span>
+                    </div>
+                </a>
+            </div>
+    </div>
+    <div class="clear">
+    </div>
+    <div class="moreTop"><a href="http://www.haivl.com/top-user/week">xem thêm »</a></div>
+
+            </div>
+        </div>
+    <div class="box darkBox socialBox">
+    <h3>
+        Ủng hộ haivl.com nhé bạn ^^</h3>
+    <div class="media facebook">
+        <div class="fb-like fb_edge_widget_with_comment fb_iframe_widget" data-href="http://www.facebook.com/haivl.com" data-send="false" data-width="270" data-show-faces="false" fb-xfbml-state="rendered"><span style="height: 28px; width: 270px;"><iframe id="f12c89b9a" name="fbeb654c" scrolling="no" style="border: none; overflow: hidden; height: 28px; width: 270px;" title="Like this content on Facebook." class="fb_ltr" src="./Ảnh vui   Hài vl_files/like(17).html"></iframe></span></div>
+    </div>
+    <div class="media twitter">
+        <iframe allowtransparency="true" frameborder="0" scrolling="no" src="./Ảnh vui   Hài vl_files/follow_button.1363148939.html" class="twitter-follow-button twitter-follow-button" style="width: 250px; height: 28px;" title="Twitter Follow Button" data-twttr-rendered="true"></iframe>
+        <script type="text/javascript">
+            !function (d, s, id) { var js, fjs = d.getElementsByTagName(s)[0]; if (!d.getElementById(id)) { js = d.createElement(s); js.id = id; js.src = "//platform.twitter.com/widgets.js"; fjs.parentNode.insertBefore(js, fjs); } } (document, "script", "twitter-wjs");
+        </script>
+    </div>
+    <div class="media google" style="border-bottom: none">
+        <div style="text-indent: 0px; margin: 0px; padding: 0px; background-color: transparent; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; width: 106px; height: 24px; display: inline-block; background-position: initial initial; background-repeat: initial initial;" id="___plusone_0"><iframe frameborder="0" hspace="0" marginheight="0" marginwidth="0" scrolling="no" style="position: static; top: 0px; width: 106px; margin: 0px; border-style: none; left: 0px; height: 24px; visibility: visible;" tabindex="0" vspace="0" width="100%" id="I0_1364398345542" name="I0_1364398345542" src="./Ảnh vui   Hài vl_files/fastbutton.html" allowtransparency="true" data-gapiattached="true" title="+1"></iframe></div>
+        <script type="text/javascript">
+            (function () {
+                var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
+                po.src = 'https://apis.google.com/js/plusone.js';
+                var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
+            })();
+        </script>
+    </div>
+    
+</div>
+
+    <div class="fixedScrollDetector">
+    </div>
+    <div class="fixedScroll" style="position: fixed; top: 51px;">
+        <!-- haivl-trang-chu -->
+        <div id="div-gpt-ad-1340107187238-0" style="width: 300px; height: 250px; display: none;" class="spaceBottom">
+            <script type="text/javascript">
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1340107187238-0'); });
+            </script>
+        </div>
+        <!-- haivl-trang-chu-bottom -->
+        <div id="div-gpt-ad-1348211982138-0" style="width: 300px; height: 250px; display: none;">
+            <script type="text/javascript">
+                googletag.cmd.push(function () { googletag.display('div-gpt-ad-1348211982138-0'); });
+            </script>
+        </div>
+        <div id="footerRight">
+    <ul class="copyright">
+        <li>Copyright © 2013 <a href="http://www.appvl.com/" target="_blank">
+            Appvl</a></li>
+    </ul>
+    <ul class="links">
+        <li><a href="http://www.haivl.com/contact">Liên hệ</a>
+        </li>
+        <li>·<a href="http://www.haivl.com/faq">FAQ</a>
+        </li>
+        <li>·<a href="http://www.facebook.com/haivl.com" target="_blank">Facebook</a>
+        </li>
+        <li>·<a href="http://itunes.apple.com/us/app/haivl.com/id558704602" target="_blank">iOS</a>
+        </li>
+        <li>·<a href="https://play.google.com/store/apps/details?id=com.appvl.haivl" target="_blank">Android</a>
+        </li>
+    </ul>
+    <div class="clear">
+    </div>
+</div>
+
+    </div>
+</div>
+<div class="clear">
+</div>
+
+
+        </div>
+    </div>
+    
+
+    <div id="fb-root" class=" fb_reset"><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div><iframe name="fb_xdm_frame_http" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_http" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" style="border: none;" src="./Ảnh vui   Hài vl_files/xd_arbiter.html"></iframe><iframe name="fb_xdm_frame_https" frameborder="0" allowtransparency="true" scrolling="no" id="fb_xdm_frame_https" aria-hidden="true" title="Facebook Cross Domain Communication Frame" tab-index="-1" style="border: none;" src="./Ảnh vui   Hài vl_files/xd_arbiter(1).html"></iframe></div></div><div style="position: absolute; top: -10000px; height: 0px; width: 0px;"><div></div></div></div>
+    <script type="text/javascript">
+        Haivl.Facebook.init("378808135489760");
+    </script>
+    
+    
+    <script type="text/javascript">
+        Haivl.ListPhoto.init("new", 1);
+    </script>
+
+
+
+
+</body></html>

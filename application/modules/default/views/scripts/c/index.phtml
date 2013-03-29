@@ -1,0 +1,23 @@
+<?php
+if ($this->status == "error")
+    $class = "message error";
+else
+    $classInfo = "message success";
+if ($this->message != null)
+    echo "<div class=<?=$classInfo?>".$this->message."</div>";
+
+if ($this->content){
+    $content = $this->content;
+    //display image
+    echo"<div >
+          <div> 
+            <div> Prev</div><div>Next</div
+          </div>
+          <div>
+            <img src='/photos/".$content['name']. "' />
+          </div>
+          <div>
+           Comment  here
+          </div>
+        </div>";
+}

@@ -1,0 +1,23 @@
+<h1> Hot</h1>
+<?php
+
+$message = $this->message;
+if ($message['error'] != null)
+    echo "Error " . $message['error'];
+
+if ($message['content']) {
+    foreach ($message['content'] as $info) {
+        ?>
+        <div class="postItem">
+            <a href='<?= "/c/".$info['pid']?>' class='postImage' target='_blank'>
+                <img src='/photos/<?=$info['name']?>' />
+            </a>
+            <div class='info'>
+                <div><a href='<?= "/c/".$info['pid'] ?>'><?= $info['title'] ?></a></div>
+                 <div>Likes <?= $info['like'] ?></div>s
+            </div>
+        </div>
+        <?
+    }
+}
+?>
