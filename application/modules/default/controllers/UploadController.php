@@ -1,6 +1,6 @@
 <?php
 
-class UploadController extends Zend_Controller_Action {
+class UploadController extends Cab_Controller_Action {
 
     public static $id = 0;
 
@@ -54,9 +54,14 @@ class UploadController extends Zend_Controller_Action {
                                     'date' => $time
                         ));
 
-                        if ($id >= 0)
+                        if ($id >= 0){
                             $this->view->url = "/c/$id";
-                        else
+                            //add keyword
+                            PostModel::addKeyword(array(
+                                "keyword" => $title,
+                                "url" => $this->view->url
+                            ));
+                        } else
                             $message[] = "Bạn đã đăng bài thành công!";
                     }
                     else

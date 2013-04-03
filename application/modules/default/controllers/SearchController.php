@@ -1,6 +1,6 @@
 <?php
 
-class SearchController extends Zend_Controller_Action {
+class SearchController extends Cab_Controller_Action {
     public function init(){
         Zend_Loader::loadClass("Zend_Search_Lucene");
     }

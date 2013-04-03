@@ -1,0 +1,47 @@
+/* 
+    Document   : custom
+    Created on : Mar 29, 2013, 9:47:36 PM
+    Author     : newvalue
+    Description:
+        Purpose of the stylesheet follows.
+*/
+section[role="region"] > header:first-child .icon.icon-search {
+    background-image: url(custom/search.png);
+}
+section[role="region"] > header > a .icon.icon-search,
+section[role="region"] > header > button .icon.icon-search {
+    background-position: -1.1rem center;
+}
+
+
+button[type="reset"] {
+    bottom: 5rem;
+}
+.suggest-container {
+    display: block;
+    clear: both;
+    padding: 0px;
+    background: rgba(0,0,0,0.9);    
+    width: 110%;
+    z-index: 1000;
+    margin: 0px;
+
+}
+#search-button {
+    position: absolute;
+    right: 0;
+    top: 1rem;  
+    height: 3rem;
+    widows: 3rem;
+    background: url("custom/search.png") ;
+    background-size: 100% 100%;
+}
+/*.suggest-container ul {
+    width: 100%;
+    list-style-type: none;
+    z-index: 1000;
+    margin: 0px;
+}
+.suggest-container ul li {
+    z-index: 1000;
+}*/

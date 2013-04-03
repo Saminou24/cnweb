@@ -1,6 +1,6 @@
 <?php
 
-class CController extends Zend_Controller_Action
+class CController extends Cab_Controller_Action
 {
     public function init(){
         Zend_Loader::loadClass("PostModel");

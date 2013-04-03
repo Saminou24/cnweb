@@ -1,6 +1,6 @@
 <?php
 
-class LoginController extends Zend_Controller_Action
+class LoginController extends Cab_Controller_Action
 {
     public function indexAction(){
         

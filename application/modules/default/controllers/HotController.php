@@ -1,17 +1,13 @@
 <?php
 
-class HotController extends Zend_Controller_Action
+class HotController extends Cab_Controller_Action
 {
     
     public function init() {
         Zend_Loader::loadClass("PostModel");
-        
-    }
-    public function __call($methodName, $args) {
-       // $this->redirect("/index/1");
     }
 
-    public function displayAction()
+    public function indexAction()
     {
         //contain message information
         $message = array();

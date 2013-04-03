@@ -1,6 +1,6 @@
 <?php
 
-class NewController extends Zend_Controller_Action {
+class NewController extends Cab_Controller_Action {
 
 //    public function preDispatch() {
 //       $page = $this->getParam("page");

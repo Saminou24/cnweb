@@ -1,0 +1,32 @@
+/* 
+    Document   : style
+    Created on : Mar 31, 2013, 7:51:17 AM
+    Author     : newvalue
+    Description:
+        Purpose of the stylesheet follows.
+*/
+
+body,html {
+    min-width: 320px;
+}
+#search-box {
+    background: #fff url(/images/search.png) no-repeat;
+    background-size: 3rem 3rem;
+    padding: 0 3rem ;
+}
+
+#search-form {
+    padding-left: 120px;
+}
+#logo {
+    position: absolute;
+    top: 3px;
+}
+#menu-sub{
+    position: absolute;
+    right: 0px;
+    height: auto;
+    top: 5rem;
+    left: auto;
+    width: 50%;
+}
