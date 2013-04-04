@@ -10,19 +10,19 @@ class Form_Upload extends Zend_Form {
 
         $file = new Zend_Form_Element_File("file");
         
-        $file->setLabel("Lua chon file")
+        $file->setLabel("Lựa chọn file:")
                 ->setRequired(true)
                 ->addValidator('Size', false, "2MB")
                 ->addValidator("Extension", false, "jpg,png,gif");
         
         $title = new Zend_Form_Element_Text("title");
-        $title->setLabel('Tieu de: ')
+        $title->setLabel('Tiêu đề: ')
                 ->setRequired(true);
         
 //        $description = new Zend_Form_Element_Text("description");
 //        $description->setLabel("Mieu ta:");
 
-        $submit = new Zend_Form_Element_Submit("Upload");
+        $submit = new Zend_Form_Element_Submit("Tải  lên");
 
         $this->addElement($file)
                 ->addElement($title)

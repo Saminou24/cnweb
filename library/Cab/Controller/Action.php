@@ -7,11 +7,16 @@ class Cab_Controller_Action extends Zend_Controller_Action {
         $deviceType = $detect->isMobile() ? ($detect->isTablet() ? 'tablet' : 'phone') : 'computer';
 
         //$layoutPath = APPLICATION_PATH . '/layouts';
+        
         Zend_Layout::getMvcInstance()->setLayout('mobile');
+        
+     
 //        if ($deviceType == 'computer')
 //            Zend_Layout::getMvcInstance()->setLayout('default');
 //        else
 //            Zend_Layout::getMvcInstance()->setLayout('mobile');
+        
+
     }
 
 }

@@ -14,7 +14,13 @@
         <link rel="stylesheet" type="text/css" href="/css/mobile/headers.css">
         <link rel="stylesheet" type="text/css" href="/css/mobile/switches.css" />
         <link rel="stylesheet" type="text/css" href="/css/mobile/style.css">
-
+        <link rel="stylesheet" type="text/css" href="/css/mobile/input_areas.css">
+        <link rel="stylesheet" type="text/css" href="/css/mobile/buttons.css" />
+        <link rel="stylesheet" type="text/css" href="/css/mobile/time_selector.css" />
+        <link rel="stylesheet" type="text/css" href="/css/mobile/buttons.css" />
+        <link rel="stylesheet" type="text/css" href="/css/mobile/date_selector.css" />
+        <link rel="stylesheet" type="text/css" href="/css/mobile/value_selector.css" />
+        <link rel="stylesheet" type="text/css" href="/css/mobile/edit_mode.css" />
     </head>
     <body role="application">
 
@@ -28,11 +34,11 @@
                     <input type='text' placeholder="Từ khóa" autocomplete="off" id='search-box'/>
                     <button type='reset'>Remove text</button>
                 </form>
-                <h2 id="logo"><img src="/images/logo.png" /></h2>
+                <h2 id="logo"><a href='/'><img src="/images/logo.png" /></a></h2>
             </header>
-     
+
         </section>
-        <section data-type="sidebar" role="region" id="menu-sub">
+        <section data-type="sidebar" role="region" id="subMenu">
             <nav>
                 <h2>Thông tin tài khoản</h2>
                 <ul>
@@ -41,21 +47,33 @@
                     <li><a href="#content">Thay đổi mật khẩu</a></li>
                     <li><a href="#content">Đăng xuất</a></li>
                 </ul>
-<!--                <h2>Subtitle</h2>
-                <ul>
-                    <li><a href="#content">label</a></li>
-                    <li><a href="#content">label</a></li>
-                    <li><a href="#content">label larger label than the </a></li>
-                    <li><a href="#content">label</a></li>
-                </ul>-->
+                <!--                <h2>Subtitle</h2>
+                                <ul>
+                                    <li><a href="#content">label</a></li>
+                                    <li><a href="#content">label</a></li>
+                                    <li><a href="#content">label larger label than the </a></li>
+                                    <li><a href="#content">label</a></li>
+                                </ul>-->
             </nav>
         </section>
+        <section id="suggest-container" data-type="list">
+
+        </section>
+        <h2 class="bb-docs">Đăng nhập</h2>
         <section id="content">
-            
+
+            <?php
+            $session = new Zend_Session_Namespace("user");
+            if ($session->username)
+                echo "Xin chào bạn " . $session->username . "<br/>";
+            echo $this->layout()->content;
+            ?>
         </section>
         <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
 <!--        <script type="text/javascript" src="/js/mobile/app.js"></script>-->
         <script type="text/javascript" src="/js/effect.js"></script>
         <script type="text/javascript" src="/js/cab.js"></script>
+        <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
+        <script type="text/javascript" src="/js/wp-ui.js"></script>
     </body>
 </html>
