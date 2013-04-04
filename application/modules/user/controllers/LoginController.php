@@ -26,6 +26,8 @@ class User_LoginController extends Cab_Controller_Action
                     $user_session->password = $password;
                     $this->redirect("/"); //back home
                 }
+                else
+                    $this->view->message = "Vui lòng kiểm tra lại thông tin tài khoản";
             }
         }
         
