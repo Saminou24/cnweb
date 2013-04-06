@@ -1,79 +1,24 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Cab.vn Mobile</title>
-        <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-        <!--        <link rel="stylesheet" type="text/css" href="/css/mobile/custom.css">-->
-        <link rel="stylesheet" type="text/css" href="/css/mobile/s.css">
-        <link rel="stylesheet" type="text/css" href="/css/mobile/building_block.css">
-
-        <link rel="stylesheet" type="text/css" href="/css/mobile/drawer.css">
-        <link rel="stylesheet" type="text/css" href="/css/mobile/lists.css">
-        <link rel="stylesheet" type="text/css" href="/css/mobile/tabs.css">
-        <link rel="stylesheet" type="text/css" href="/css/mobile/toolbars.css">
-        <link rel="stylesheet" type="text/css" href="/css/mobile/headers.css">
-        <link rel="stylesheet" type="text/css" href="/css/mobile/switches.css" />
-        <link rel="stylesheet" type="text/css" href="/css/mobile/style.css">
-        <link rel="stylesheet" type="text/css" href="/css/mobile/input_areas.css">
-        <link rel="stylesheet" type="text/css" href="/css/mobile/buttons.css" />
-        <link rel="stylesheet" type="text/css" href="/css/mobile/time_selector.css" />
-        <link rel="stylesheet" type="text/css" href="/css/mobile/buttons.css" />
-        <link rel="stylesheet" type="text/css" href="/css/mobile/date_selector.css" />
-        <link rel="stylesheet" type="text/css" href="/css/mobile/value_selector.css" />
-        <link rel="stylesheet" type="text/css" href="/css/mobile/edit_mode.css" />
+        <?php echo $this->headTitle() ?>
+        <?php echo $this->headMeta() ?>
+        <?php echo $this->headLink() ?>
+        <?php echo $this->headScript() ?>
+        <?php echo $this->partial('mobile/head.phtml'); ?>
     </head>
     <body role="application">
 
-        <section role="region" class="skin-organic">
-            <header>
-                <button><span class="icon icon-back"></span></button>
-                <menu type="toolbar">
-                    <button id='menu'><span class="icon icon-menu"></span></button>
-                </menu>
-                <form action='/search' id="search-form">
-                    <input type='text' placeholder="Từ khóa" autocomplete="off" id='search-box'/>
-                    <button type='reset'>Remove text</button>
-                </form>
-                <h2 id="logo"><a href='/'><img src="/images/logo.png" /></a></h2>
-            </header>
+        <?php require 'mobile/menu.phtml'; ?>
 
-        </section>
-        <section data-type="sidebar" role="region" id="subMenu">
-            <nav>
-                <h2>Thông tin tài khoản</h2>
-                <ul>
-                    <li><a href="#content">Trang cá nhân</a></li>
-                    <li><a href="#content">Thay đổi thông tin</a></li>
-                    <li><a href="#content">Thay đổi mật khẩu</a></li>
-                    <li><a href="#content">Đăng xuất</a></li>
-                </ul>
-                <!--                <h2>Subtitle</h2>
-                                <ul>
-                                    <li><a href="#content">label</a></li>
-                                    <li><a href="#content">label</a></li>
-                                    <li><a href="#content">label larger label than the </a></li>
-                                    <li><a href="#content">label</a></li>
-                                </ul>-->
-            </nav>
-        </section>
         <section id="suggest-container" data-type="list">
-
         </section>
-        <h2 class="bb-docs">Đăng nhập</h2>
-        <section id="content">
+    <div id="content">
+        <?php echo $this->layout()->content; ?>
+    </div>
 
-            <?php
-            $session = new Zend_Session_Namespace("user");
-            if ($session->username)
-                echo "Xin chào bạn " . $session->username . "<br/>";
-            echo $this->layout()->content;
-            ?>
-        </section>
-        <script type="text/javascript" src="/js/jquery-1.7.1.min.js"></script>
-<!--        <script type="text/javascript" src="/js/mobile/app.js"></script>-->
-        <script type="text/javascript" src="/js/effect.js"></script>
-        <script type="text/javascript" src="/js/cab.js"></script>
-        <script type="text/javascript" src="/js/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="/js/wp-ui.js"></script>
-    </body>
+    <?php
+    require_once 'mobile/script.phtml';
+    ?>
+</body>
 </html>

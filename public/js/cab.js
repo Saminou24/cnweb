@@ -27,10 +27,20 @@ function init() {
 //                                data = data.replace(re, "<strong>$&</strong>");
 //                            }
 //                        });
-                        $('#suggest-container').html(data);
+                        $('#suggest-container').html(data).show();
                         
                     }});
             }, 150);
+         else
+             $('#suggest-container').hide();    
 
     });
+}
+
+cab = {
+    version: "0.0.1"
+};
+cab.confirmLink = function(info){
+    var c = confirm(info);
+    return c;
 }

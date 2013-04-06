@@ -12,6 +12,9 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
     protected function  _initSession(){
         Zend_Session::start();
     }
+    protected function _initConstant(){
+        defined("NUM_PER_PAGE") || define("NUM_PER_PAGE", 5);
+    }
 
     //init db
     protected function _initDb() {

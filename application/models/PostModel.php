@@ -60,6 +60,13 @@ class PostModel extends Zend_Db_Table_Abstract {
 
         return $str;
     }
+    public static function getHotPage($page){
 
+        $model = new PostModel();
+        $sql = $model->select()
+                ->columns("count($uid)");
+        $total = $model->fetchAll($sql);
+        
+    }
 }
 

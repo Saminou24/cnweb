@@ -6,9 +6,12 @@
         Purpose of the stylesheet follows.
 */
 
-body,html {
+body{
     min-width: 320px;
+    margin: -1rem;
+    font-weight: lighter;
 }
+
 #search-box {
     background: #fff url(/images/search.png) no-repeat;
     background-size: 3rem 3rem;
@@ -24,12 +27,16 @@ body,html {
 }
 #subMenu{
     display: none;
-    position: absolute;
-    right: 0px;
+    position: relative;
+    float: left;
+
     height: auto;
     top: 5rem;
     left: auto;
     width: 50%;
+}
+#subMenu nav {
+    overflow: hidden;
 }
 #suggest-container {
     font-weight: 100;
@@ -56,3 +63,70 @@ h2.bb-docs {
     background-color: #f5f5f5;
 }
 form { margin: 1rem 2rem; }
+
+#content {
+    width: 100%;
+    padding: 20px;
+}
+
+.table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1px solid #000; 
+    margin-bottom: 20px;
+}
+.table td {
+    border: 1px solid #000;
+    padding: 10px;
+    font-weight: lighter;
+}
+.table  th {
+    border: 1px solid #000;
+    padding: 10px;
+    background: #ccc;
+    font-weight: normal
+
+}
+/** trang chính **/
+#main {
+
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    width: 650px;
+    float: left;
+    margin: 20px;
+    padding: 20px;
+}
+#sidebar {
+    margin-top: 20px;
+    padding: 0px;
+    box-shadow: 0 0 3px rgba(0,0,0,0.3);
+    width: 200px;
+    float: left;
+    vertical-align: central;
+}
+#sidebar li.active p {
+   color: #ccc;
+}
+#sidebar li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+}
+#sidebar p {
+    font-size: 14px;
+    color: #000;
+}
+#sidebar ul {
+    margin-left: 25px;
+    margin-bottom: 0px;
+}
+#content {
+    margin: 10px auto;
+    width: 980px;
+}
+form label {
+    height: auto;
+    width: 200px;
+}
+.require {
+    color: red;
+}
