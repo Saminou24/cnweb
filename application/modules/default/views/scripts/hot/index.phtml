@@ -1,5 +1,6 @@
 <h1> Hot</h1>
 <?php
+$this->headTitle("Ảnh mới");
 
 $message = $this->message;
 if ($message['error'] != null)
@@ -8,12 +9,12 @@ if ($message['error'] != null)
 if ($message['content']) {
     foreach ($message['content'] as $info) {
         ?>
-        <div class="postItem">
-            <a href='<?= "/c/".$info['pid']?>' class='postImage' target='_blank'>
-                <img src='/photos/<?=$info['name']?>' />
+        <div class="post-item">
+            <a href='<?= "/c/".$info['pid']?>' class='post-image' target='_blank'>
+                <img src='/photos/<?=$info['name']?>' width="100%" />
             </a>
-            <div class='info'>
-                <div><a href='<?= "/c/".$info['pid'] ?>'><?= $info['title'] ?></a></div>
+            <div class='post-info'>
+                <div><a href='<?= "/c/".$info['pid'] ?>'><h3><?= $info['title'] ?></h3></a></div>
                  <div>Likes <?= $info['like'] ?></div>s
             </div>
         </div>

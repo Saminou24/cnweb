@@ -61,12 +61,33 @@ class PostModel extends Zend_Db_Table_Abstract {
         return $str;
     }
     public static function getHotPage($page){
-
+        $offset = $page * NUM_PER_PAGE;
         $model = new PostModel();
+        $total = $model->select()
+                ->order("like desc")
+                ->from("post","count(pid)");
+        if ($offset > $total)
+            return array();
+        $num = $offset + NUM_PER_PAGE < $total ? NUM_PER_PAGE : $total - $offset;
         $sql = $model->select()
-                ->columns("count($uid)");
-        $total = $model->fetchAll($sql);
+                ->limit($num, $offset);
         
+        return $model->fetchAll($sql);
+        
+    }
+    public static function getNewPage($page){
+         $offset = $page * NUM_PER_PAGE;
+        $model = new PostModel();
+        $total = $model->select()
+                ->order("date_created desc")
+                ->from("post","count(pid)");
+        if ($offset > $total)
+            return array();
+        $num = $offset + NUM_PER_PAGE < $total ? NUM_PER_PAGE : $total - $offset;
+        $sql = $model->select()
+                ->limit($num, $offset);
+        
+        return $model->fetchAll($sql);
     }
 }
 
