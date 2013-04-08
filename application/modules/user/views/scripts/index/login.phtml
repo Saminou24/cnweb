@@ -1,0 +1,18 @@
+<?php
+if ($this->message)
+    echo $this->message;
+?>
+<form method="POST">
+    <p>
+        <input type="text" name='username' required/>
+        <button type="reset">Clear</button>
+    </p>
+    <p>
+        <input type="password" name="password" required/>
+        <button type="reset">Clear</button>
+    </p>
+    <button type="submit"class="recommend">Đăng nhập </button>
+</form>
+<section role="status" >
+    Bạn chưa có tài khoản.Hãy <a href='#signup' >đăng ký</a> để cùng chia sẻ nào.<br/>
+</section>
