@@ -16,7 +16,8 @@ class PostModel extends Zend_Db_Table_Abstract {
     public static function addPost($data) {
         $model = new PostModel();
         $model->insert($data);
-        return self::getDefaultAdapter()->lastInsertId();
+        return $model->getDefaultAdapter()->lastInsertId();
+
     }
 
     public static function dellPost($id) {
@@ -33,9 +34,9 @@ class PostModel extends Zend_Db_Table_Abstract {
         Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive());
         $index = Zend_Search_Lucene::open('post');
         $doc = new Zend_Search_Lucene_Document();
-        $doc->addField(Zend_Search_Lucene_Field::Keyword('link',  $data['url'], 'UTF-8'));
+        $doc->addField(Zend_Search_Lucene_Field::Keyword('link', $data['url'], 'UTF-8'));
         $doc->addField(Zend_Search_Lucene_Field::Text('keyword', self::normalizeName($data['keyword']), 'UTF-8'));
-         $doc->addField(Zend_Search_Lucene_Field::Text('title', $data['keyword'], 'UTF-8'));
+        $doc->addField(Zend_Search_Lucene_Field::Text('title', $data['keyword'], 'UTF-8'));
         $index->addDocument($doc);
         $index->commit();
     }
@@ -55,39 +56,58 @@ class PostModel extends Zend_Db_Table_Abstract {
         $str = preg_replace("/(Ù|Ú|Ụ|Ủ|Ũ|Ư|Ừ|Ứ|Ự|Ử|Ữ)/", 'U', $str);
         $str = preg_replace("/(Ỳ|Ý|Ỵ|Ỷ|Ỹ)/", 'Y', $str);
         $str = preg_replace("/(Đ)/", 'D', $str);
-       // $str = str_replace(" ", "-", str_replace("&*#39;", "", $str));
+        // $str = str_replace(" ", "-", str_replace("&*#39;", "", $str));
         $str = strtolower($str);
 
         return $str;
     }
-    public static function getHotPage($page){
+
+    public static function getHotPage($page) {
         $offset = $page * NUM_PER_PAGE;
         $model = new PostModel();
         $total = $model->select()
                 ->order("like desc")
-                ->from("post","count(pid)");
+                ->from("post", "count(pid)");
         if ($offset > $total)
             return array();
         $num = $offset + NUM_PER_PAGE < $total ? NUM_PER_PAGE : $total - $offset;
         $sql = $model->select()
                 ->limit($num, $offset);
-        
+
         return $model->fetchAll($sql);
-        
     }
-    public static function getNewPage($page){
-         $offset = $page * NUM_PER_PAGE;
+
+    public static function getNewPage($page) {
+        $offset = $page * NUM_PER_PAGE;
         $model = new PostModel();
         $total = $model->select()
                 ->order("date_created desc")
-                ->from("post","count(pid)");
+                ->from("post", "count(pid)");
         if ($offset > $total)
             return array();
         $num = $offset + NUM_PER_PAGE < $total ? NUM_PER_PAGE : $total - $offset;
         $sql = $model->select()
                 ->limit($num, $offset);
-        
+
         return $model->fetchAll($sql);
     }
+
+    public static function getHotPages($page) {
+        $model = new PostModel();
+        $total = $model->fetchRow(
+            $model->select()
+                ->from("post", "count(pid) as count"));
+        //echo $total["count"];
+        $total = $total['count'];
+
+        $offset = $page * NUM_PER_PAGE;
+        echo $offset;
+        $num = NUM_PER_PAGE * SEG_PER_PAGE;
+        $sql = $model->select()
+                ->order("like desc")
+                ->limit($num, $offset);
+        return $model->fetchAll($sql);
+    }
+
 }
 

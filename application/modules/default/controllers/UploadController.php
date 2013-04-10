@@ -38,6 +38,7 @@ class UploadController extends Cab_Controller_Action {
 
                     //generate unique file name
                     $time = time();
+                    $date = date("MM-DD-YYYY");
                     $name = base64_encode($uid . "_" . $time) . "." . $info['extension'];
                     //echo $name$upload->addValidator($name)
                     $upload->addFilter("Rename", $name);
@@ -51,7 +52,7 @@ class UploadController extends Cab_Controller_Action {
                                     'uid' => $uid,
                                     'title' => $title,
                                     'name' => $name,
-                                    'date' => $time
+                                    'date-created' => $date
                         ));
 
                         if ($id >= 0){

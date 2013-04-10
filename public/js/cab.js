@@ -1,38 +1,32 @@
-init();
+$(document).ready(function(){
+    init();
+});
 
 function init() {
     //container
-    var timeId = {};
-
+    var timeId = {
+        'suggest': 'undefined',
+        'time': new Date().getTime()
+    };
+    var MIN_UPDATE_TIME = 150;
     $('#search-box').bind("keyup", function() {
         // alert('keyfire');
         var keyword = $('#search-box').val();
-        if (timeId['suggest'])
+        var t = new Date().getTime();
+        if (timeId['suggest'] && t - timeId['time'] < MIN_UPDATE_TIME)
             clearTimeout(timeId['suggest']);
-        if (keyword.length > 0)
+        if (keyword.length > 0) {
+
             timeId['suggest'] = setTimeout(function() {
-                // alert('eventCall');
+                timeId['time'] = new Date().getTime();
                 $.ajax({
                     url: "/suggest/index?q=" + keyword,
                     success: function(data) {
-                       //alert(data);
-//                        //highlight
-//                        // alert(data.match(/<li>[a-z]*<\/li>/gi));
-//                        var keyArr = keyword.split(" ");
-//                        keyArr.forEach(function(e) {
-//                            // alert('replace: ' + e);
-//                            if (e.length > 0) {
-//                                var re = new RegExp(e, "gi");
-//
-//                                data = data.replace(re, "<strong>$&</strong>");
-//                            }
-//                        });
                         $('#suggest-container').html(data).show();
-                        
                     }});
-            }, 150);
-         else
-             $('#suggest-container').hide();    
+            }, 50);
+        } else
+            $('#suggest-container').hide();
 
     });
 }
@@ -40,7 +34,8 @@ function init() {
 cab = {
     version: "0.0.1"
 };
-cab.confirmLink = function(info){
+cab.confirmLink = function(info) {
     var c = confirm(info);
     return c;
+
 }
