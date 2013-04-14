@@ -1,7 +1,9 @@
 <?php
 
 class Admin_AccountController extends Cab_Controller_Action {
-
+    public function preDispatch() {
+        Zend_Layout::getMvcInstance()->setLayout("admin");
+    }
     public function indexAction() {
         //set title
         $this->view->headTitle('Quản lý thành viên');
@@ -17,7 +19,7 @@ class Admin_AccountController extends Cab_Controller_Action {
             $listUser = $model->getAllUsersData();
             $paginator = Zend_Paginator::factory($listUser);
             $paginator->setCurrentPageNumber($page);
-            $paginator->setDefaultItemCountPerPage(NUM_PER_PAGE);
+            $paginator->setDefaultItemCountPerPage(ITEM_PER_PAGE);
             $this->view->paginator = $paginator; //send page to zend view
         }
     }
@@ -55,18 +57,19 @@ class Admin_AccountController extends Cab_Controller_Action {
                 $active = $this->getPost('active');
                 $isAdmin = $this->getPost('admin');
                 $email = $this->getPost('email');
-                $status = $model->updateUser($id, array(
+                $result = $model->updateUser($id, array(
                     'username' => $username,
                     'password' => $pass,
                     'info' => $info,
                     'active' => $active,
                     'admin' => $isAdmin,
-                    'date_created' => date("ymd")
+                    'email' => $email,
+                    'date_created' => date("YYYY - MM - DD h:i:s")
                 ));
-                if ($status)
+                if ($result['status'])
                     $this->redirect("/admin/account/");
-                else
-                    $message[] = "Có lỗi xảy ra";
+                else 
+                    $message = $result['message'];
             }
         }
         $this->view->message = $message;
@@ -80,6 +83,8 @@ class Admin_AccountController extends Cab_Controller_Action {
 
         $model = new Admin_Model_Account();
         $this->view->form = $form;
+        
+        $message = array();
         if ($request->isPost()) {
 
             // exit(0);
@@ -90,19 +95,23 @@ class Admin_AccountController extends Cab_Controller_Action {
                 $active = $request->getPost('active');
                 $isAdmin = $request->getPost('admin');
                 $email = $request->getPost('email');
-                $status = $model->creatUser(array(
+                $result = $model->creatUser(array(
                     'username' => $username,
                     'password' => $pass,
                     'info' => $info,
+                    'email' => $email,
                     'active' => $active,
                     'admin' => $isAdmin,
-                    'date_created' => date("ymd")
+                    'date_created' => date("YYYY-DD-MM h:i:s")
                 ));
 
-                if ($status)
+                if ($result['status']) //redirect
                     $this->redirect("/admin/account/");
+                else
+                    $message = $result['message'];
             }
         }
+        $this->view->message = $message;
     }
 
     public function delAction() {

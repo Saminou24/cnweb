@@ -1,4 +1,11 @@
+
 <?php
-    foreach ($this->message as $ms)
-        echo "<p>".$ms."</p>";
+   if (count($this->message)) {
+       echo "<div class='error'>
+           <p>";
+       foreach ($message as $m)
+           echo $m. "<br/>";
+       echo "</p></div>";
+   }
     echo $this->form;
+?>

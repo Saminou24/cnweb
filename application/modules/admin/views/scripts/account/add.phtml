@@ -1,47 +1,47 @@
 <?php
 $this->headTitle("Thêm tài khoản");
-
 ?>
+    <?php
+    if (count($this->message)) {
+        echo "<div class='error'>
+            <span class='close'></span>
+           <p>";
+        foreach ($this->    message as $m)
+            echo $m . "<br/>";
+        echo "</p></div>";
+    }
 
-<div id='main'>
-    <?php echo $this->form; ?>
-<!--    <h2> Thêm tài khoản </h2>
-    <form method='POST'>
-        Tên tài khoản <span class='require'>(*)</span> 
+    echo $this->form;
+    ?>
+    <!--    <h2> Thêm tài khoản </h2>
+        <form method='POST'>
+            Tên tài khoản <span class='require'>(*)</span> 
+    
+            <p>
+    
+                <input type='text' name='username'/>
+                <button type='reset'>Reset</button>
+            </p>
+            Mật khẩu <span class='require'>(*)</span>
+            <p>
+            <input type='password' name='password'/>
+            <button type='reset'>Reset</button>
+            </p>
+            Nhập lại mật khẩu <span class='require'>(*)</span>:
+            <p>
+                <input type='password' name='username'/>
+                <button type='reset'>Reset</button>
+            </p>
+            Thông tin thêm:
+            <p>
+                <input type='text' name=''/>
+                <button type='reset'>Reset</button>
+            </p>
+            Email: 
+            <p>
+                <input type='text' name=''/>
+                <button type='reset'>Reset</button>
+            </p>
+            <button type='submit' role='recommend'>Tạo tài khoản</button>-->
 
-        <p>
-
-            <input type='text' name='username'/>
-            <button type='reset'>Reset</button>
-        </p>
-        Mật khẩu <span class='require'>(*)</span>
-        <p>
-        <input type='password' name='password'/>
-        <button type='reset'>Reset</button>
-        </p>
-        Nhập lại mật khẩu <span class='require'>(*)</span>:
-        <p>
-            <input type='password' name='username'/>
-            <button type='reset'>Reset</button>
-        </p>
-        Thông tin thêm:
-        <p>
-            <input type='text' name=''/>
-            <button type='reset'>Reset</button>
-        </p>
-        Email: 
-        <p>
-            <input type='text' name=''/>
-            <button type='reset'>Reset</button>
-        </p>
-        <button type='submit' role='recommend'>Tạo tài khoản</button>-->
-
-    </form>
-</div>
-<div id='sidebar'  >
-    <ul data-type='edit'>
-        <li class='active'><a href='/admin/acount/index'><p>Quản lý tài khoản</p></a></li>
-        <li><a href='/admin/post/index'><p>Quản lý bài viết</p></a></li>
-        <li><a href='/admin/notify/index'><p>Quản lý thông báo</p></a></li>
-    </ul>
-</div>
+    <!--    </form>-->

@@ -187,9 +187,9 @@ form label {
     width: 100%;
 }
 .post-info{
-    position: relative;
-    margin-right: 0px;
-    margin-left: 0px;
+    position: fixed;
+    top: 0px;
+    right: 0pz;
     width: 180px;
     background: #00aacc;
 }

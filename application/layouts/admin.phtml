@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <?php echo $this->headTitle() ?>
+        <?php echo $this->headMeta() ?>
+        <?php echo $this->headLink() ?>
+        <?php echo $this->headScript() ?>
+        <?php echo $this->partial('admin/head.phtml'); ?>
+    </head>
+    <body >
+        <?php 
+        require_once 'admin/menu.phtml';
+        require_once 'plugins/facebook.phtml';
+        ?>
+        
+        <div id="main">
+            <div id="content" >
+                <?php echo $this->layout()->content; ?>
+            </div>
+            <div id="panel">
+                <?php require_once 'admin/panel.phtml'; ?>
+            </div>
+        </div>
+        <?php require_once 'admin/script.phtml'; ?>
+    </body>
+</html>

@@ -9,17 +9,20 @@
     </head>
     <body role="application">
 
-        <?php require 'mobile/menu.phtml'; ?>
+        <?php
+        require 'mobile/menu.phtml';
+        ?>
 
         <section id="suggest-container" data-type="list">
         </section>
-    <div id="content">
-        <?php echo $this->layout()->content; ?>
-    </div>
+        <div id="content">
+            <?php echo $this->layout()->content; ?>
+        </div>
 
-    <?php
-    require_once 'mobile/nav.phtml';
-    require_once 'mobile/script.phtml';
-    ?>
-</body>
+        <?php
+        require_once 'mobile/nav.phtml';
+        require_once 'plugins/facebook.phtml';  
+        require_once 'mobile/script.phtml';
+        ?>
+    </body>
 </html>

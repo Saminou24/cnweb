@@ -23,11 +23,13 @@ class Admin_Form_User extends Zend_Form {
 //                ->setLabel("Nhập lại mật khẩu");
 //        
         $info = new Zend_Form_Element_Textarea("info");
-        $info->setLabel("Thông tin thêm");
+        $info->setLabel("Thông tin thêm")
+                ->setAttrib("rows", 6);
         
         $email = new Zend_Form_Element_Text("email");
         $email->addValidator(new Zend_Validate_EmailAddress())
                 ->addValidator("NotEmpty", false)
+                ->setRequired(true)
                 ->setLabel("Email");
         $isAdmin = new Zend_Form_Element_Checkbox('admin');
         $isAdmin->setLabel("Là admin:");

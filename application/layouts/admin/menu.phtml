@@ -1,16 +1,17 @@
 <div id="header" >
-        <button><span class="icon icon-back"></span></button>
-        <menu type="toolbar">
-            <button id='menu'><span class="icon icon-menu"></span></button>
-        </menu>
+    <div id="header-wrap" >
+        <a href='/' id="logo"><span><img src="/images/logo.png" /></span></a> 
+        <div class="verticle-span"></div>
         <form action='/search' id="search-form">
             <p>
                 <input type='text' placeholder="Từ khóa" autocomplete="off" id='search-box'/>
-                <button type='reset'>Remove text</button>   
             </p>
         </form>
-        <h2 id="logo"><a href='/'><img src="/images/logo.png" /></a></h2>   
-
+        <div id="menu">
+            <div id="menu-button"></div>
+        </div>
+        
+    </div>
 </div>
 <!--<section data-type="sidebar" role="region" id="subMenu">
 <nav>
