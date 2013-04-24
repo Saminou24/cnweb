@@ -4,13 +4,13 @@ class SearchController extends Cab_Controller_Action {
 
     public function init() {
         Zend_Loader::loadClass("Zend_Search_Lucene");
+        Zend_Loader::loadClass("PostModel");
     }
 
     public function indexAction() {
-        echo "Kết quả tìm kiếm cho từ khóa : <strong> " . $this->_request->getParam('q') . "</strong>";
-
+        $this->_response->setHeader("content-type", "text/html;charset=utf-8");
         $query = PostModel::normalizeName($this->_request->getParam('q'));
-        
+
         //open search engine
         $index = Zend_Search_Lucene::open("post");
         $result = $index->find($query);

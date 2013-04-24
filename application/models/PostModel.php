@@ -6,7 +6,9 @@ class PostModel extends Zend_Db_Table_Abstract {
 
     protected $_name = "post";
     protected $_primary = "pid";
-
+    public function init() {
+        Zend_Loader::loadClass("TimeUtil");
+    }
     public static function getAll() {
         $model = new PostModel();
 
@@ -42,6 +44,7 @@ class PostModel extends Zend_Db_Table_Abstract {
     }
 
     public static function normalizeName($str) {
+        $str = trim($str);
         $str = preg_replace("/(à|á|ạ|ả|ã|â|ầ|ấ|ậ|ẩ|ẫ|ă|ằ|ắ|ặ|ẳ|ẵ)/", 'a', $str);
         $str = preg_replace("/(è|é|ẹ|ẻ|ẽ|ê|ề|ế|ệ|ể|ễ)/", 'e', $str);
         $str = preg_replace("/(ì|í|ị|ỉ|ĩ)/", 'i', $str);
@@ -106,8 +109,17 @@ class PostModel extends Zend_Db_Table_Abstract {
         $sql = $model->select()
                 ->order("like desc")
                 ->limit($num, $offset);
-        return $model->fetchAll($sql);
-    }
+        $result = $model->fetchAll($sql);
 
+        return $result;
+    }
+    public static function isExist($id){
+        $model = new PostModel();
+        $r = $model->fetchRow('pid = '.$id);
+        if ($r != null)
+            return true;
+        else
+            return false;
+    }
 }
 

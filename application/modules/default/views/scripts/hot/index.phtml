@@ -7,17 +7,34 @@ if ($message['error'] != null)
     echo "Error " . $message['error'];
 
 if ($message['content']) {
-    foreach ($message['content'] as $info) {
+    foreach ($message['content'] as $i => $info) {
+        $relative_time = $message['relative_time'][$i];
+        echo $relative_time;
         ?>
-        <section class="post-item">
+        <section class="post-item" >
             <a href='<?= "/c/" . $info['pid'] ?>' class='post-image' target='_blank'>
                 <img src='/photos/<?= $info['name'] ?>' width="100%" />
             </a>
-            <section class='post-info'>
-                <div><a href='<?= "/c/" . $info['pid'] ?>'><h3><?= $info['title'] ?></h3></a></div>
-                <div class='post-like'><?= $info['like'] ?></div>
-                <div class="fb-like" data-href="http://cnweb/c/<?=$info['pid'] ?>/" data-send="true" data-width="250" data-show-faces="true"></div>
+            <section class='post-info' data-type="list">
+                <header><?= $info['title'] ?></header>
+                <!--                <ul>
+                                    <li>-->
+
+                <!--                    </li>-->
+                <!--                </ul>-->
+                <ul>
+                    <li role='status'>
+                        <section role='status'>
+                            <input type='hidden' class='id' value='<?php echo $info['pid'] ?>' />
+                            <span class='post-like'><?= $info['like'] ?></span> &nbsp; &nbsp;
+                        <!--<div class="fb-like" data-href="http://cnweb/c/<?= $info['pid'] ?>/" data-send="true" data-width="150" data-show-faces="false"></div>-->
+                        <span class="fb-like" data-href="http://cnweb/c/<?= $info['pid'] ?>/" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false"></span>
+                        <span> <?= $relative_time ?> bởi </span>
+                        </section>
+                    </li>
+                </ul>
             </section>
+       
         </section>
         <?
     }

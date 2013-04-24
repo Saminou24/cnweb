@@ -28,15 +28,15 @@ if (count($this->message) > 0) {
                 <td><?php echo $ac['info'] ?></td>
                 <td><?php
                     if ($ac['active'])
-                        echo "Đã được kích hoạt";
+                        echo "<input type='checkbox' disabled checked />";
                     else
-                        echo "Bị khóa";
+                        echo "<input type='checkbox' disabled/>";
                     ?></td>
-                <td><?php echo $ac['admin'] ? "Admin" : ""; ?></td>
+                <td><?php echo $ac['admin'] ?  "<input type='checkbox' disabled checked />" :  "<input type='checkbox' disabled/>"; ?></td>
                 <td><?php echo $ac['ban_reason']; ?></td>
                 <td>
-                    <a href="<?php echo $this->url(array('action' => 'edit', 'id' => $ac['uid'])) ?>"><button>Sửa</button></a>
-                    <a href="<?php echo $this->url(array('action' => 'del', 'id' => $ac['uid'])) ?>" onclick =" return cab.confirmLink('Bạn có chắc muốn xóa tài khoản này?')"><button>Xóa</button></a>
+                    <a class="edit link" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ac['uid'])) ?>">Sửa</a>
+                    <a class="del link" href="<?php echo $this->url(array('action' => 'del', 'id' => $ac['uid'])) ?>" onclick =" return cab.confirmLink('Bạn có chắc muốn xóa tài khoản này?')"> Xóa </a>
                 </td>
             </tr>
 
@@ -46,5 +46,5 @@ if (count($this->message) > 0) {
     ?>
 </table>
 <?php
-echo "<a href='/admin/account/add'><button class='icon'>Thêm tài khoản</button></a>";
+echo "<a href='/admin/account/add'><button>Thêm tài khoản</button></a>";
 echo "<div>".$this->paginationControl($this->paginator, 'Sliding', 'account/paginator.phtml')."</div>";

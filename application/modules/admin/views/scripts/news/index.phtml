@@ -33,15 +33,15 @@ if (count($this->message) > 0) {
                 <td><?php echo $data['date_created'] ?></td>
                 <td>
                     <ul class="no-list">
-                        <li><a  target="_blank" href="<?php
+                        <li><a  target="_blank"  class="link preview" href="<?php
                             echo $this->url(array(
                                 'module' => 'admin',
                                 'controller' => 'news',
                                 'action' => 'preview',
                                 'id' => $data['id']))
-                                    ?>"><button>Xem trước</button></a></li>
-                        <li><a href="/admin/news/edit/id/<?php echo $data['id'] ?>" ><button>Sửa</button></a></li>
-                        <li><a href="/admin/news/del/id/<?php echo $data['id'] ?>" onclick="return cab.confirmLink('Bạn có chắc chắn muốn xóa bài viết này?')"><button>Xóa</button></a></li>
+                                    ?>">Xem trước</a></li>
+                        <li><a class="link edit" href="/admin/news/edit/id/<?php echo $data['id'] ?>" >Sửa</a></li>
+                        <li><a class="link del" href="/admin/news/del/id/<?php echo $data['id'] ?>" onclick="return cab.confirmLink('Bạn có chắc chắn muốn xóa bài viết này?')">Xóa</a></li>
 
                     </ul>
                 </td>

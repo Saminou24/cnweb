@@ -1,9 +1,11 @@
 <?php
 
 class Admin_AccountController extends Cab_Controller_Action {
+
     public function preDispatch() {
         Zend_Layout::getMvcInstance()->setLayout("admin");
     }
+
     public function indexAction() {
         //set title
         $this->view->headTitle('Quản lý thành viên');
@@ -68,7 +70,7 @@ class Admin_AccountController extends Cab_Controller_Action {
                 ));
                 if ($result['status'])
                     $this->redirect("/admin/account/");
-                else 
+                else
                     $message = $result['message'];
             }
         }
@@ -83,7 +85,7 @@ class Admin_AccountController extends Cab_Controller_Action {
 
         $model = new Admin_Model_Account();
         $this->view->form = $form;
-        
+
         $message = array();
         if ($request->isPost()) {
 
@@ -95,20 +97,25 @@ class Admin_AccountController extends Cab_Controller_Action {
                 $active = $request->getPost('active');
                 $isAdmin = $request->getPost('admin');
                 $email = $request->getPost('email');
-                $result = $model->creatUser(array(
-                    'username' => $username,
-                    'password' => $pass,
-                    'info' => $info,
-                    'email' => $email,
-                    'active' => $active,
-                    'admin' => $isAdmin,
-                    'date_created' => date("YYYY-DD-MM h:i:s")
-                ));
+                if (strstr($username, " ") ||
+                        strstr($pass, " "))
+                    $message[] = "Tên tài khoản hoặc mật khẩu không được có dấu cách";
+                else {
+                    $result = $model->creatUser(array(
+                        'username' => $username,
+                        'password' => $pass,
+                        'info' => $info,
+                        'email' => $email,
+                        'active' => $active,
+                        'admin' => $isAdmin,
+                        'date_created' => date("d M Y H:i:s")
+                    ));
 
-                if ($result['status']) //redirect
-                    $this->redirect("/admin/account/");
-                else
-                    $message = $result['message'];
+                    if ($result['status']) //redirect
+                        $this->redirect("/admin/account/");
+                    else
+                        $message = $result['message'];
+                }
             }
         }
         $this->view->message = $message;

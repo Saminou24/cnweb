@@ -11,7 +11,8 @@ class Admin_Form_News extends Zend_Form {
         $content->setLabel("Nội dung : ")
                 ->setAttribs(array(
                     'id' => 'content-id',
-                    'rows' => '14'
+                    'rows' => '14',
+                    "class" => "ckeditor"
                 ))
                 ->setRequired();
         $submit = new Zend_Form_Element_Submit('Tạo tin tức');

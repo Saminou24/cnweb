@@ -5,6 +5,7 @@ class HotController extends Cab_Controller_Action
     
     public function init() {
         Zend_Loader::loadClass("PostModel");
+        Zend_Loader::loadClass("TimeUtil");
     }
 
     public function indexAction()
@@ -20,7 +21,13 @@ class HotController extends Cab_Controller_Action
         else {
             //create model
             $message['error'] = null;
-            $message['content'] = PostModel::getHotPages($page); //load page 
+            $message['content'] = PostModel::getHotPages($page); //load page
+            $t = array();
+            foreach ($message['content'] as $i=>$v){
+                $t[] = TimeUtil::calRelativeTime($v['date-created']);
+            }
+            $message['relative_time'] = $t;
+         //   print_r($message['content']);
             
         }
         $this->view->message = $message;

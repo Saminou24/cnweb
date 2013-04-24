@@ -4,10 +4,11 @@ class Admin_NewsController extends Cab_Controller_Action {
 
     public function init() {
         $this->view->headTitle("Quản lý thông báo");
+        Zend_Layout::getMvcInstance()->setLayout("admin");
     }
 
     public function preDispatch() {
-        Zend_Layout::getMvcInstance()->setLayout("admin");
+        //Zend_Layout::getMvcInstance()->setLayout("admin");
     }
 
     public function indexAction() {
@@ -54,9 +55,10 @@ class Admin_NewsController extends Cab_Controller_Action {
             if ($form->isValid($_POST)) {
                 $title = $request->getParam("title");
                 $content = $request->getParam("content");
-                $date = date("YYYY-MMM-DD h-i-s", time());
+                $date = date('Y-m-d H:i:s');
                 $model = new Admin_Model_News();
 
+                var_dump($content, $date);
                 $status = $model->addNews(array(
                     'title' => $title,
                     'content' => $content,
@@ -83,14 +85,14 @@ class Admin_NewsController extends Cab_Controller_Action {
             $model = new Admin_Model_News();
             $data = $model->getNews($id);
             if ($data != null) {
-                $form->getElement ('title')->setValue ($data['title']);
+                $form->getElement('title')->setValue($data['title']);
                 $form->getElement('content')->setValue($data['content']);
             }
             if ($request->isPost()) {
                 if ($form->isValid($_POST)) {
-                    $title = $request->getPost("title");
-                    $content = $request->getPost("content");
-                    $date = date("YYYY-MMM-DD h-i-s", time());
+                    $title = $request->getParam("title");
+                    $content = $request->getParam("content");
+                    $date = date('Y-m-d H:i:s');
 
 
                     $status = $model->updateNews($id, array(

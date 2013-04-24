@@ -61,5 +61,6 @@ class Admin_Model_Account extends Zend_Db_Table_Abstract {
     public function getAllUsersData() {
         return $this->fetchAll();
     }
+ 
 
 }

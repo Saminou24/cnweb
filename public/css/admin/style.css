@@ -129,12 +129,13 @@ p > input[type='text'] {
     border: 1px solid #5088dc;
     width: 100%;
     border-collapse: collapse;
-    font-size: 60%;
-     text-align: left;
+    font-size: 80%;
+    text-align: left;
+    margin: 3px;
 }
 .table td, th {
     border: 1px solid #5088dc;
-    padding: 0;
+    padding: 5px;
     margin: 0;
 }
 .table th {
@@ -181,11 +182,28 @@ p > input[type='text'] {
 /** list  **/
 ul.no-list {
     list-style-type: none; 
-        
+    padding: 1px;
+    }
+    /*.table button {
+        width: 80px;
+        background: #BE5B00;
+        border-width: 0;
+        color: #fff;
+    }*/
+    .link {
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    padding-left: 20px;
+    background-repeat: none;
+    font-size: 14px;
 }
-.table button {
-    width: 80px;
-    background: #BE5B00;
-    border-width: 0;
-    color: #fff;
+.edit {
+    background: url(/images/icon/b_edit.png) no-repeat;
+}
+.del {
+    background: url(/images/icon/b_drop.png) no-repeat;
+}
+.preview {
+    background: url(/images/icon/b_preview.jpg) no-repeat;
 }
