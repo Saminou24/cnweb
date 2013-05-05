@@ -9,21 +9,26 @@ class SearchController extends Cab_Controller_Action {
 
     public function indexAction() {
         $this->_response->setHeader("content-type", "text/html;charset=utf-8");
-        $query = PostModel::normalizeName($this->_request->getParam('q'));
-
+        $q = htmlentities($this->_request->getParam('q'));
+        $q = str_replace("+", " ", $q); //change + as space
+        $query = PostModel::normalizeName($q);
         //open search engine
         $index = Zend_Search_Lucene::open("post");
         $result = $index->find($query);
 
-        // echo count($result) . " Kết quả được tìm thấy :<br/>";
-        echo "<ul  data-type='edit'>";
+        echo "<section data-type='list'><ul   id='search-result-list'>
+                <header><span style='color:#000;font-size:2rem;font-weight:bold;'>" . count($result) . "</span> kết quả được tìm thấy</header>";
+        ;
         foreach ($result as $r) {
-            $hlText = $this->highlight($rawQuery, " " . $r->title);
+            $hlText = $this->highlight($q, " " . $r->title);
             echo '<li>
-                        <a href="/search/?q=' . $r->title . '"><p>   ' . $hlText . '</p></a>
+                        <a href="' . $r->link . '">
+                            <p>   ' . $hlText . '</p>
+                             <p></p>
+                        </a>
                   </li>';
         }
-        echo "</ul>";
+        echo "</ul></section>";
     }
 
     public function specialAction() {
@@ -84,6 +89,18 @@ class SearchController extends Cab_Controller_Action {
         $output .='</div>';
 
         echo $output;
+    }
+
+    public function highlight($query, $str) {
+        $hl = explode(" ", $query);
+
+        foreach ($hl as $t) {
+            // echo "highlight for ".$t." in".$str."</br>/$t/i";
+            if (strlen($t) > 0)
+//                str_replace($t, "<strong>".$t."</strong>", $str);
+                @$str = preg_replace("/ $t/i", "<strong class='keyword'> $t</strong>", $str);
+        }
+        return $str;
     }
 
 }

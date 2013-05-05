@@ -35,8 +35,10 @@ class SuggestController extends Zend_Controller_Action {
         echo "<ul  data-type='edit'>";
         foreach ($result as $r) {
             $hlText = $this->highlight($rawQuery, " " . $r->title);
+            $query = preg_replace('!\s+!', "+", $r->title);
+//            die($query);
             echo '<li>
-                        <a href="/search/?q=' . $r->title . '"><p>   ' . $hlText . '</p></a>
+                        <a href="/search/?q=' . $query . '"><p>   ' . $hlText . '</p></a>
                   </li>';
         }
         echo "</ul>";
@@ -49,7 +51,7 @@ class SuggestController extends Zend_Controller_Action {
             // echo "highlight for ".$t." in".$str."</br>/$t/i";
             if (strlen($t) > 0)
 //                str_replace($t, "<strong>".$t."</strong>", $str);
-                $str = preg_replace("/ $t/i", "<strong> $t</strong>", $str);
+                $str = preg_replace("/ $t/i", "<strong class='keyword'> $t</strong>", $str);
         }
         return $str;
     }

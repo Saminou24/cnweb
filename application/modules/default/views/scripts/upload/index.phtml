@@ -1,17 +1,20 @@
 
 <?php
-if (count($this->message)) 
-?>
-<div class="<?= $this->status ?>">
-    <span class="close" ></span>
-    <?php echo implode("<br/>", $this->message); ?>
-</div>
+$this->headTitle("Đăng bài mới");
 
-<?php
-    if ($this->url != null)
-        echo "<p> Địa chỉ truy cập của bạn: <br/><a href='".$this->url."'>".$this->url."</a></p>
+if (count($this->message)) {
+    ?>
+    <div class="<?= $this->status ?>">
+        <span class="close" ></span>
+        <?php echo implode("<br/>", $this->message); ?>
+    </div>
+
+    <?php
+}
+if ($this->url != null)
+    echo "<p> Địa chỉ truy cập của bạn: <br/><a href='" . $this->url . "'>" . $this->url . "</a></p>
             <a role='button'>Trở về trang chủ</a>";
-    else {
-        echo $this->form; //display form
-    }
+else {
+    echo "<div style='padding:10px'>".$this->form."</div>"; //display form
+}
 ?>

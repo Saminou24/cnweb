@@ -38,7 +38,7 @@ class PostModel extends Zend_Db_Table_Abstract {
     }
 
     public static function addKeyword($data) {
-        Zend_Debug::dump($data);
+//        Zend_Debug::dump($data);
         Zend_Search_Lucene_Analysis_Analyzer::setDefault(new Zend_Search_Lucene_Analysis_Analyzer_Common_Utf8_CaseInsensitive());
         $index = Zend_Search_Lucene::open('post');
         $doc = new Zend_Search_Lucene_Document();
@@ -47,6 +47,11 @@ class PostModel extends Zend_Db_Table_Abstract {
         $doc->addField(Zend_Search_Lucene_Field::Text('title', $data['keyword'], 'UTF-8'));
         $index->addDocument($doc);
         $index->commit();
+    }
+    public static function isValid($pid){
+        $model = new PostModel();
+        return $model->fetchRow("pid='".$pid."'");
+   
     }
 
     public static function normalizeName($str) {
@@ -148,7 +153,14 @@ class PostModel extends Zend_Db_Table_Abstract {
 
         return $model->fetchAll($sql);
     }
-
+    public static function getTotalPageOfUser($uid){
+        $model = new PostModel();
+        $sql = $model->select()
+                    ->from("post",array("count" => "count(*)"))
+                    ->where("uid = ?", $uid);
+        $r = $model->fetchRow($sql);
+        return $r['count'];
+    }
     public static function getPreviousPostId($id) {
         $model = new PostModel();
         $sql = $model->select()

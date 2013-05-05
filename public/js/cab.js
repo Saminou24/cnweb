@@ -52,9 +52,19 @@ cab.init = function() {
     cab.user = {status: -1}; //not init
     cab.browser = {width: $(window).width()};
     cab.updateStatus();
+
+    var src = $('#cab-script').attr("src").split('?');
+    var mode = src[1];
+    if (mode)
+        cab.mode = mode;
+    else
+        cab.mode = "normal";
 }
 
 cab.addEventListener = function() {
+    $('.close').click(function() {
+        $(this).parent().hide("slow");
+    })
     $('#plugin-message').enscroll({
         showOnHover: true,
         verticalTrackClass: 'track3',
@@ -65,7 +75,7 @@ cab.addEventListener = function() {
         var target = e.target;
         var curentId = cab.post.currentPostId;
         var curentPost = cab.post.currentPost;
-        if ($(target).hasClass("active") && target.getAttribute('id')!='like') {
+        if ($(target).hasClass("active") && target.getAttribute('id') != 'like') {
             $('#plugin-content').hide();
             $(target).removeClass("active");
         } else
@@ -91,8 +101,8 @@ cab.addEventListener = function() {
                 case "like":
                     function likeAction() {
                         $(target).toggleClass("active");
-                        if (curentId){
-                            
+                        if (curentId) {
+
                             $.ajax(
                                     "/ajax/index?act=like&type=photo&id=" + curentId
                                     ).done(function(st) {
@@ -153,9 +163,9 @@ cab.sendMessage = function() {
         url: "/c/" + cab.post.currentPostId + "?mode=plugin",
         type: "POST",
         data: {
-            "comment" : $('#plugin-msg').val()
+            "comment": $('#plugin-msg').val()
         },
-        success: function(data){
+        success: function(data) {
 //            alert('update')
             $('#plugin-message-content').html(data);
         }

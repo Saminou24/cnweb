@@ -25,10 +25,10 @@ class UploadController extends Cab_Controller_Action {
         if ($this->getRequest()->isPost())
             if ($form->isValid($_POST)) {
 
-                $title = addslashes($request->getParam('title'));
-                $name = addslashes($request->getParam('name'));
+                $title = htmlentities($request->getParam('title'));
+                $name = htmlentities($request->getParam('name'));
                 $video = trim($request->getParam("video"));
-                echo $video;
+//                echo $video;
                 if ($video) { //use link youtube to upload
                     if (!filter_var($video, FILTER_VALIDATE_URL))
                         $message[] = "Link video không hợp lệ ";
@@ -39,12 +39,13 @@ class UploadController extends Cab_Controller_Action {
                             $message[] = "Chúng tôi hiện tại chỉ hỗ trợ video từ Youtube";
                         else {
                             $queryArr = $this->queryToArray($parsed_url['query']);
-                            $url = "video|" . $queryArr['v'];
+                            $url = $queryArr['v'];
                             $date = date("Y-m-d H:i:s");
                             $id = PostModel::addPost(array(
                                         'uid' => $uid,
                                         'title' => $title,
                                         'name' => $url,
+                                        'type' => "video",
                                         'date-created' => $date
                             ));
 
@@ -57,10 +58,11 @@ class UploadController extends Cab_Controller_Action {
                                 ));
                                 $this->view->status = "success";
                             }
-                            else
-                                $this->$status = "error";
+                           
                         }
                     }
+                    if (!$this->view->status)
+                        $this->view->status = "error";
                 } else {
                     //use user photo upload
                     $upload = new Zend_File_Transfer_Adapter_Http();
@@ -85,7 +87,8 @@ class UploadController extends Cab_Controller_Action {
                             $id = PostModel::addPost(array(
                                         'uid' => $uid,
                                         'title' => $title,
-                                        'name' => "photo|".$name,
+                                        'name' => $name,
+                                        'type' => "photo",
                                         'date-created' => $date
                             ));
 

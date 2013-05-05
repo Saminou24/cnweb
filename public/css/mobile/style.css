@@ -13,6 +13,7 @@ body,html{
     min-width: 320px;
     font-size: 12px;
     margin: 0px;
+    font-family: "MozTT";
     /*overflow: hidden;*/
 }
 .user-name {
@@ -136,13 +137,17 @@ section[role='region'] {
     height: 100%;
     bottom: 4rem;
     top: 5rem;
-    z-index: 100;
+/*    z-index: 100;*/
 }
 #plugin-content > * {
     // conmargin-right: 5.5rem;
 }
 #plugin-message-content {
 
+}
+#plugin-facebook {
+
+    
 }
 #plugin-content-cover {
     position: fixed;
@@ -369,8 +374,8 @@ form label {
     position: relative;
     /*    padding: 20px 0 20px 20px;*/
     background: #ddd; 
-    min-height: 200px;
-    padding: 50px 0 50px 0;
+/*    min-height: 200px;*/
+/*    padding: 50px 0 50px 0;*/
     border-bottom: 1px solid #888;
 }
 .post-image {
@@ -503,6 +508,13 @@ form label {
 
 strong {
     color: #00aacc;
+}
+strong.keyword {
+    color: #000;
+    font-weight: bold;
+}
+#search-result-list li {
+    background: #e7e7e7;
 }
 label.filebutton {
     width:120px;

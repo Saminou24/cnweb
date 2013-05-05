@@ -53,8 +53,8 @@ class Admin_NewsController extends Cab_Controller_Action {
         $message = array();
         if ($request->isPost()) {
             if ($form->isValid($_POST)) {
-                $title = $request->getParam("title");
-                $content = $request->getParam("content");
+                $title = htmlentities($request->getParam("title"));
+                $content = htmlentities($request->getParam("content"));
                 $date = date('Y-m-d H:i:s');
                 $model = new Admin_Model_News();
 
