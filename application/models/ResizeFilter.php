@@ -23,5 +23,14 @@ class ResizeFilter {
         
         return $filter;
     }
-
+    public static function getThumbnailFilter(){
+        $filter = new Zend_Filter();
+        $filter->appendFilter(new Skoch_Filter_File_Resize(array(
+            "width" => 64,
+            "height" => 64,
+            "keepRatio" => false
+        )));
+        
+        return $filter;
+    }
 }

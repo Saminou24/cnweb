@@ -8,15 +8,16 @@ class UploadController extends Cab_Controller_Action {
         Zend_Loader::loadClass("Form_Upload");
         Zend_Loader::loadClass("PostModel");
         Zend_Loader::loadClass("ResizeFilter");
-       // Zend_Loader::loadClass("Skoch_Filter_File_Resize");
+        // Zend_Loader::loadClass("Skoch_Filter_File_Resize");
     }
- 
+
     public function indexAction() {
 
-        $_SESSION['uid'] = 2;
-        $uid = $_SESSION['uid'];
-        if (!$_SESSION['uid'])
-            $this->_redirect("/new/1");
+        //check login before upload
+        $session = new Zend_Session_Namespace("user");
+        if (!$session->username)
+            $this->redirect("/user/login?redirect=/upload");
+        $uid = $session->uid;
 
         $form = new Form_Upload();
         $request = $this->_request;
@@ -26,51 +27,87 @@ class UploadController extends Cab_Controller_Action {
 
                 $title = addslashes($request->getParam('title'));
                 $name = addslashes($request->getParam('name'));
-//                echo UPLOAD_PATH;
-//                die();
-                $upload = new Zend_File_Transfer_Adapter_Http();
-                $upload->setDestination(UPLOAD_PATH);
-
-                //get new name of file
-                $name;
-                try {
-                    $info = pathinfo($upload->getFileName());
-
-                    //generate unique file name
-                    $time = time();
-                    $date = date("Y-m-d H:i:s");
-                    $name = base64_encode($uid . "_" . $time) . "." . $info['extension'];
-                    //echo $name$upload->addValidator($name)
-                    $upload->addFilter("Rename", $name);
-                    
-                    //add filter to scale image
-                    $upload->addFilter(ResizeFilter::getSmallFilter());
-                    
-                    if ($upload->receive()) {
-                        //insert into database
-                        $id = PostModel::addPost(array(
-                                    'uid' => $uid,
-                                    'title' => $title,
-                                    'name' => $name,
-                                    'date-created' => $date
-                        ));
-
-                        if ($id >= 0){
-                            $this->view->url = "/c/$id";
-                            //add keyword
-                            PostModel::addKeyword(array(
-                                "keyword" => $title,
-                                "url" => $this->view->url
+                $video = trim($request->getParam("video"));
+                echo $video;
+                if ($video) { //use link youtube to upload
+                    if (!filter_var($video, FILTER_VALIDATE_URL))
+                        $message[] = "Link video không hợp lệ ";
+                    else {
+                        $parsed_url = parse_url($video);
+                       // var_dump($parsed_url);
+                        if (strtolower($parsed_url['host']) != "youtube.com" && strtolower($parsed_url["host"]) != "www.youtube.com")
+                            $message[] = "Chúng tôi hiện tại chỉ hỗ trợ video từ Youtube";
+                        else {
+                            $queryArr = $this->queryToArray($parsed_url['query']);
+                            $url = "video|" . $queryArr['v'];
+                            $date = date("Y-m-d H:i:s");
+                            $id = PostModel::addPost(array(
+                                        'uid' => $uid,
+                                        'title' => $title,
+                                        'name' => $url,
+                                        'date-created' => $date
                             ));
-                        } else
-                            $message[] = "Bạn đã đăng bài thành công!";
+
+                            if ($id >= 0) {
+                                $this->view->url = "/c/$id";
+                                //add keyword
+                                PostModel::addKeyword(array(
+                                    "keyword" => $title,
+                                    "url" => $this->view->url
+                                ));
+                                $this->view->status = "success";
+                            }
+                            else
+                                $this->$status = "error";
+                        }
                     }
-                    else
-                        $message[] = "Đã có lỗi xảy ra! Vui lòng thử lại!";
-                    //Zend_Debug::dump($upload->getFileInfo());
-                } catch (Zend_File_Transfer_Exception $e) {
-                    // echo $e->message();
-                    $message[] = $e->getMessage();
+                } else {
+                    //use user photo upload
+                    $upload = new Zend_File_Transfer_Adapter_Http();
+//                $upload->setDestination(UPLOAD_PATH);
+                    //get new name of file
+                    try {
+                        $info = pathinfo($upload->getFileName());
+
+                        //generate unique file name
+                        $time = time();
+                        $date = date("Y-m-d H:i:s");
+                        $name = base64_encode($uid . "_" . $time) . "." . $info['extension'];
+                        //echo $name$upload->addValidator($name)
+                        $upload->addFilter("Rename", UPLOAD_PATH . "/medium/" . $name)
+                                ->addFilter(ResizeFilter::getMediumFilter());
+//                            ->addFilter(ResizeFilter::getSmallFilter());
+//                    $upload->addFilter("Rename", array("target" => UPLOAD_PATH. "/medium/". $name, "overwrite"=> true));
+//                            ->addFilter(ResizeFilter::getMediumFilter());
+
+                        if ($upload->receive()) {
+                            //insert into database
+                            $id = PostModel::addPost(array(
+                                        'uid' => $uid,
+                                        'title' => $title,
+                                        'name' => "photo|".$name,
+                                        'date-created' => $date
+                            ));
+
+                            if ($id >= 0) {
+                                $this->view->url = "/c/$id";
+                                //add keyword
+                                PostModel::addKeyword(array(
+                                    "keyword" => $title,
+                                    "url" => $this->view->url
+                                ));
+                                $this->view->status = "success";
+                            }
+                            else
+                                $this->view->status = "error";
+                        }
+                        else
+                            $message[] = "Đã có lỗi xảy ra! Vui lòng thử lại!";
+                        //Zend_Debug::dump($upload->getFileInfo());
+                    } catch (Zend_File_Transfer_Exception $e) {
+                        // echo $e->message();
+                        $message[] = $e->getMessage();
+                    }
                 }
 
                 //post if upload success
@@ -81,6 +118,23 @@ class UploadController extends Cab_Controller_Action {
 
     public function uploadAction() {
         
+    }
+
+    /**
+     *  Extract query string to array
+     * @param type $query
+     * @return array
+     */
+    function queryToArray($query) {
+        $queryParts = explode('&', $query);
+
+        $params = array();
+        foreach ($queryParts as $param) {
+            $item = explode('=', $param);
+            $params[$item[0]] = $item[1];
+        }
+
+        return $params;
     }
 
 }

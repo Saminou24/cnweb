@@ -1,23 +1,119 @@
 <?php
+$content = $this->content;
+$this->headTitle("Bình luận");
+$comments = $this->commentData;
 if ($this->status == "error")
-    $class = "message error";
+    $classInfo = "message error";
 else
     $classInfo = "message success";
 if ($this->message != null)
-    echo "<div class=<?=$classInfo?>".$this->message."</div>";
+    echo "<div class=<?=$classInfo?>" . implode("<br/>", $this->message) . "</div>";
 
-if ($this->content){
-    $content = $this->content;
-    //display image
-    echo"<div >
-          <div> 
-            <div> Prev</div><div>Next</div
-          </div>
-          <div>
-            <img src='/photos/".$content['name']. "' />
-          </div>
-          <div>
-           Comment  here
-          </div>
-        </div>";
+
+if ($this->content && $this->mode == "normal") {
+    ?>
+    <div class="post-control">
+        <?php
+        if ($this->prevId)
+            echo "<a  href='/c/" . $this->prevId . "' ><span class='icon icon-back'><<Ảnh trưóc</span></a>";
+        else
+            echo "<<Ảnh trưóc";
+
+        echo "<span> &nbsp; &nbsp; </span>";
+        if ($this->nextId)
+            echo "<a  href='/c/" . $this->nextId . "' ><span class='icon icon-next'>Ảnh sau >></span></a>";
+        else
+            echo "Ảnh sau>>";
+        ?>
+    </div>
+    <?php
+}
+if ($this->content && $this->mode == "normal") {
+
+    $t = explode("|", $content['name']);
+    ?>
+    <section class="post-item" >
+        <a href='#' class='post-image' >
+            <?php
+            if ($t[0] == "photo")
+                echo "<img src='/photos/medium/" . $t[1] . "' width='100%' />";
+            else
+                echo "<img src='http://img.youtube.com/vi/" . $t[1] . "/0.jpg' width='100%' class='post-video'/> 
+                            <div class='video-indicator'></div>";
+            ?>
+        </a>
+        <section class='post-info post-position-absolute' data-type="list">
+            <header>
+                <?= stripcslashes($content['title']) ?> 
+            </header>
+            <ul>
+                <li>
+                    <aside class="icon">
+                        <a href="/uploader/<?php echo $content['uid'] ?>" ><img src="/photos/avatar/<?= $content['avatar'] ?> " alt="<?php echo $info['username'] ?>"/></a>
+                    </aside>
+                    <a href="#" >
+
+                        <p>
+                            <input type='hidden' class='id' value='<?php echo $info['pid'] ?>' />
+                            <span class='post-like'><?= $this->like_count; ?></span> &nbsp; &nbsp;
+                            <span class='post-comment'><?= $content['comment'] ?></span> &nbsp; &nbsp;
+                            <span class="fb-like" data-href="#" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false"></span>
+
+                        </p>
+                        <p>
+                            <?= $this->relative_time ?> bởi <?php echo "<span class='link' href='/uploader/" . $content['uid'] . "'> <strong>" . $content['username'] . "</strong></span>"; ?>
+
+                        </p>
+                    </a>
+
+                </li>
+            </ul>
+
+        </section>
+
+    </section>
+
+    <?php
+}
+
+//display comment
+?>
+<section data-type="list">
+    <header>Bình luận</header>
+    <ul data-type="edit">
+        <?php
+        foreach ($comments as $c) {
+            ?>
+            <li>
+                <label class="danger">
+                    <a href='/uploader/<?= $c['uid'] ?>' target='_blank' title='<?= $c['username'] ?>'><img src="/photos/avatar/<?= $c['avatar'] ?>" /></a>
+                </label>
+
+
+                <a href="#">
+                    <p style='margin-left: 2rem;float:left;font-size: 1.2rem;'><?php echo $c['comment'] ?></p>
+                    <p style='float: right;font-style: italic;font-weight: lighter;margin-right: 5rem;font-size:0.9rem;'><?php $t = new DateTime($c['date_created']);
+        echo $t->format("d M,Y H:i:s"); ?></p>
+                </a>
+            </li>
+
+            <?php
+        }
+        ?>
+
+    </ul>
+</section>
+<?php
+if ($this->mode == "normal") {
+?>
+<h2 class="bb-docs">&nbsp;</h2>
+<form method="post" role="search">
+    <button type="submit"> Bình luận</button>
+    <p>
+        <input type="text" name="comment">
+        <button type="reset">Clear</button>
+    </p>
+
+</form>
+<?php
 }

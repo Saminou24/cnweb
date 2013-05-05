@@ -8,23 +8,43 @@
         <?php echo $this->partial('mobile/head.phtml'); ?>
     </head>
     <body role="application">
+        <div id="fb-root"></div>
+        <script type="text/javascript">
+            window.fbAsyncInit = function() {
+                //Your app details here
+                FB.init({appId: '235095629949087', status: true, cookie: true, xfbml: true});
+                //Resize the iframe when needed
+                var width = $(window).width();
+            };
 
+            //Load the SDK asynchronously
+            (function() {
+                var e = document.createElement('script');
+                e.async = true;
+                e.src = document.location.protocol +
+                        '//connect.facebook.net/en_US/all.js';
+                document.getElementById('fb-root').appendChild(e);
+            }());
+        </script>
         <?php
         require 'mobile/menu.phtml';
         ?>
 
         <section id="suggest-container" data-type="list">
         </section>
-        <div id="content">
-            <?php echo $this->layout()->content; ?>
+        <div id="loading">
         </div>
-
+        <div id="content" data-role='page'>
+            <div>
+                <?php echo $this->layout()->content; ?>
+            </div>
+        </div>
         <?php
         require_once 'mobile/nav.phtml';
-        require_once 'plugins/facebook.phtml';  
+        require_once 'plugins/facebook.phtml';
         echo "<div id='plugin-content'>";
-        require_once 'mobile/chat_test.phtml';
-        echo  "</div>";
+        require_once 'mobile/plugin.phtml';
+        echo "</div>";
         require_once 'mobile/script.phtml';
         ?>
     </body>

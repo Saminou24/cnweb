@@ -13,8 +13,8 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap {
         Zend_Session::start();
     }
     protected function _initConstant(){
-        defined("NUM_PER_PAGE") || define("NUM_PER_PAGE", 1);
-        defined("SEG_PER_PAGE") || define("SEG_PER_PAGE", 3); //3 segment per page
+        defined("NUM_PER_PAGE") || define("NUM_PER_PAGE", 3);
+        defined("SEG_PER_PAGE") || define("SEG_PER_PAGE", 1); //3 segment per page
         
         defined("ITEM_PER_PAGE") || define("ITEM_PER_PAGE", 20);
     }

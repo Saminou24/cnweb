@@ -1,18 +1,21 @@
+
 <?php
+
 if ($this->message)
-    echo $this->message;
+echo $this->message;
 ?>
-<form method="POST">
+<h2 class='bb-docs'> Đăng nhập </h2>
+<form method="POST" id='login-form'>
     <p>
-        <input type="text" name='username' required/>
+        <input type="text" name='username' required placeholder="Tên tài khoản"/>
         <button type="reset">Clear</button>
     </p>
     <p>
-        <input type="password" name="password" required/>
+        <input type="password" name="password" required placeholder="Mật khẩu"/>
         <button type="reset">Clear</button>
     </p>
     <button type="submit"class="recommend">Đăng nhập </button>
 </form>
-<section role="status" >
-    Bạn chưa có tài khoản.Hãy <a href='#signup' >đăng ký</a> để cùng chia sẻ nào.<br/>
+<section  >
+    Bạn chưa có tài khoản.Hãy <strong><a href='/user/register' >đăng ký</a></strong> để cùng chia sẻ nào.<br/>
 </section>

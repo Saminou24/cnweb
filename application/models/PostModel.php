@@ -6,9 +6,11 @@ class PostModel extends Zend_Db_Table_Abstract {
 
     protected $_name = "post";
     protected $_primary = "pid";
+
     public function init() {
         Zend_Loader::loadClass("TimeUtil");
     }
+
     public static function getAll() {
         $model = new PostModel();
 
@@ -19,7 +21,6 @@ class PostModel extends Zend_Db_Table_Abstract {
         $model = new PostModel();
         $model->insert($data);
         return $model->getDefaultAdapter()->lastInsertId();
-
     }
 
     public static function dellPost($id) {
@@ -28,7 +29,12 @@ class PostModel extends Zend_Db_Table_Abstract {
 
     public static function getPost($id) {
         $model = new PostModel();
-        return $model->fetchRow("pid=$id");
+        $sql = $model->select()
+                ->from(array("p" => "post"), array("p.*", 'comment' => '(' . new Zend_Db_Expr('select count(*) from comment where comment.pid = p.pid') . ')'))
+                ->setIntegrityCheck(false)
+                ->where("p.pid=?", $id)
+                ->join("user", "user.uid=p.uid", array("username", "avatar"));
+        return $model->fetchRow($sql);
     }
 
     public static function addKeyword($data) {
@@ -66,60 +72,106 @@ class PostModel extends Zend_Db_Table_Abstract {
     }
 
     public static function getHotPage($page) {
-        $offset = $page * NUM_PER_PAGE;
+        $offset = ($page - 1) * NUM_PER_PAGE;
         $model = new PostModel();
-        $total = $model->select()
-                ->order("like desc")
-                ->from("post", "count(pid)");
-        if ($offset > $total)
-            return array();
-        $num = $offset + NUM_PER_PAGE < $total ? NUM_PER_PAGE : $total - $offset;
         $sql = $model->select()
-                ->limit($num, $offset);
-
+                ->setIntegrityCheck(false)
+                ->from(array("p" => "post"), array("p.*",
+                    'comment' => '(' . new Zend_Db_Expr('select count(*) from comment where comment.pid = p.pid') . ')',
+                    'num_like' => '(' . new Zend_Db_Expr('select count(*) from `like` where `like`.`targetId` = p.pid') . ')'
+                ))
+                ->join("user", "user.uid=p.uid", array("username", "avatar"))
+                ->order("num_like desc")
+                ->order("comment desc")
+                ->order('date_created desc')
+                ->limit(NUM_PER_PAGE, $offset);
+//        die($sql);
         return $model->fetchAll($sql);
     }
 
     public static function getNewPage($page) {
-        $offset = $page * NUM_PER_PAGE;
+
         $model = new PostModel();
-        $total = $model->select()
-                ->order("date_created desc")
-                ->from("post", "count(pid)");
-        if ($offset > $total)
-            return array();
-        $num = $offset + NUM_PER_PAGE < $total ? NUM_PER_PAGE : $total - $offset;
+
+        $offset = ($page - 1 ) * NUM_PER_PAGE;
+        $num = NUM_PER_PAGE;
         $sql = $model->select()
+                ->setIntegrityCheck(false)
+                ->from(array("p" => "post"), array("p.*",
+                    'comment' => '(' . new Zend_Db_Expr('select count(*) from comment where comment.pid = p.pid') . ')',
+                    'num_like' => '(' . new Zend_Db_Expr('select count(*) from `like` where `like`.`targetId` = p.pid') . ')'
+                ))
+                ->join("user", "user.uid=p.uid", array("username", "avatar"))
+                ->order("p.date-created desc")
                 ->limit($num, $offset);
 
         return $model->fetchAll($sql);
     }
 
-    public static function getHotPages($page) {
-        $model = new PostModel();
-        $total = $model->fetchRow(
-            $model->select()
-                ->from("post", "count(pid) as count"));
-        //echo $total["count"];
-        $total = $total['count'];
+//    public static function getHotPages($page) {
+//        $model = new PostModel();
+////        $total = $model->fetchRow(
+////            $model->select()
+////                ->from("post", "count(pid) as count"));
+////        //echo $total["count"];
+////        $total = $total['count'];
+//
+//        $offset = ($page - 1) * NUM_PER_PAGE;
+//        $num = NUM_PER_PAGE * SEG_PER_PAGE;
+//        $sql = $model->select()
+////                ->order("like desc")
+//                ->limit($num, $offset);
+//        $result = $model->fetchAll($sql);
+//
+//        return $result;
+//    }
 
-        $offset = $page * NUM_PER_PAGE;
-        echo $offset;
-        $num = NUM_PER_PAGE * SEG_PER_PAGE;
-        $sql = $model->select()
-                ->order("like desc")
-                ->limit($num, $offset);
-        $result = $model->fetchAll($sql);
-
-        return $result;
-    }
-    public static function isExist($id){
+    public static function isExist($id) {
         $model = new PostModel();
-        $r = $model->fetchRow('pid = '.$id);
+        $r = $model->fetchRow('pid = ' . $id);
         if ($r != null)
             return true;
         else
             return false;
     }
+
+    public static function getPageOfUser($id, $page) {
+        $model = new PostModel();
+        $offset = ($page - 1) * NUM_PER_PAGE;
+        $sql = $model->select()
+                ->setIntegrityCheck(false)
+                ->from('post')
+                ->join("user", "user.uid=post.uid", array("username", "avatar"))
+                ->where("user.uid=?", $id)
+                ->order("post.date-created desc")
+                ->limit(NUM_PER_PAGE, $offset);
+
+        return $model->fetchAll($sql);
+    }
+
+    public static function getPreviousPostId($id) {
+        $model = new PostModel();
+        $sql = $model->select()
+                ->where("pid< $id")
+                ->limit(1);
+        $r = $model->fetchRow($sql);
+        if ($r)
+            return $r['pid'];
+        else
+            return null;
+    }
+
+    public static function getNextPostId($id) {
+        $model = new PostModel();
+        $sql = $model->select()
+                ->where("pid> $id")
+                ->limit(1);
+        $r = $model->fetchRow($sql);
+        if ($r)
+            return $r['pid'];
+        else
+            return null;
+    }
+
 }
 

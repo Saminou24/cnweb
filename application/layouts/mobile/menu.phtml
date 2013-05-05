@@ -1,35 +1,91 @@
-<section role="region" id='menu'>
-    <header>
-        <button><span class="icon icon-back"></span></button>
-        <menu type="toolbar">
-            <button id='menu'><span class="icon icon-menu"></span></button>
-        </menu>
-        <form action='/search' id="search-form">
-            <p>
-                <input type='text' placeholder="Từ khóa" autocomplete="off" id='search-box'/>
-                <button type='reset'>Remove text</button>   
-            </p>
-        </form>
-        <h2 id="logo"><a href='/'><img src="/images/logo.png" /></a></h2>
-    </header>
+<?php
+$session = new Zend_Session_Namespace('user');
 
-</section>
-<header id="navigator">
-    <ul role="tablist" data-type="filter" data-items="2">
-        <li id="new-menu-item" role="tab" class="item-active"><a href="/new/">Bài mới</a></li>
-        <li id="hot-menu-item" role="tab"><a href="/hot/">Top bài</a></li>
-    </ul>
+if ($this->menu_include) {
+    ?>
+    <section role="region" id='menu'>
+        <header>
+            <button><span class="icon icon-back"></span></button>
+            <menu type="toolbar">
+                <?php
+                if ($session->username)
+                    echo
+                    '<a href="/user/message" style="padding:0">
+                        <button style="background: url(/images/icon/b_message.png) no-repeat;margin-top: 1rem;margin-left:1rem;margin-right:0;">';
+                    if ($this->unread_message)
+                            echo '<span style="font-size: 1.5rem;background:#ff0000;padding:0 3px;">' . $this->unread_message . '</span>';
+                    echo'</button>
+                     </a>';
+                ?>
+                <button id = 'menu-btn'><span class = "icon <?php
+                    if ($session->username)
+                        echo 'icon-user';
+                    else
+                        echo 'icon-menu';
+                    ?>"></span></button>
+            </menu>
+            <form action = '/search' id = "search-form">
+                <p>
+                    <input type = 'text' placeholder = "Từ khóa" autocomplete = "off" id = 'search-box'/>
+                    <button type = 'reset'>Remove text</button>
+                </p>
+            </form>
+            <h2 id = "logo"><a href = '/'><img src = "/images/logo.png" /></a></h2>
+        </header>
 
-</header>
-<section data-type="sidebar" role="region" id="subMenu">
-    <nav>
-        <h2>Thông tin tài khoản</h2>
+    </section>
+    <?php
+    if ($this->section) {
+        ?>
+        <header id="navigator">
+            <ul role="tablist" data-type="filter" data-items="2">
+                <li id="new-menu-item" role="tab" <?php if ($this->section == "new") echo 'class="item-active"' ?>><a href="/new/">Bài mới</a></li>
+                <li id="hot-menu-item" role="tab" <?php if ($this->section == "hot") echo 'class="item-active"' ?>><a href="/hot/">Top bài</a></li>
+            </ul>
+
+        </header>
+        <?php
+    }
+    ?>
+    <section data-type="sidebar" role="region" id="subMenu">
+        <nav>
+            <?php
+            if ($session->username != null)
+                echo
+                "<h2>Xin chào <strong>" . $session->username . "</strong></h2>
         <ul>
-            <li><a href="#content">Trang cá nhân</a></li>
-            <li><a href="#content">Thay đổi thông tin</a></li>
-            <li><a href="#content">Thay đổi mật khẩu</a></li>
-            <li><a href="#content">Đăng xuất</a></li>
-        </ul>
-
-    </nav>
-</section>
+            <li><a href='/uploader/" . $session->uid . "/'>Trang cá nhân</a></li>
+            <li><a href='/user/profile'>Thay đổi thông tin cá nhân</a></li>
+            <li><a href='/uploader/" . $session->uid . "'>Danh sách bài viết </a></li>
+                
+            <li><a href='/upload/index'> Đăng bài mới </a></li>
+            <li><a href='/user/logout/'>Đăng xuất</a></li>
+        </ul>";
+            else
+                echo
+                "<ul>
+            <li><a href='/user/login/'>Đăng nhập</a></li>
+            <li><a href = '/user/register/'>Đăng ký</a></li>
+        </ul>";
+            ?>
+        </nav>
+    </section>
+    <?php
+}else {
+    ?>
+    <section role="region" id="menu">
+        <header>
+            <a href="#"><span class="icon icon-back">back</span></a>
+            <menu type="toolbar">
+                <?php
+                if ($this->back_link)
+                    echo "<a href='" . $this->back_link . "'>back</span></a>";
+                else
+                    echo '<a href="/"><span class="icon icon-back">back</span></a>';
+                ?>
+            </menu>
+            <h1><?php echo $this->headTitle()[0] ?></h1>
+        </header>
+    </section>
+    <?php
+}

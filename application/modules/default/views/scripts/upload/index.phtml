@@ -1,23 +1,16 @@
-<div class="notify success">
-    <div class="close" ></div>
-    <?php if ($this->message) echo implode("<br/>",$this->message) ?>
-</div>
+
 <?php
-if ($this->status == "success")
-    $class = "notify success";
-else
-    $class = "notify fail";
-    ?>
-<div class="<?=$class ?>">
-    <div class="close" ></div>
-    <div>
-        <?php if ($this->message) echo explode("<br/>",$this->message) ?>
-    </div>
+if (count($this->message)) 
+?>
+<div class="<?= $this->status ?>">
+    <span class="close" ></span>
+    <?php echo implode("<br/>", $this->message); ?>
 </div>
 
 <?php
     if ($this->url != null)
-        echo "<p> Địa chỉ truy cập của bạn: <br/><a href='".$this->url."'>".$this->url."</a></p>";
+        echo "<p> Địa chỉ truy cập của bạn: <br/><a href='".$this->url."'>".$this->url."</a></p>
+            <a role='button'>Trở về trang chủ</a>";
     else {
         echo $this->form; //display form
     }

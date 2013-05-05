@@ -25,7 +25,9 @@ body {
     margin-top: 0px;
     padding: 0px;
 }
-
+#content > form {
+    margin-right: 40px;
+}
 ul.menu {
     float: right;
     list-style: none;

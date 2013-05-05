@@ -1,11 +1,17 @@
+<?php
+if ($this->show_toolbar){
+?>
 <div id="toolbar-wrap">
     <div role="toolbar" id="toolbar">
-
         <ul>
-            <li><button class="pack-icon-send" id="send-message">Send</button></li>
-            <li><button class="pack-icon-mark" id="like">Like</button></li>
-            <li><div class='hozirontal-span'></div><li>
-            <li><button class="pack-icon-share" id='facebook-share'>Share</button></li>
+            <li><button class="icon-facebook expandable" id="facebook-share">Facebook</button></li>
         </ul>
+        <ul>
+            <li><button class="pack-icon-mark " id="like">Like</button></li>
+            <li><button class="pack-icon-share expandable" id='send-message'>Comment</button></li>
+        </ul>
+
     </div>
 </div>
+<?php
+}
