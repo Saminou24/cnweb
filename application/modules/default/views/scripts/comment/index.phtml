@@ -1,0 +1,23 @@
+<?php
+    if(count($this->message)){
+        echo "<div class='error'><span class='close'></span>";
+        foreach ($this->message as $m)
+            echo $m."<br/>";
+        echo "</div>";
+    }
+    $data = $this->data;
+    echo "<section data-type='list'>
+            <header>Comment</header>
+                <li>";
+    foreach ($data as $r){
+                
+    }
+?>
+
+<form role="search" id="send-message-form" method="post">
+    <button type="submit" onclick="cab.postMessage(); return false;">Send</button>
+    <p>
+        <textarea placeholder="Placeholder in textarea" required=""></textarea>
+        <button type="reset">Clear</button>
+    </p>
+</form>

@@ -1,0 +1,102 @@
+<?php
+if ($this->act == "send_message") {
+    ?>
+    <h2 class="bb-docs">Gửi tin nhắn </h2>
+    <form method="post">
+        <p>
+            <input type="text" placeholder="Tiêu đề tin nhắn" name="title"/>
+            <button type="reset"> Clear</button>
+        </p>
+        <p>
+            <input type="text" placeholder="Nội dung tin nhắn" name="msg" />
+            <button type="reset">Clear</button>
+        </p>
+        <button type="submit" name="send" >Gửi tin nhắn</button>
+    </form>
+    <?php
+} else {
+    echo "<input type='hidden' id='page_id' value='" . $this->page . "' />";
+    $message = $this->message;
+    if (count($message))
+        echo "<div class='error'><span class='close'></span>" . implode("<br/>", $message) . "</div>";
+
+    $data = $this->data;
+    $user = $this->user;
+    ?>
+    <div class="user-info" >
+        <div class="user-avatar">
+            <img src="/photos/avatar/<?= $user['avatar'] ?>" />
+            <div class="user-name">
+                <strong style="font-size:120%;"><?= $user['username'] ?></strong><br/>
+                <span style="font-style: italic; font-size: 70%;">
+                    <?php
+                    $datetime = new DateTime($user['date_created']);
+                    echo "Ngày gia nhập " . $datetime->format("d/m/Y")
+                    ?>
+                </span>
+            </div>
+        </div>
+        Thông tin thêm: <strong style="color: #b90000">&nbsp;&nbsp;&nbsp;&nbsp; <?= $user['info'] ?></strong><br/>
+        Tổng số bài viết: <strong style="color: #b90000;">&nbsp;&nbsp;&nbsp;<?php echo $this->post_count ?></strong><br/>
+        Tổng số lượt thích: <strong style="color: #b90000;"><?php echo $this->like_count ?></strong><br/>
+        <?php 
+        if ($this->show_send_link)
+            echo "<a href='/uploader/".$user['uid']."?act=send_message' > Gửi tin nhắn </a>";
+        ?>
+    </div>
+
+    <?php
+    if ($data) {
+        foreach ($data as $i => $info) {
+            $relative_time = $this->relative_time[$i];
+            $like_count = $this->like_count[$i];
+            $like_status = $this->like_status[$i];
+            ?>
+            <section class="post-item" >
+                <a href='<?= "/c/" . $info['pid'] ?>' class='post-image' target='_blank'>
+                    <?php
+                    if ($info['type'] == "photo")
+                        echo "<img src='/photos/medium/" . $info['name'] . "' width='100%' />";
+                    else
+                        echo "<img src='http://img.youtube.com/vi/" . $info['name'] . "/0.jpg' width='100%' class='post-video'/> 
+                            <div class='video-indicator'></div>";
+                    ?>
+                </a>
+                <section class='post-info post-position-absolute' data-type="list">
+                    <header>
+                        <?= $info['title'] ?> 
+                    </header>
+                    <ul>
+                        <li>
+                            <aside class="icon">
+                                <a href="/uploader/<?php echo $info['uid'] ?>" ><img src="/photos/avatar/<?= $info['avatar'] ?> " alt="<?php echo $info['username'] ?>"/></a>
+                            </aside>
+                            <a href="http://cnweb/c/<?= $info['pid'] ?>" >
+
+                                <p>
+                                    <input type='hidden' class='id' value='<?php echo $info['pid'] ?>' like-status='<?php echo $like_status; ?>' />
+                                    <span class='post-like'><?= $like_count ?></span> &nbsp; &nbsp;
+                                    <span class='post-comment'><?= 15 ?></span> &nbsp; &nbsp;
+                                    <span class="fb-like" data-href="http://cnweb/c/<?= $info['pid'] ?>/" data-send="false" data-layout="button_count" data-width="60" data-show-faces="false"></span>
+
+                                </p>
+                                <p>
+                                    <?= $relative_time ?> bởi <?php echo "<span class='link' href='/uploader/" . $info['uid'] . "'> <strong>" . $info['username'] . "</strong></span>"; ?>
+
+                                </p>
+                            </a>
+
+                        </li>
+                    </ul>
+
+                </section>
+
+            </section>
+            <?
+        }
+    }
+    if (!count($data))
+        echo "<h2>Không còn bài nào cũ hơn</h2>
+                                Trở về <a href='/'><strong>Trang chủ</a>";
+}
+?>

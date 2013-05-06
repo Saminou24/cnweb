@@ -1,0 +1,49 @@
+<?php
+if (count($this->message)) {
+    echo "<div class='". $this->status."'><span class='close'></span>";
+    foreach ($this->message as $m)
+        echo $m . '<br/>';
+    echo "</div>";
+}
+if ($this->status == "error") {
+?>
+<div style="padding:20px">
+<form method="POST" id='signup-form'>
+    <h2 class='bb-docs'> Thông tin bắt buộc </h2>
+    <fieldset>
+        <legend class="action" style="width: 18rem;">Thông tin tài khoản</legend>
+        <section>
+            <p>
+                <input type="text" name='username' required placeholder="Tên tài khoản"/>
+                <button type="reset">Clear</button>
+            </p>
+            <p>
+                <input type="password" name="password" required placeholder="Mật khẩu"/>
+                <button type="reset">Clear</button>
+            </p>
+            <p>
+                <input type='password' name='repassword' required placeholder="Nhập lại mật khẩu">
+                <button type="reset">Clear</button>
+            </p>
+
+            <p>
+                <input type="email" name="email" required placeholder="Địa chỉ email" />
+                <button type="reset">Clear</button>
+            </p>
+        </section>
+    </fieldset>
+    <br/>
+    <h2 class="bb-docs"> Thông tin cá nhân (tùy chọn) </h2>
+    <p>
+        <textarea required="" placeholder="Thông tin miêu tả"></textarea>
+        <button type="reset">Clear</button>
+    </p>
+   
+    <button type="submit" class="recommend"> Đăng ký </button>
+</form>
+<div></div>
+<?php
+}
+
+?>
+</div>

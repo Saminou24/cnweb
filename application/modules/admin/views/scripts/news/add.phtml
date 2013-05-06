@@ -1,0 +1,11 @@
+<?php
+if (count($this->message) > 0) {
+    echo "<section rol='info'>
+        <span class='close'></span>";
+    foreach ($this->message as $ms) {
+        echo $ms . "<br/>";
+    }
+    echo "</section>";
+}
+
+echo $this->form;

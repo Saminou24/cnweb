@@ -1,0 +1,37 @@
+<?php
+$data = $this->data;
+$username = $this->username;
+?>
+<h1> Xin chào <strong><? echo $username ?></strong></h1>
+<h2 class="bb-docs"> Cập nhật thông tin cá nhân </h2>
+<?php
+if ($this->status == "success")
+    echo "<div class='success'><span class='close'></span> Bạn đã cập nhật thành công</div>";
+else if ($this->status == "error")
+    echo "<div class='error'><span class='close'></span> Không có gì cập nhật mới </div>";
+?>
+<form method="post" enctype="multipart/form-data">
+    <p>
+    <h3> Email</h3>
+    <input type="email" value="<?php echo $data['email'] ?>" disabled="disable">
+    </p>
+    <p>
+    <h3> Avatar</h3>
+    <label class="filebutton">
+        <span class='guide'>Chọn avatar</span>
+        <span><input type="file" id="myfile" name="file"></span>
+        <img width="100%" heigh="100%" src="<?php
+        if (!$data['avatar'])
+            echo '/photos/avatar/no-avatar.jpg';
+        else
+            echo '/photos/avatar/' . $data['avatar']
+            ?>" />
+    </label>
+</p>
+<h3> Thông tin thêm </h3>
+<p>
+    <textarea type="text" name="info" ><?php echo $data['info'] ?></textarea>
+    <button type="reset">Clear</button>
+</p>
+<button type="submit" class="recommend">Cập nhật </button>
+</form>

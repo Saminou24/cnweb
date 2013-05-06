@@ -1,0 +1,182 @@
+/* body css */
+body {
+    font-family: helvetica;
+    background: #f2f6fc;
+    margin: 0px;
+  /*  -webkit-transform: skewX(30deg); */
+    
+}
+::selection {
+    background: rgba(0, 255, 0, 0.3);
+}
+
+/**********Navigator *************/
+.nav {
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+    height: 40px;
+    background: #2e71d5;
+    
+}
+.nav-center {
+    width: 920px;
+    margin: 0 auto;
+    margin-top: 0px;
+    padding: 0px;
+}
+#content > form {
+    margin-right: 40px;
+}
+ul.menu {
+    float: right;
+    list-style: none;
+    height: 40px;
+    padding: 0px;
+    margin: 0px;
+}
+ul.menu > li {
+    display: inline-block;
+    float:left;
+    height: 40px;
+    margin: 10px 20px 10px 20px;
+
+}
+
+.button {
+    text-decoration: none;
+    font-size: 13pt;
+
+}   
+.button:hover {
+    color: #fff;
+    cursor: pointer;
+}
+#login-form {
+    display: none;
+}
+.separate {
+    float: left;
+    width: 1px;
+    height: 40px;
+    border-right: 1px solid #15376a;
+}
+.command-bar-form {
+    float: left;
+    margin: 0px;
+  
+    padding: 1px;
+    
+}
+.command-bar-form p {
+    height: 30px;
+    margin: 3px;
+    float: left;
+    padding: 0px;
+    border: 1px solid #000;
+      overflow: hidden;
+    border-radius: 15px;
+    background: #fff;
+}
+#search-box {
+    border: 0px;
+    margin-top: -2px;
+    margin-left: 15px;
+    
+    width: 200px;
+    height: 32px;
+    border-radius: 4px;
+    transition: width 0.2s ease-in-out;
+    -moz-transition: width 0.2s ease-in-out; /* Firefox 4 */
+    -webkit-transition: width 0.2s ease-in-out; /* Safari and Chrome */
+    -o-transition: width 0.2s ease-in-out; /* Opera */  
+}
+#btnsearch {
+    width: 30px;
+    height: 30px;
+    padding: 0px;
+    color: #fff;
+    border: 0px solid #000;
+    border-radius: 0 50% 50% 0;
+    background: url("http://cnweb/images/btnsearch.jpg");
+    background-size: 30px 30px;
+    
+}
+#container {
+   margin-top: 20px;
+}
+#mainContainer {
+   width: 920px;
+   margin: 0 auto;
+}
+#content {
+    float: left;
+    width: 610px;
+    //padding: 30px;
+    word-wrap: break-word;
+    background: #83abe6;
+    border: 1px solid #15376a;
+    border-radius: 10px;
+    box-shadow: 0 0  8px #fff;
+}
+
+/************************** sidebar ***********************/
+#sidebar {
+    position: relative;
+    float: left;
+    width: 200px;
+    margin-left: 20px;
+}
+.sidebar-item {
+    margin-bottom: 30px;
+    float: left;
+    display: block;
+    width: 100%;
+    padding: 20px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    box-shadow: 0 0 5px #000;
+}
+.sidebar-item-header {
+    display: block;
+    margin-left: -20px;
+    width: 90%;
+    background: #000;
+    color: #fff;
+    padding-left: 30px;
+}
+
+/******************** Post ***********************/
+.post {
+    display: block;
+    margin: 1px;
+    border-bottom: 1px solid #ccc;
+}
+.info {
+    float: right;
+    background: #044062;
+    font-size: 20px;
+    color: #fff;
+}
+.header-content {
+  
+    width: 100%;
+    height: 40px;
+    background: #15376a;
+    padding: 0px;
+}
+.menu-item {
+    float:left;
+    border-right: 1px solid #2e71d5;
+    height: 40px;
+    padding: 0px;
+
+}
+.menu-item a {
+    margin: 0px;
+    padding: 20px;
+    text-decoration: none;
+}
+.active {
+    background: #fff;
+}

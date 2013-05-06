@@ -1,0 +1,50 @@
+<?php
+if (count($this->message) > 0) {
+    echo "<section rol='info'>
+        <span class='close'></span>";
+    foreach ($this->message as $ms) {
+        echo $ms . "<br/>";
+    }
+    echo "</section>";
+}
+?>
+<table class="table">
+    <tr>
+        <th>Tên tài khoản</th>
+        <th>Email</th>
+        <th>Thông tin </th>
+        <th>Trạng thái</th>
+        <th>Admin</th>
+        <th>Lý do ban </th>
+        <th > Hành động</th>
+    </tr>
+    <?php
+    if ($this->paginator) {
+        foreach ($this->paginator as $ac) {
+            ?>
+            <tr>
+                <td><?php echo $ac['username']; ?></td>
+                <td><?php echo $ac['email']; ?></td>
+                <td><?php echo $ac['info'] ?></td>
+                <td><?php
+                    if ($ac['active'])
+                        echo "<input type='checkbox' disabled checked />";
+                    else
+                        echo "<input type='checkbox' disabled/>";
+                    ?></td>
+                <td><?php echo $ac['admin'] ?  "<input type='checkbox' disabled checked />" :  "<input type='checkbox' disabled/>"; ?></td>
+                <td><?php echo $ac['ban_reason']; ?></td>
+                <td>
+                    <a class="edit link" href="<?php echo $this->url(array('action' => 'edit', 'id' => $ac['uid'])) ?>">Sửa</a>
+                    <a class="del link" href="<?php echo $this->url(array('action' => 'del', 'id' => $ac['uid'])) ?>" onclick =" return cab.confirmLink('Bạn có chắc muốn xóa tài khoản này?')"> Xóa </a>
+                </td>
+            </tr>
+
+            <?
+        }
+    }
+    ?>
+</table>
+<?php
+echo "<a href='/admin/account/add'><button>Thêm tài khoản</button></a>";
+echo "<div>".$this->paginationControl($this->paginator, 'Sliding', 'account/paginator.phtml')."</div>";

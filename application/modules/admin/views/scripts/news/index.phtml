@@ -1,0 +1,57 @@
+<?php
+if (count($this->message) > 0) {
+    echo "<section rol='info'>
+        <span class='close'></span>";
+    foreach ($this->message as $ms) {
+        echo $ms . "<br/>";
+    }
+    echo "</section>";
+}
+?>
+<table class="table">
+    <tr>
+        <th>id</th>
+        <th>Tiêu đề</th>
+        <th>Nội dung</th>
+        <th>Ngày tạo</th>
+        <th>Hành động</th>
+    </tr>
+    <?php
+    if ($this->paginator) {
+        foreach ($this->paginator as $data) {
+            ?>
+            <tr>
+                <td><?php echo $data['id']; ?></td>
+                <td><?php echo $data['title']; ?></td>
+                <td><?php
+                    if (strlen($data['content']) > 30)
+                        echo substr($data['content'], 0, 30) . "[...]";
+                    else
+                        echo $data['content'];
+                    ?>
+                </td>
+                <td><?php echo $data['date_created'] ?></td>
+                <td>
+                    <ul class="no-list">
+                        <li><a  target="_blank"  class="link preview" href="<?php
+                            echo $this->url(array(
+                                'module' => 'admin',
+                                'controller' => 'news',
+                                'action' => 'preview',
+                                'id' => $data['id']))
+                                    ?>">Xem trước</a></li>
+                        <li><a class="link edit" href="/admin/news/edit/id/<?php echo $data['id'] ?>" >Sửa</a></li>
+                        <li><a class="link del" href="/admin/news/del/id/<?php echo $data['id'] ?>" onclick="return cab.confirmLink('Bạn có chắc chắn muốn xóa bài viết này?')">Xóa</a></li>
+
+                    </ul>
+                </td>
+            </tr>
+
+            <?
+        }
+    }
+    ?>
+</table>
+<?php
+echo "<a href='/admin/news/add'><button class='icon'>Thêm thông báo</button></a>";
+echo "<div>" . $this->paginationControl($this->paginator, 'Sliding', 'news/paginator.phtml') . "</div>";

@@ -1,0 +1,62 @@
+<?php
+$this->headTitle("Hộp thư cá nhân");
+switch ($this->act) {
+    case "display":
+        $data = $this->data;
+        echo "<section data-type='list'>
+                <header>Hộp thư</header>
+                    <ul >";
+        foreach ($data as $m) {
+            ?>
+            <li>
+                <aside class="pack-end">
+                    <a href="/user/message?act=show_detail&mid=<?= $m['mid_parent'] ?>"><button class="icon icon-dialog">Chi tiết</button></a>
+                </aside>
+                <p <?php if ($m['unread']) echo 'class="unread"' ?>><?php
+                    echo $m['title'];
+                    if ($m['unread']) 
+                        echo " (".$m['unread'].")";
+                    ?></p>
+                <p><?= $m['date_created'] ?></p>
+            </li>
+            <?php
+        }
+        echo "</ul></section>";
+        break;
+    case "show_detail":
+        if (count($this->message))
+            echo "<div class='" . $this->status . "'><span class='close'></span>" . implode("<br/>", $this->message) . "</div>";
+        $data = $this->data;
+        $uid = $this->uid;
+        echo "<div class='message-container' data-type='list'>";
+        foreach ($data as $m) {
+            ?>
+            <div>
+                <div class="message <?php
+                if ($m['uid_from'] == $uid)
+                    echo "message-me";
+                else
+                    echo "message-friend"
+                    ?>"> 
+                    <div class="message-content">    
+            <?php echo $m['message'] ?>
+                    </div>
+                    <div class="message-time"><?php echo $m['date_created'] ?></div>
+                </div>
+
+                <img src='<?php if ($m['read'] && $m['uid_to'] == $uid) echo '/images/icon/b_message_read.png' ?>'/>
+            </div>
+            <?php
+        }
+        echo
+        '<form method = "post" role = "search">
+        <button type = "submit">Trả lời</button>
+        <p>
+        <input type = "text" name = "msg">
+        <button type = "reset">Clear</button>
+        </p>
+
+        </form></div>';
+        break;
+}
+?>

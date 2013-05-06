@@ -1,0 +1,15 @@
+<?php
+if (count($this->message)) {
+    echo "<div class='error'><span class='close'></span>";
+    foreach ($this->message as $m){
+        echo $m. "<br/>";
+    }
+    echo "</div>";
+}
+if ($this->data){
+    echo "<h2 class='news-title'>".$this->data['title']."</h2>";
+    echo "<div class='news-date'>".explode(" ",$this->data['date_created'])[0]."</div>";
+    echo "<div class='news-content'>".$this->data['content']."</div>";
+}
+?>
+</div>

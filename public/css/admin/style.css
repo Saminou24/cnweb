@@ -1,0 +1,209 @@
+/* 
+    Document   : style
+    Created on : Apr 10, 2013, 11:41:37 PM
+    Author     : newvalue
+    Description:
+        Purpose of the stylesheet follows.
+*/
+body {
+    margin: 0px;
+    font-family: "Lucida Grande", Verdana, sans-serif;
+}
+#header {
+    width: 100%;
+    height: 5rem;
+    background: url(/css/admin/images/header.png) repeat-x;
+    padding: 0px;
+}
+#header-wrap{
+    width: 920px;
+    margin: 0 auto; 
+    position: relative;
+    padding: 0px;
+}
+#menu {
+    position: relative;
+    float: left;
+    height: 100%;
+}
+#search-form {
+    position: relative;
+    float: left;
+    margin-top: 0px;
+}
+form p {
+    margin: 0px;
+}
+p > input[type='text'] {
+    position: absolute;
+    margin-top: 0.5rem;
+    width: 250px;
+    height: 2rem;
+    border: 1px solid #000;
+    transition: all ease-in-out 0.2s;
+    -webkit-transition: all ease-in-out 0.2s;
+    -moz-transition: all ease-in-out 0.2s;
+    -o-transition: all ease-in-out 0.2s;
+    background: #fff url(/images/search.png) no-repeat;
+    background-size: 2rem 2rem;
+    background-position: right;
+    padding: 0 2rem 0 2rem;
+    border-radius: 1rem;
+}
+
+#logo {
+    position: relative;
+    float: left;  
+    width: 107px;
+    margin-right: 5px;
+}
+#logo span {
+    width: 107px;
+}
+.verticle-span {
+    position: relative;
+    float: left;
+    display: block;
+    width: 1px;
+    margin: 0 10px;
+    background: #7d3807;
+    height: 3rem;
+    border-right: 1px solid #fce1ce;
+}
+#menu {
+    position: relative;
+    float: right;
+    margin: 0;
+    border-right: 1px solid #fce1ce;
+    padding: 0px;
+    height: 50px;
+}
+#menu-button {
+    width: 50px;
+    height: 50px;
+
+    background-position: center center;
+}
+#menu-button:before {
+    background: url(/css/admin/images/menu.png) no-repeat;
+    background-size: 40px 40px;
+    background-position: center center;
+    content: "";
+    position: absolute;
+    width: 50px;
+    height: 50px;
+}
+#menu-button:active {
+    background: #2868c7;
+}
+
+#main {
+    width: 920px;
+    margin: 30px auto;
+
+}
+#content {
+    position: relative;
+    width: 650px;
+    border: 1px solid #7c7c7c;
+    background: #f2f6fc;
+    float: left;
+    padding: 40px 20px 20px 20px;
+    margin: 0 20px 0 0;
+    display: block;
+    box-shadow: 0 0 4px rgba(0,0,0,0.3);
+}
+#panel {
+    display: block;
+    border: 1px solid #7c7c7c;
+    position: relative;
+    float: right;
+    background: #7ba5e4;
+    width: 200px;
+    margin: 0px;
+    padding: 0px;
+}
+/** table **/
+.table {
+    position: relative;
+    border: 1px solid #5088dc;
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 80%;
+    text-align: left;
+    margin: 3px;
+}
+.table td, th {
+    border: 1px solid #5088dc;
+    padding: 5px;
+    margin: 0;
+}
+.table th {
+    background: #aec8ee;
+    font-weight: bold;
+}
+.table tr:nth-child(odd) {
+    background: #f2f6fc;
+   
+}
+.table tr:nth-child(even){
+    background: #fff;
+}
+
+/** helpfull class */
+.error {
+    background: #FFECCE;
+    padding: 10px;
+    width: 630px;
+    border: 1px solid #E9C59B;
+    border-radius: 10px;
+    display: block;
+}
+.success {
+    background: #97d685;
+    padding: 10px;
+    border: 1px solid #76c95e;
+    border-radius: 10px;
+    display:block;
+}
+ .close {
+    position: relative;
+    float: right;
+    margin-top: 15px;
+    width: 16px;
+    height: 16px;
+    background: url(/images/close.png);
+    opacity: 0.75;
+}
+.close:hover {
+    opacity: 1;
+}
+
+/** list  **/
+ul.no-list {
+    list-style-type: none; 
+    padding: 1px;
+    }
+    /*.table button {
+        width: 80px;
+        background: #BE5B00;
+        border-width: 0;
+        color: #fff;
+    }*/
+    .link {
+    text-decoration: none;
+    display: block;
+    cursor: pointer;
+    padding-left: 20px;
+    background-repeat: none;
+    font-size: 14px;
+}
+.edit {
+    background: url(/images/icon/b_edit.png) no-repeat;
+}
+.del {
+    background: url(/images/icon/b_drop.png) no-repeat;
+}
+.preview {
+    background: url(/images/icon/b_preview.jpg) no-repeat;
+}
