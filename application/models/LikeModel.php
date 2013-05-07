@@ -27,11 +27,11 @@ class LikeModel extends Zend_Db_Table_Abstract {
 
     public function getTotalLikeToUser($id) {
         $sql = $this->select()
-                ->from("post", array("pid", "uid"))
+                ->from("post", array("pid", "uid","count(*) as count"))
                 ->where("post.uid =?", $id)
                 ->setIntegrityCheck(false)
-                ->join("like", "post.pid = like.targetId and post.type='photo'", array("count(*) as count"));
-
+                ->join("like", "post.pid = like.targetId and like.type='photo'", array("like.targetId"));
+//        die($sql);
         $r = $this->fetchRow($sql);
 //        Zend_Debug::dump($r);
         return $r['count'];

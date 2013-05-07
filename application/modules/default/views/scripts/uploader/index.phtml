@@ -37,9 +37,9 @@ if ($this->act == "send_message") {
                 </span>
             </div>
         </div>
-        Thông tin thêm: <strong style="color: #b90000">&nbsp;&nbsp;&nbsp;&nbsp; <?= $user['info'] ?></strong><br/>
+        Thông tin thêm: <strong style="color: #b90000">&nbsp;&nbsp;&nbsp;<?= $user['info'] ?></strong><br/>
         Tổng số bài viết: <strong style="color: #b90000;">&nbsp;&nbsp;&nbsp;<?php echo $this->post_count ?></strong><br/>
-        Tổng số lượt thích: <strong style="color: #b90000;"><?php echo $this->like_count ?></strong><br/>
+        Tổng số lượt thích: <strong style="color: #b90000;"> <?php echo $this->like_count ?></strong><br/>
         <?php 
         if ($this->show_send_link)
             echo "<a href='/uploader/".$user['uid']."?act=send_message' > Gửi tin nhắn </a>";

@@ -3,16 +3,15 @@ $(document).scroll(function(e) {
     getPostElementAt(top);
     if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
 
+        console.log($(window).scrollTop() >= $(document).height() - $(window).height());
         cab.current_seg_page++;
 //        alert(cab.current_seg_page)
         var pageId = $('#page_id').val();
-        var p = 1.0 * pageId + 1.0 * cab.current_seg_page;
+        var p = 1.0 * pageId +  cab.current_seg_page;
 //        var sort;
-        
-        if (cab.current_seg_page < cab.SEG_PER_PAGE) {
-            $('#loading').show();
-           
 
+        if (p <= cab.SEG_PER_PAGE + 3) {
+            $('#loading').show();
             if (location.href.match(/^http(s)?:\/\/[^\/]+\/uploader\/.*/)) {
                 var uid = location.href.substr(location.href.search("uploader")).split("/")[1].split("?")[0];
                 var query = location.search.substr(1).split("&");
@@ -32,8 +31,7 @@ $(document).scroll(function(e) {
                     $('#loading').hide();
                     // alert('test');
                 });
-            }
-            else {
+            } else {
                 cab.sort = (location.href.match(/^http(s)?:\/\/[^\/]+\/hot\/.*/)) ? "hot" : "new";
                 $.ajax(
                         "/ajax/index?act=load_more&sort=" + cab.sort + "&page=" + p
@@ -44,21 +42,21 @@ $(document).scroll(function(e) {
                 });
             }
 
-
 //            alert(location.href.match(/^http.*\/uploader\/\.*/))
 //            if (location.href.match(/^http.*\/uploader\/\.*/)) {
 //                var url = location.strstr("uploader/").split("/")
-//                alert(url[1]);
+//                alert(url[1])
 //
 //            }
+            if (p == cab.SEG_PER_PAGE + 3) {
+                alert("show button");
+                if (cab.sort == "userpost")
+                    $('#content').html($('#content').html() + "<a role='button' href='" + location.href + "?page=" + p + "'>Trang tiếp theo </a>");
+                else
+                    $('#content').html($('#content').html() + "<a role='button' href='/" + cab.sort + "/index/page/" + p + "'>Trang tiếp theo </a>");
+            }
         }
-        else if (cab.current_seg_page == cab.SEG_PER_PAGE) {
-//            alert(cab.sort)
-            if (cab.sort == "userpost")
-                $('#content').html($('#content').html() + "<a role='button' href='" + location.href + "?page=" + p + "'>Trang tiếp theo </a>");
-            else
-                $('#content').html($('#content').html() + "<a role='button' href='/" + cab.sort + "/index/page/" + p + "'>Trang tiếp theo </a>");
-        }
+
     }
 });
 
