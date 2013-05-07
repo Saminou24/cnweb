@@ -43,11 +43,19 @@ class AjaxController extends Cab_Controller_Action {
                 echo $session->uid ? 1 : 0;
                 break;
             case "load_more";
-                $p = $request->getParam("page");
+                $p = $request->getParam("page","1");
                 $model = new PostModel();
                 $likeModel = new LikeModel();
-                $data = PostModel::getHotPage($p);
-
+                $sort = $request->getParam("sort","new");
+                echo $sort;
+                if ($sort == "new")
+                    $data = PostModel::getNewPage($p);
+                else if ($sort == "hot")
+                    $data = PostModel::getHotPage ($p);
+                else if ($sort == "userpost") {
+                    $uid = $request->getParam("uid");
+                    $data = PostModel::getPageOfUser ($uid, $p);
+                }             
                 foreach ($data as $i => $info) {
                     $relative_time = TimeUtil::calRelativeTime($info['date-created']);
                     if ($session->uid)

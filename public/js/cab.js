@@ -18,13 +18,13 @@ function init() {
         if (timeId['suggest'] && t - timeId['time'] < MIN_UPDATE_TIME)
             clearTimeout(timeId['suggest']);
         if (keyword.length > 0) {
-
+            $('#suggest-container').show();
             timeId['suggest'] = setTimeout(function() {
                 timeId['time'] = new Date().getTime();
                 $.ajax({
                     url: "/suggest/index?q=" + keyword,
                     success: function(data) {
-                        $('#suggest-container').html(data).show();
+                        $('#suggest-list-result').html(data).show();
                     }});
             }, 50);
         } else
@@ -62,6 +62,10 @@ cab.init = function() {
 }
 
 cab.addEventListener = function() {
+    $('#hide-search').click(function(){
+       $('#suggest-container').hide();
+       $('#search-box').val("");
+    });
     $('.close').click(function() {
         $(this).parent().hide("slow");
     })

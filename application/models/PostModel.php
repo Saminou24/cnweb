@@ -48,10 +48,10 @@ class PostModel extends Zend_Db_Table_Abstract {
         $index->addDocument($doc);
         $index->commit();
     }
-    public static function isValid($pid){
+
+    public static function isValid($pid) {
         $model = new PostModel();
-        return $model->fetchRow("pid='".$pid."'");
-   
+        return $model->fetchRow("pid='" . $pid . "'");
     }
 
     public static function normalizeName($str) {
@@ -78,6 +78,8 @@ class PostModel extends Zend_Db_Table_Abstract {
 
     public static function getHotPage($page) {
         $offset = ($page - 1) * NUM_PER_PAGE;
+        if ($offset < 0)
+            return array();
         $model = new PostModel();
         $sql = $model->select()
                 ->setIntegrityCheck(false)
@@ -99,6 +101,8 @@ class PostModel extends Zend_Db_Table_Abstract {
         $model = new PostModel();
 
         $offset = ($page - 1 ) * NUM_PER_PAGE;
+        if ($offset < 0)
+            $offset = 0;
         $num = NUM_PER_PAGE;
         $sql = $model->select()
                 ->setIntegrityCheck(false)
@@ -143,24 +147,32 @@ class PostModel extends Zend_Db_Table_Abstract {
     public static function getPageOfUser($id, $page) {
         $model = new PostModel();
         $offset = ($page - 1) * NUM_PER_PAGE;
+        if ($offset < 0)
+            return array();
+//        die($offset);
         $sql = $model->select()
                 ->setIntegrityCheck(false)
-                ->from('post')
-                ->join("user", "user.uid=post.uid", array("username", "avatar"))
+                ->from(array("p" => "post"), array("p.*",
+                    'comment' => '(' . new Zend_Db_Expr('select count(*) from comment where comment.pid = p.pid') . ')',
+                    'num_like' => '(' . new Zend_Db_Expr('select count(*) from `like` where `like`.`targetId` = p.pid') . ')'
+                ))
+                ->join("user", "user.uid=p.uid", array("username", "avatar"))
                 ->where("user.uid=?", $id)
-                ->order("post.date-created desc")
+                ->order("p.date-created desc")
                 ->limit(NUM_PER_PAGE, $offset);
 
         return $model->fetchAll($sql);
     }
-    public static function getTotalPageOfUser($uid){
+
+    public static function getTotalPageOfUser($uid) {
         $model = new PostModel();
         $sql = $model->select()
-                    ->from("post",array("count" => "count(*)"))
-                    ->where("uid = ?", $uid);
+                ->from("post", array("count" => "count(*)"))
+                ->where("uid = ?", $uid);
         $r = $model->fetchRow($sql);
         return $r['count'];
     }
+
     public static function getPreviousPostId($id) {
         $model = new PostModel();
         $sql = $model->select()

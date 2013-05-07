@@ -3,7 +3,7 @@
 class TimeUtil {
 
     public static function calRelativeTime($ts) {
-
+        $tm = $ts;
         if (!ctype_digit($ts))
             $ts = strtotime($ts);
 
@@ -30,7 +30,8 @@ class TimeUtil {
                 return "cách đây ".$day_diff . ' ngày';
             
             //else return date
-            return $ts;
+            $datetime = new DateTime($tm);
+            return "Vào ".$datetime->format("d/m/Y");
 //            
 //            if ($day_diff < 31)
 //                return "cách đây ". ceil($day_diff / 7) . ' tuần';

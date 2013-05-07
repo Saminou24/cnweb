@@ -23,6 +23,7 @@ class UploaderController extends Cab_Controller_Action {
 
         //set uploader_loader mode
         $this->view->mode = "uploader";
+        $this->view->page = $page;
         if ($act == "display") {
             if (!is_numeric($id) || !is_numeric($page))
                 $message[] = "Trang bạn yêu cầu không tồn tại";
@@ -67,6 +68,7 @@ class UploaderController extends Cab_Controller_Action {
 
                     //add show Scroll effect to layout
                     $this->view->scroll_script_include = true;
+                    $this->view->show_toolbar = true;
 //         $this->view->menu_include = true;
                 }
             }

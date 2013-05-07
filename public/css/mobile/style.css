@@ -45,11 +45,24 @@ body,html{
     padding: 10px 10px 10px 50px;
 }
 #suggest-container{
+    display: none;
     position: fixed;
     top: 5rem;
+    bottom: 0;
     right: 0px;
+    z-index: 32;
+    background: #fff;
 
 } 
+#suggest-list-result {
+    width: 100%;
+    border-top: 1px solid #000;
+}
+#hide-search {
+    width: 100px;
+    margin: 10px;
+    background:#a6a6a6;
+}
 #suggest-container ul {
     background: #ddd;
 }
@@ -137,7 +150,7 @@ section[role='region'] {
     height: 100%;
     bottom: 4rem;
     top: 5rem;
-/*    z-index: 100;*/
+    /*    z-index: 100;*/
 }
 #plugin-content > * {
     // conmargin-right: 5.5rem;
@@ -146,8 +159,8 @@ section[role='region'] {
 
 }
 #plugin-facebook {
+    position: fixed;
 
-    
 }
 #plugin-content-cover {
     position: fixed;
@@ -374,8 +387,8 @@ form label {
     position: relative;
     /*    padding: 20px 0 20px 20px;*/
     background: #ddd; 
-/*    min-height: 200px;*/
-/*    padding: 50px 0 50px 0;*/
+    /*    min-height: 200px;*/
+    /*    padding: 50px 0 50px 0;*/
     border-bottom: 1px solid #888;
 }
 .post-image {
@@ -438,16 +451,10 @@ form label {
     background : -linear-gradient(top, rgb(255, 255, 255) 00%, rgba(255, 255, 255,0.1) 99%);
 }
 .post-video {
-}
-.video-indicator{
-    width: 100%;
-    height: 100%;
     background: url(/images/icon/b_video.png) no-repeat;
     background-position: 50% 50%;
-    position: absolute;
-    top: 0;
-    left: 0;
-}
+}s
+
 .post-like {
     background: url(/images/icon/b_like.png) no-repeat;
     padding-left: 16px;

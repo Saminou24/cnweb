@@ -9,7 +9,7 @@ class SearchController extends Cab_Controller_Action {
 
     public function indexAction() {
         $this->_response->setHeader("content-type", "text/html;charset=utf-8");
-        $q = htmlentities($this->_request->getParam('q'));
+        $q = htmlentities(trim($this->_request->getParam('q')));
         $q = str_replace("+", " ", $q); //change + as space
         $query = PostModel::normalizeName($q);
         //open search engine
@@ -20,10 +20,10 @@ class SearchController extends Cab_Controller_Action {
                 <header><span style='color:#000;font-size:2rem;font-weight:bold;'>" . count($result) . "</span> kết quả được tìm thấy</header>";
         ;
         foreach ($result as $r) {
-            $hlText = $this->highlight($q, " " . $r->title);
+//            $hlText = $this->highlight($q, " " . $r->title);
             echo '<li>
                         <a href="' . $r->link . '">
-                            <p>   ' . $hlText . '</p>
+                            <p>   ' . stripslashes($r->title) . '</p>
                              <p></p>
                         </a>
                   </li>';
