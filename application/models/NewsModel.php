@@ -1,6 +1,6 @@
 <?php
 
-class Admin_Model_News extends Zend_Db_Table_Abstract {
+class NewsModel extends Zend_Db_Table_Abstract {
 
     protected $_name = "news";
     protected $_primary = "id";
@@ -19,8 +19,7 @@ class Admin_Model_News extends Zend_Db_Table_Abstract {
     }
 
     public function updateNews($id, $data) {
-        $this->update($data, "id=" . $id."");
-        return 1;
+        $this->update($data, "id=$id");
     }
 
     public function getNews($id) {

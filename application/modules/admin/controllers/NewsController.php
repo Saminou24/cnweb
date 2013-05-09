@@ -3,12 +3,15 @@
 class Admin_NewsController extends Cab_Controller_Action {
 
     public function init() {
-        $this->view->headTitle("Quản lý thông báo");
+        $this->view->headTitle("Quản lý tin tức");
+        
         Zend_Layout::getMvcInstance()->setLayout("admin");
+        $session = new Zend_Session_Namespace('user');
     }
 
     public function preDispatch() {
-        //Zend_Layout::getMvcInstance()->setLayout("admin");
+//        if (!$session->isAdmin)
+//            $this->redirect ("/user/login?redirect=/admin/index");
     }
 
     public function indexAction() {
@@ -32,6 +35,7 @@ class Admin_NewsController extends Cab_Controller_Action {
     }
 
     public function previewAction() {
+        Zend_Layout::getMvcInstance()->setLayout("mobile");
         $id = $this->_request->getParam('id');
         $message = array();
         if (!is_numeric($id))
@@ -92,15 +96,14 @@ class Admin_NewsController extends Cab_Controller_Action {
                 if ($form->isValid($_POST)) {
                     $title = $request->getParam("title");
                     $content = $request->getParam("content");
-                    $date = date('Y-m-d H:i:s');
-
-
+                    
                     $status = $model->updateNews($id, array(
                         'title' => $title,
                         'content' => $content
                     ));
-                    if (!$status)
-                        $message[] = "Đã có lỗi xảy ra vui lòng kiểm tra lại!";
+                    $this->view->success = true;
+//                    if (!$status)
+//                        $message[] = "Đã có lỗi xảy ra vui lòng kiểm tra lại!";
                 }
             }
         }

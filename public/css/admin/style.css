@@ -8,6 +8,7 @@
 body {
     margin: 0px;
     font-family: "Lucida Grande", Verdana, sans-serif;
+    background: #f0f0f0;
 }
 #header {
     width: 100%;
@@ -16,7 +17,7 @@ body {
     padding: 0px;
 }
 #header-wrap{
-    width: 920px;
+    width: 995px;
     margin: 0 auto; 
     position: relative;
     padding: 0px;
@@ -25,6 +26,7 @@ body {
     position: relative;
     float: left;
     height: 100%;
+    padding: 20px;
 }
 #search-form {
     position: relative;
@@ -64,19 +66,23 @@ p > input[type='text'] {
     position: relative;
     float: left;
     display: block;
-    width: 1px;
+    width: 0px;
     margin: 0 10px;
-    background: #7d3807;
-    height: 3rem;
-    border-right: 1px solid #fce1ce;
+    height: 2rem;
+    border-right: 1px solid #fff;
 }
 #menu {
     position: relative;
     float: right;
     margin: 0;
-    border-right: 1px solid #fce1ce;
-    padding: 0px;
+    
+    padding: 10px;
     height: 50px;
+}
+#menu a {
+    margin: 0 5px 0 5px;
+    border-left: 1px solid #fce1ce;
+    padding: 5px;
 }
 #menu-button {
     width: 50px;
@@ -98,15 +104,23 @@ p > input[type='text'] {
 }
 
 #main {
-    width: 920px;
+    width: 995px;
     margin: 30px auto;
 
+}
+
+#menu a, #panel a{
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
 }
 #content {
     position: relative;
     width: 650px;
     border: 1px solid #7c7c7c;
-    background: #f2f6fc;
+    background: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 3px #aaa;
     float: left;
     padding: 40px 20px 20px 20px;
     margin: 0 20px 0 0;
@@ -118,8 +132,8 @@ p > input[type='text'] {
     border: 1px solid #7c7c7c;
     position: relative;
     float: right;
-    background: #7ba5e4;
-    width: 200px;
+    background: #4D4E53;
+    width: 250px;
     margin: 0px;
     padding: 0px;
 }

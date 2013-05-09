@@ -12,9 +12,9 @@ if ($this->menu_include) {
                     echo
                     '<a href="/user/message" style="padding:0">
                         <button style="background: url(/images/icon/b_message.png) no-repeat;margin-top: 1rem;margin-left:1rem;margin-right:0;">';
-                    if ($this->unread_message)
-                            echo '<span style="font-size: 1.5rem;background:#ff0000;padding:0 3px;">' . $this->unread_message . '</span>';
-                    echo'</button>
+                if ($this->unread_message)
+                    echo '<span style="font-size: 1.5rem;background:#ff0000;padding:0 3px;">' . $this->unread_message . '</span>';
+                echo'</button>
                      </a>';
                 ?>
                 <button id = 'menu-btn'><span class = "icon <?php
@@ -53,9 +53,12 @@ if ($this->menu_include) {
             if ($session->username != null)
                 echo
                 "<h2>Xin chào <strong>" . $session->username . "</strong></h2>
-        <ul>
-            <li><a href='/uploader/" . $session->uid . "/'>Trang cá nhân</a></li>
-            <li><a href='/user/profile'>Thay đổi thông tin cá nhân</a></li>
+        <ul>";
+            if ($session->isAdmin)
+                echo "<li><a href='/admin/index'>Trang Admin</a></li>";
+            if ($session->username)
+                echo
+                "<li><a href='/user/profile'>Thay đổi thông tin cá nhân</a></li>
             <li><a href='/uploader/" . $session->uid . "'>Danh sách bài viết </a></li>
                 
             <li><a href='/upload/index'> Đăng bài mới </a></li>

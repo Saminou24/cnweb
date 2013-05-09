@@ -3,6 +3,7 @@
 class Admin_IndexController extends Zend_Controller_Action {
     public function init() {
         Zend_Layout::getMvcInstance()->setLayout("admin");
+        $this->view->headTitle("Trang admin");
     }
 
     public function indexAction(){

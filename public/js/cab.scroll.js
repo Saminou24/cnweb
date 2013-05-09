@@ -7,10 +7,10 @@ $(document).scroll(function(e) {
         cab.current_seg_page++;
 //        alert(cab.current_seg_page)
         var pageId = $('#page_id').val();
-        var p = 1.0 * pageId +  cab.current_seg_page;
+        var p = 1.0 * pageId + cab.current_seg_page;
 //        var sort;
 
-        if (p <= cab.SEG_PER_PAGE + 3) {
+        if (cab.current_seg_page <= cab.SEG_PER_PAGE) {
             $('#loading').show();
             if (location.href.match(/^http(s)?:\/\/[^\/]+\/uploader\/.*/)) {
                 var uid = location.href.substr(location.href.search("uploader")).split("/")[1].split("?")[0];
@@ -48,13 +48,13 @@ $(document).scroll(function(e) {
 //                alert(url[1])
 //
 //            }
-            if (p == cab.SEG_PER_PAGE + 3) {
-                alert("show button");
-                if (cab.sort == "userpost")
-                    $('#content').html($('#content').html() + "<a role='button' href='" + location.href + "?page=" + p + "'>Trang tiếp theo </a>");
-                else
-                    $('#content').html($('#content').html() + "<a role='button' href='/" + cab.sort + "/index/page/" + p + "'>Trang tiếp theo </a>");
-            }
+
+        } else if (cab.current_seg_page == cab.SEG_PER_PAGE + 1) {
+            alert("show button");
+            if (cab.sort == "userpost")
+                $('#content').append("<a role='button' style='z-index: 100' href='" + location.href + "?page=" + p + "'>Trang tiếp theo </a>");
+            else
+                $('#content').append("<a role='button' style='z-index: 100' href='/" + cab.sort + "/index/page/" + p + "'>Trang tiếp theo </a>");
         }
 
     }

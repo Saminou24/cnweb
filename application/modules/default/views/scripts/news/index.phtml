@@ -1,0 +1,16 @@
+<div style='padding:15px;'>
+<?php
+    $this->headTitle("Tin tức");
+
+if ($this->data){
+    }
+if ($this->data){
+    echo "<h2 class='news-title'>".$this->data['title']."</h2>";
+    echo "<div class='news-date'>".explode(" ",$this->data['date_created'])[0]."</div>";
+    echo "<div class='news-content'>".html_entity_decode($this->data['content'])."</div>";
+}
+else
+    echo "<div>Trang không tồn tại!</div>";
+
+?>
+</div>

@@ -23,39 +23,50 @@ class SuggestController extends Zend_Controller_Action {
 
 
         
-        $query =  PostModel::normalizeName($rawQuery);
+        $query =  preg_replace('!\s+!', " ",PostModel::normalizeName($rawQuery));
 //        die(strlen($query));
 //        $last = explode(" ", $query);
 //        $last = $last[count($last) - 1];
         
-        if (strlen($query) >= 3)
-            $query .= "*"; //use regex
+//        if (strlen($query) >= 2)
+//            $query .= "*"; //use regex
         $index = Zend_Search_Lucene::open("post");
-        $result = $index->find($query);
+        $result = $index->find("keyword".$query);
 
         // echo count($result) . " Kết quả được tìm thấy :<br/>";
         echo "<ul  data-type='edit'>";
         foreach ($result as $r) {
-            $hlText = $this->highlight($rawQuery, " " . $r->title);
-            $query = preg_replace('!\s+!', "+", $r->title);
+            $hlText = $this->highlight($query,$r->keyword, $r->title);
+//            die($hlText);
+            $query_url = htmlspecialchars(preg_replace('!\s+!', "+", $r->title));
 //            die($query);
             echo '<li>
-                        <a href="/search/?q=' . $query . '"><p>   ' . $hlText . '</p></a>
+                        <a href="/search/?q=' . $query_url . '"><p>   ' . $hlText . '</p></a>
                   </li>';
         }
         echo "</ul>";
     }
 
-    public function highlight($query, $str) {
-        $hl = explode(" ", $query);
-
-        foreach ($hl as $t) {
-            // echo "highlight for ".$t." in".$str."</br>/$t/i";
-            if (strlen($t) > 0)
-//                str_replace($t, "<strong>".$t."</strong>", $str);
-                $str = preg_replace("/ $t/i", "<strong class='keyword'> $t</strong>", $str);
+    public function highlight($query, $str1,$str2) {
+        $hl = explode(" ", strtolower($query));
+        $replaceArr = explode(" ", $str2);
+        
+        $str1 = explode(" ", strtolower($str1));
+        foreach ($hl as $i=>$t) {
+            while (($pos = array_search($t, $str1))!== FALSE){
+//                   echo ("replace");
+                $str1[$pos] = "<strong class='keyword'>".$replaceArr[$pos]."</strong>";
+            }
         }
-        return $str;
+        return implode(" ", $str1);
+//        foreach ($hl as $i=>$t) {
+//            // echo "highlight for ".$t." in".$str."</br>/$t/i";
+//            if (strlen($t) > 0) {
+////                str_replace($t, "<strong>".$t."</strong>", $str);
+//                $str = preg_replace("/ $t/i", "<strong class='keyword'> $replaceArr[$i]</strong>", $str1);
+//            }
+//        }
+//        return $str;
     }
 
 }

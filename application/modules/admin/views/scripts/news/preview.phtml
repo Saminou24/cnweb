@@ -1,3 +1,4 @@
+<div style='padding:15px;'>
 <?php
 if (count($this->message)) {
     echo "<div class='error'><span class='close'></span>";
@@ -7,9 +8,9 @@ if (count($this->message)) {
     echo "</div>";
 }
 if ($this->data){
-    echo "<h2 class='news-title'>".$this->data['title']."</h2>";
+    echo "<h2 class='news-title'>".html_entity_decode($this->data['title'])."</h2>";
     echo "<div class='news-date'>".explode(" ",$this->data['date_created'])[0]."</div>";
-    echo "<div class='news-content'>".$this->data['content']."</div>";
+    echo "<div class='news-content'>".html_entity_decode($this->data['content'])."</div>";
 }
 ?>
 </div>

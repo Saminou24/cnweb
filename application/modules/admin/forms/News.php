@@ -1,9 +1,10 @@
 <?php
+
 class Admin_Form_News extends Zend_Form {
+
     public function init() {
-        $this->setAction("/admin/news/add")
-                ->setMethod("POST");
-        
+        $this->setMethod("POST");
+
         $title = new Zend_Form_Element_Text('title');
         $title->setLabel("Tiêu đề : ")
                 ->setRequired();
@@ -19,6 +20,6 @@ class Admin_Form_News extends Zend_Form {
         $this->addElement($title)
                 ->addElement($content)
                 ->addElement($submit);
-                
     }
+
 }

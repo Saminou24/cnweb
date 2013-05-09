@@ -7,6 +7,7 @@ class HotController extends Cab_Controller_Action {
         Zend_Loader::loadClass("TimeUtil");
         Zend_Loader::loadClass("LikeModel");
         Zend_Loader::loadClass("MessageModel");
+        Zend_Loader::loadClass("NewsModel");
     }
 
     public function indexAction() {
@@ -45,8 +46,13 @@ class HotController extends Cab_Controller_Action {
             $message['like_status'] = $likeStatus;
             //   print_r($message['content']);
         }
+
+        $newsModel = new NewsModel();
+        $news = $newsModel->getAllNews();
+        $this->view->news = $news;
         $this->view->message = $message;
         $this->view->page = $page;
+
 
         //add show Scroll effect to layout
         $this->view->scroll_script_include = true;

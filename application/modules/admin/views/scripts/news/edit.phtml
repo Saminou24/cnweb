@@ -7,6 +7,9 @@ if (count($this->message) > 0) {
     }
     echo "</section>";
 }
-
-echo $this->form;
+if ($this->status){
+    echo "<section rol='info'>
+        <span class='close'></span> Đã cập nhật thành công</section>";
+}
+    echo $this->form;
 echo "<a href='/admin/news/'><< Trở về trang trước</a>";

@@ -14,7 +14,7 @@ class SearchController extends Cab_Controller_Action {
         $query = PostModel::normalizeName($q);
         //open search engine
         $index = Zend_Search_Lucene::open("post");
-        $result = $index->find($query);
+        $result = $index->find("keyword:".$query);
 
         echo "<section data-type='list'><ul   id='search-result-list'>
                 <header><span style='color:#000;font-size:2rem;font-weight:bold;'>" . count($result) . "</span> kết quả được tìm thấy</header>";

@@ -5,6 +5,15 @@ $message = $this->message;
 if ($message['error'] != null)
     echo "Error " . $message['error'];
 
+$news = $this->news;
+foreach ($news as $n) {
+    ?>
+    <div class='news'>
+        <span class='close'></span>
+        <div><?php echo html_entity_decode($n->title); ?></div> <a href='/news/index/id/<?php echo $n->id ?>'>xem tiếp>></a> 
+    </div>
+    <?php
+}
 if ($message['content']) {
     foreach ($message['content'] as $i => $info) {
         $relative_time = $message['relative_time'][$i];
