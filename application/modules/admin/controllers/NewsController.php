@@ -4,14 +4,18 @@ class Admin_NewsController extends Cab_Controller_Action {
 
     public function init() {
         $this->view->headTitle("Quản lý tin tức");
-        
+
         Zend_Layout::getMvcInstance()->setLayout("admin");
         $session = new Zend_Session_Namespace('user');
     }
 
     public function preDispatch() {
-//        if (!$session->isAdmin)
-//            $this->redirect ("/user/login?redirect=/admin/index");
+        $session = new Zend_Session_Namespace("user");
+        if (!$session->username)
+            $this->redirect("/user/login?redirect=/admin/index");
+        else
+        if (!$session->isAdmin)
+            $this->redirect("/");
     }
 
     public function indexAction() {
@@ -96,7 +100,7 @@ class Admin_NewsController extends Cab_Controller_Action {
                 if ($form->isValid($_POST)) {
                     $title = $request->getParam("title");
                     $content = $request->getParam("content");
-                    
+
                     $status = $model->updateNews($id, array(
                         'title' => $title,
                         'content' => $content

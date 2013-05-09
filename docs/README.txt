@@ -28,3 +28,12 @@ The following is a sample VHOST you might want to consider for your project.
    </Directory>
 
 </VirtualHost>
+
+====================================
+- Thêm cơ sở dữ liệu bằng cách import cơ sở dữ liệu từ file cnweb_sql_update.sql vào 
+- Sửa cấu hình host ảo như trên
+- Chỉnh lại thông tin trong file application/configs/application.ini tại
+resources.db.params.dbname= cnweb
+resources.db.params.username=root 
+resources.db.params.password=something
+trong đó cnweb, root, something lần lưọt là tên cơ sở dữ liệu, tên tài khoản, mật khẩu

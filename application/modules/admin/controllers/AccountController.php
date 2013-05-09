@@ -4,6 +4,13 @@ class Admin_AccountController extends Cab_Controller_Action {
 
     public function preDispatch() {
         Zend_Layout::getMvcInstance()->setLayout("admin");
+        $session = new Zend_Session_Namespace("user");
+        if (!$session->username)
+            $this->redirect("/user/login?redirect=/admin/index");
+        else
+        if (!$session->isAdmin)
+            $this->redirect ("/");
+
     }
 
     public function indexAction() {

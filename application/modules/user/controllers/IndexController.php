@@ -115,7 +115,7 @@ class User_IndexController extends Cab_Controller_Action {
             //get new name of file
             $name;
             try {
-                var_dump($upload->getFileName());
+//                var_dump($upload->getFileName());
 
 
                 if ($upload->isUploaded()) {
@@ -129,7 +129,7 @@ class User_IndexController extends Cab_Controller_Action {
 //                            ->addFilter(ResizeFilter::getSmallFilter());
 //                    $upload->addFilter("Rename", array("target" => UPLOAD_PATH. "/medium/". $name, "overwrite"=> true));
 //                            ->addFilter(ResizeFilter::getMediumFilter());
-                    echo UPLOAD_PATH . "/avatar/" . $name;
+//                    echo UPLOAD_PATH . "/avatar/" . $name;
                     $info = $request->getParam("info");
                     if ($upload->receive()) {
                         //insert into database
@@ -191,7 +191,7 @@ class User_IndexController extends Cab_Controller_Action {
                     $to = $msgData['from'];
                     $uid_to = $msgData['uid_from'];
                 }
-              Zend_Debug::dump($mid);
+//              Zend_Debug::dump($mid);
                 if ($request->isPost() && is_numeric($mid)) {
 
                     $msg = $request->getParam("msg");
