@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 06, 2013 at 11:41 AM
+-- Generation Time: May 09, 2013 at 03:19 PM
 -- Server version: 5.5.29
 -- PHP Version: 5.4.6-1ubuntu1.2
 
@@ -33,7 +33,7 @@ CREATE TABLE IF NOT EXISTS `comment` (
   `uid` int(11) NOT NULL,
   `date_created` datetime NOT NULL,
   PRIMARY KEY (`cid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=25 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=27 ;
 
 --
 -- Dumping data for table `comment`
@@ -58,7 +58,9 @@ INSERT INTO `comment` (`cid`, `pid`, `comment`, `uid`, `date_created`) VALUES
 (21, 155, 'dfsfjsf àlas', 3, '2013-05-05 19:36:00'),
 (22, 155, 'ssssssssssssssssssssssssss', 3, '2013-05-05 19:36:03'),
 (23, 91, 'jflsadfa', 3, '2013-05-05 21:18:43'),
-(24, 158, 'MacOs đẹp quá', 3, '2013-05-05 22:43:25');
+(24, 158, 'MacOs đẹp quá', 3, '2013-05-05 22:43:25'),
+(25, 145, 'Thưòng thôi llllllllll', 3, '2013-05-06 23:10:13'),
+(26, 158, 'Chuẩn không cần chỉnh ...', 3, '2013-05-07 09:11:43');
 
 -- --------------------------------------------------------
 
@@ -79,8 +81,11 @@ CREATE TABLE IF NOT EXISTS `like` (
 
 INSERT INTO `like` (`uid`, `targetId`, `type`) VALUES
 (3, 132, 'photo'),
+(3, 152, 'photo'),
+(3, 154, 'photo'),
 (3, 155, 'photo'),
 (3, 158, 'photo'),
+(3, 159, 'photo'),
 (10, 157, 'photo');
 
 -- --------------------------------------------------------
@@ -99,7 +104,7 @@ CREATE TABLE IF NOT EXISTS `message` (
   `date_created` datetime NOT NULL,
   `read` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`mid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=48 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=53 ;
 
 --
 -- Dumping data for table `message`
@@ -151,7 +156,12 @@ INSERT INTO `message` (`mid`, `mid_parent`, `uid_from`, `uid_to`, `title`, `mess
 (44, 43, 3, 10, '', 'sòmd fjslfj', '2013-05-05 19:31:23', 1),
 (45, 43, 10, 3, '', 'gggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggggg', '2013-05-05 19:33:07', 1),
 (46, 43, 10, 3, '', 'hhhhhhhhhhhhh', '2013-05-05 19:33:13', 1),
-(47, 43, 10, 3, '', 'fdsfsfsgsgs', '2013-05-05 19:34:18', 0);
+(47, 43, 10, 3, '', 'fdsfsfsgsgs', '2013-05-05 19:34:18', 1),
+(48, 48, 3, 3, 'HI tuấn', 'Xin chào', '2013-05-07 08:01:27', 1),
+(49, 49, 3, 3, 'I cloud ', 'some thing happen', '2013-05-07 08:02:06', 1),
+(50, 49, 3, 3, '', 'ok bay be', '2013-05-07 08:03:39', 1),
+(51, 51, 10, 3, 'Xin chào tuấn', 'Rất vui được gặp bạn ....', '2013-05-07 09:15:29', 1),
+(52, 51, 3, 10, '', 'jkfsjdfs', '2013-05-07 12:11:37', 0);
 
 -- --------------------------------------------------------
 
@@ -161,40 +171,18 @@ INSERT INTO `message` (`mid`, `mid_parent`, `uid_from`, `uid_to`, `title`, `mess
 
 CREATE TABLE IF NOT EXISTS `news` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `content` varchar(500) NOT NULL,
+  `content` varchar(5000) NOT NULL,
   `date_created` datetime NOT NULL,
   `title` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=33 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=47 ;
 
 --
 -- Dumping data for table `news`
 --
 
 INSERT INTO `news` (`id`, `content`, `date_created`, `title`) VALUES
-(4, 'Hiện tại chúng tôi đang thêm', '0000-00-00 00:00:00', 'Tuy?n thành viên ban qu?n tr?'),
-(5, 'test thôi nào', '0000-00-00 00:00:00', 'không có gì'),
-(6, 'Không có gì ?âu :)', '0000-00-00 00:00:00', 'C?m ?n các b?n ?ã ?óng góp'),
-(10, 'Không có gì ?âu :)', '0000-00-00 00:00:00', 'C?m ?n các b?n ?ã ?óng góp'),
-(13, '<p>Ch&uacute;ng t&ocirc;i ?ang c?n t&igrave;m th&ecirc;m th&agrave;nh vi&ecirc;n ban qu?n tr? m?i</p>\r\n', '0000-00-00 00:00:00', 'Tuy?n thành viên ban qu?n tr?'),
-(14, '<p>Tuy?n th&agrave;nh vi&ecirc;n ban qu?n tr?</p>\r\n', '0000-00-00 00:00:00', 'Tuy?n thành viên ban qu?n tr?'),
-(15, '<p>KH&ocirc;ng c&oacute; g&igrave; test ti?g vi?t th&ocirc;i</p>\r\n', '0000-00-00 00:00:00', 'C?m ?n các b?n ?ã ?óng góp'),
-(16, '<p>Test ti?ng vi?t th&ocirc;i</p>\r\n', '0000-00-00 00:00:00', 'C?m ?n các b?n ?ã ?óng góp'),
-(17, 'Tuy?n thành viên ban qu?n tr?', '0000-00-00 00:00:00', 'Tuy?n thành viên ban qu?n tr?'),
-(18, 'Mau ??ng ký thành viên ?? tr? thành ', '0000-00-00 00:00:00', 'Tuy?n thành viên ban qu?n tr?'),
-(19, 'Không có n?i dung nào', '0000-00-00 00:00:00', 'C?m ?n các b?n ?ã ?óng góp'),
-(20, '<p>jsfasjflasjfklasj</p>\r\n', '0000-00-00 00:00:00', 'C?m ?n các b?n ?ã ?óng góp'),
-(21, '<p>fajskfjaskljdfsksjfklasjflajslfjaslfasjfla</p>\r\n', '0000-00-00 00:00:00', 'C?m ?n các b?n ?ã ?óng góp'),
-(22, '<p>fsjfkljsadfkasj</p>\r\n', '0000-00-00 00:00:00', 'C?m ?n các b?n ?ã ?óng góp'),
-(23, '<p>Update th? ti?ng vi?t xem c&oacute; ?n kh&ocirc;ng</p>\r\n', '0000-00-00 00:00:00', 'fsdfa'),
-(24, '<p>fjskfjsakfa</p>\r\n', '0000-00-00 00:00:00', 'ti?ng vi?t'),
-(25, '<p>fjskfjsakfa</p>\r\n', '0000-00-00 00:00:00', 'tiếng việt'),
-(26, '<h2><strong>Thử t&iacute; ti&ecirc;ng việt th&ocirc;i</strong></h2>\r\n', '0000-00-00 00:00:00', 'Cảm ơn các bạn đã đóng góp'),
-(27, '<p>Kh&ocirc;ng c&oacute; g&igrave; đ&acirc;u :)</p>\r\n', '0000-00-00 00:00:00', 'Lại cảm ơn nữa'),
-(29, '<p>Cảm ơn rất nhiều nh&eacute;</p>\r\n', '0000-00-00 00:00:00', 'Cảm ơn các bạn đã đóng góp'),
-(30, '<p>Kh&ocirc;ng c&oacute; g&igrave; phải cảm ơn đ&acirc;u :)</p>\r\n', '2013-04-24 22:54:56', 'Cảm ơn các bạn đã đóng góp'),
-(31, '<p>Ch&agrave;o mừng bạn đ&atilde; đến với cab.vn</p>\r\n', '2013-04-24 22:56:59', 'Xin chào cab.vn'),
-(32, '<p>fajskfjaskljdfsksjfklasjflajslfjaslfasjfla</p>\r\n', '2013-04-24 23:06:42', 'Cảm ơn các bạn đã đóng góp');
+(45, '<p>&lt;p&gt; Ch&agrave;o mừng c&aacute;c bạn đ&atilde; đến với ch&uacute;ng t&ocirc;i. Ch&uacute;c c&aacute;c bạn c&oacute; những gi&acirc;y ph&uacute;t vui vẻ v&agrave; bổ &iacute;ch với ch&uacute;ng t&ocirc;i&lt;/p&gt;</p>\r\n', '2013-05-09 00:33:40', 'Chào mừng bạn đã đến vơi Epic.vn');
 
 -- --------------------------------------------------------
 
@@ -210,7 +198,7 @@ CREATE TABLE IF NOT EXISTS `post` (
   `name` varchar(100) NOT NULL,
   `date-created` datetime DEFAULT NULL,
   PRIMARY KEY (`pid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=159 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=162 ;
 
 --
 -- Dumping data for table `post`
@@ -232,7 +220,10 @@ INSERT INTO `post` (`pid`, `uid`, `title`, `type`, `name`, `date-created`) VALUE
 (155, 3, 'Just the way you are :)', 'video', 'LjhCEhWiKXk', '2013-04-29 16:57:22'),
 (156, 3, 'Pattern', 'photo', 'M18xMzY3MzA1OTM1.jpg', '2013-04-30 14:12:15'),
 (157, 10, 'I\\''m yours', 'video', 'LYhrYHmUPn0', '2013-04-30 22:53:51'),
-(158, 3, 'Giao diện macos cực đẹp', 'photo', 'M18xMzY3NzYxNDQ4.jpg', '2013-05-05 20:44:08');
+(158, 3, 'Giao diện macos cực đẹp', 'photo', 'M18xMzY3NzYxNDQ4.jpg', '2013-05-05 20:44:08'),
+(159, 3, 'b&agrave;i đầu tay n&agrave;o ', 'video', 'u7vzicDQJ4k', '2013-05-07 09:14:23'),
+(160, 3, 'Thốn qu&aacute; ..', 'photo', 'M18xMzY4MDg3Mjgz.jpg', '2013-05-09 15:14:43'),
+(161, 3, 'Th&aacute;p nước ph&aacute;t quang', 'photo', 'M18xMzY4MDg3NDQy.jpg', '2013-05-09 15:17:22');
 
 -- --------------------------------------------------------
 
@@ -259,7 +250,7 @@ CREATE TABLE IF NOT EXISTS `user` (
 --
 
 INSERT INTO `user` (`uid`, `password`, `email`, `info`, `username`, `active`, `admin`, `ban_reason`, `date_created`, `avatar`) VALUES
-(3, 'icloud', 'newvalue92@gmail.com', 'Tôi là tuấn :)', 'newvalue', 1, 1, NULL, '2013-04-09', 'M19hdmF0YXJfMTM2NzMwNzEzNw==.jpg'),
+(3, 'icloud', 'newvalue92@gmail.com', 'Nothing is imposible ...', 'newvalue', 1, 1, NULL, '2013-04-09', 'M19hdmF0YXJfMTM2NzMwNzEzNw==.jpg'),
 (5, 'nothing', 'kho@gmail.com', 'jfksf', 'testuser', 1, 0, NULL, '0000-00-00', 'no-avatar.jpg'),
 (6, 'icloud', 'khongcoai@gmail.com', 'thong tin tài kho?n', 'something', 1, 0, NULL, '0000-00-00', 'no-avatar.jpg'),
 (7, 'fsdfsf', 'ffsfsf@gmail.com', 'fsfas', 'fdfsfs', 1, 0, NULL, '0000-00-00', 'no-avatar.jpg'),
