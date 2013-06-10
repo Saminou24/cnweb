@@ -1,7 +1,7 @@
 cnweb
 =====
 
-This is a small project at school. I used Firefox OS to make mobile layout
+This is a small project at school. I used Firefox OS UI to make mobile layout
 <br/>
 For more information about Firefox OS UI, you can find at :
 http://buildingfirefoxos.com/
