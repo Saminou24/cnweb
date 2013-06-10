@@ -129,7 +129,7 @@ class User_IndexController extends Cab_Controller_Action {
 //                            ->addFilter(ResizeFilter::getSmallFilter());
 //                    $upload->addFilter("Rename", array("target" => UPLOAD_PATH. "/medium/". $name, "overwrite"=> true));
 //                            ->addFilter(ResizeFilter::getMediumFilter());
-//                    echo UPLOAD_PATH . "/avatar/" . $name;
+//                     echo UPLOAD_PATH . "/avatar/" . $name;
                     $info = $request->getParam("info");
                     if ($upload->receive()) {
                         //insert into database
@@ -168,6 +168,7 @@ class User_IndexController extends Cab_Controller_Action {
         if (!$session->uid)
             $this->redirect("/user/login?redirect=/user/message");
         $model = new MessageModel();
+        $userModel = new UserModel();
         $request = $this->getRequest();
         $act = $request->getParam("act", "display");
         $uid = $session->uid;
@@ -182,14 +183,19 @@ class User_IndexController extends Cab_Controller_Action {
             case "show_detail":
                 $mid = $request->getParam("mid");
                 $msgData = $model->getFirstMessages($mid);
+
+                //get user infro
+                $me = $userModel->getUserData($uid);
                 if ($msgData['uid_from'] == $uid) {
-                    $from = $msgData['from'];
-                    $to = $msgData['to'];
+//                    $friend_name = $msgData['to'];
+//                    $friend_avatar = $msgData['avatar_to'];
+                    $friend = $userModel->getUserData($msgData['uid_to']);
                     $uid_to = $msgData['uid_to'];
                 } else {
-                    $from = $msgData['to'];
-                    $to = $msgData['from'];
-                    $uid_to = $msgData['uid_from'];
+//                    $friend_name= $msgData['from'];
+//                    $friend_avatar = $msgData['avatar_from'];
+                    $friend = $userModel->getUserData($msgData['uid_from']);
+                     $uid_to = $msgData['uid_from'];
                 }
 //              Zend_Debug::dump($mid);
                 if ($request->isPost() && is_numeric($mid)) {
@@ -210,14 +216,16 @@ class User_IndexController extends Cab_Controller_Action {
                             $this->view->status = "success";
                     }
                 }
-                
+
                 //get all message content
                 $data = $model->getChildMessages($mid);
-                
+
                 //mark read message
                 $model->markReadMessage($uid, $mid);
                 $this->view->data = $data;
                 $this->view->uid = $uid;
+                $this->view->friend = $friend;
+                $this->view->me = $me;
                 if (!$this->view->status)
                     $this->view->status = "error";
 //                $class = array();
@@ -227,6 +235,7 @@ class User_IndexController extends Cab_Controller_Action {
 //                Zend_Debug::dump($data);
                 //set back_link
                 $this->view->back_link = "/user/message";
+                $this->view->message = $message;
                 break;
         }
         $this->view->act = $act;

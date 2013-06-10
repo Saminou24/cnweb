@@ -14,8 +14,8 @@ switch ($this->act) {
                 </aside>
                 <p <?php if ($m['unread']) echo 'class="unread"' ?>><?php
                     echo $m['title'];
-                    if ($m['unread']) 
-                        echo " (".$m['unread'].")";
+                    if ($m['unread'])
+                        echo " (" . $m['unread'] . ")";
                     ?></p>
                 <p><?= $m['date_created'] ?></p>
             </li>
@@ -28,6 +28,10 @@ switch ($this->act) {
             echo "<div class='" . $this->status . "'><span class='close'></span>" . implode("<br/>", $this->message) . "</div>";
         $data = $this->data;
         $uid = $this->uid;
+        $me = $this->me;
+        $friend = $this->friend;
+        echo "<div style='margin-bottom:70px;padding:10px;'><div style='float:left'><img width='60px' height='60px' src='/photos/avatar/" . $friend['avatar'] . "' /><br/><strong> " . $friend['username'] . "</strong></div>";
+        echo "<div style='float:right'><img width='60px' height='60px' src='/photos/avatar/" . $me['avatar'] . "' /><br/><strong> " . $me['username'] . "</strong></div></div>";
         echo "<div class='message-container' data-type='list'>";
         foreach ($data as $m) {
             ?>
@@ -39,7 +43,7 @@ switch ($this->act) {
                     echo "message-friend"
                     ?>"> 
                     <div class="message-content">    
-            <?php echo $m['message'] ?>
+                        <?php echo $m['message'] ?>
                     </div>
                     <div class="message-time"><?php echo $m['date_created'] ?></div>
                 </div>

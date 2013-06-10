@@ -1,14 +1,12 @@
-$(document).scroll(function(e) {
+$(window).scroll(function(e) {
     var top = $(document).scrollTop();
     getPostElementAt(top);
-    if ($(window).scrollTop() >= $(document).height() - $(window).height()) {
+    if ($(document).height() <= ($(window).height() + $(window).scrollTop())){
 
         console.log($(window).scrollTop() >= $(document).height() - $(window).height());
         cab.current_seg_page++;
-//        alert(cab.current_seg_page)
         var pageId = $('#page_id').val();
         var p = 1.0 * pageId + cab.current_seg_page;
-//        var sort;
 
         if (cab.current_seg_page <= cab.SEG_PER_PAGE) {
             $('#loading').show();
@@ -27,7 +25,7 @@ $(document).scroll(function(e) {
                 $.ajax(
                         "/ajax/index?act=load_more&sort=userpost&uid=" + uid + "&page=" + p
                         ).done(function(data) {
-                    $('#content').html($('#content').html() + data);
+                    $('#content').append(data);
                     $('#loading').hide();
                     // alert('test');
                 });
@@ -50,7 +48,7 @@ $(document).scroll(function(e) {
 //            }
 
         } else if (cab.current_seg_page == cab.SEG_PER_PAGE + 1) {
-            alert("show button");
+//            alert("show button");
             if (cab.sort == "userpost")
                 $('#content').append("<a role='button' style='z-index: 100' href='" + location.href + "?page=" + p + "'>Trang tiếp theo </a>");
             else

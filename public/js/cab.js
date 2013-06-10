@@ -67,7 +67,7 @@ cab.addEventListener = function() {
        $('#search-box').val("");
     });
     $('.close').click(function() {
-        $(this).parent().hide("slow");
+        $(this).parent().slideUp();
     })
     $('#plugin-message').enscroll({
         showOnHover: true,
